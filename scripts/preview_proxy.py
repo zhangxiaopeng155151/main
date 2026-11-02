@@ -57,7 +57,11 @@ class Handler(BaseHTTPRequestHandler):
         length = int(self.headers.get("Content-Length") or 0)
         body = self.rfile.read(length) if length else None
         headers = {k: v for k, v in self.headers.items() if k.lower() not in HOP_BY_HOP}
-        headers["Host"] = f"{host}:{port}"
+        # 保留浏览器发来的真实 Host，让 Next 生成的绝对链接/hreflang 指向对外地址而不是内网端口。
+        headers["Host"] = self.headers.get("Host") or f"{host}:{port}"
+        headers["X-Forwarded-Host"] = headers["Host"]
+        headers["X-Forwarded-Proto"] = self.headers.get("X-Forwarded-Proto", "https")
+        headers["X-Forwarded-For"] = self.client_address[0]
         headers["Accept-Encoding"] = "identity"  # 交给浏览器处理压缩，避免二次解码
         connection = http.client.HTTPConnection(host, port, timeout=900)
         try:
@@ -67,6 +71,10 @@ class Handler(BaseHTTPRequestHandler):
             for key, value in response.getheaders():
                 if key.lower() not in HOP_BY_HOP:
                     self.send_header(key, value)
+            # HEAD 与 204/304 不允许带响应体，否则调用方会等一个永远不会到来的 chunk。
+            if self.command == "HEAD" or response.status in (204, 304):
+                self.end_headers()
+                return
             self.send_header("Transfer-Encoding", "chunked")
             self.end_headers()
             try:
