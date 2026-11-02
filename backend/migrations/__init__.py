@@ -20,6 +20,19 @@ class MigrationError(RuntimeError):
     """需要先处理的存储冲突或不支持的版本。"""
 
 
+def _is_link(path: Path) -> bool:
+    """判断路径是否为符号链接或 Windows 目录联接（junction）。
+
+    Args: path: 待检查路径。
+    Returns: 是链接时返回 True。
+
+    Path.is_junction 自 Python 3.12 起提供；更早的解释器上没有该方法，
+    此时退化为只检查符号链接，保证启动迁移不会因版本差异中断。
+    """
+    checker = getattr(path, "is_junction", None)
+    return path.is_symlink() or bool(checker and checker())
+
+
 def inventory(root: Path) -> dict[str, str]:
     """读取文件摘要并拒绝链接，避免迁移越出指定目录。
 
@@ -31,7 +44,7 @@ def inventory(root: Path) -> dict[str, str]:
     files = [root, *root.rglob("*")] if root.is_dir() else [root]
     result = {}
     for path in files:
-        if path.is_symlink() or path.is_junction():
+        if _is_link(path):
             raise MigrationError(f"请先处理链接路径：{path}")
         if path.is_file() and path.name != ".lock":
             with path.open("rb") as handle:
@@ -141,12 +154,12 @@ def prepare_files(project: Path = PROJECT_ROOT, data: Path = USER_DATA_DIR, *, l
     Returns: 应展示给用户的简短提示。
     """
     for candidate in (project, data, *data.parents):
-        if candidate.is_symlink() or candidate.is_junction():
+        if _is_link(candidate):
             raise MigrationError(f"请先处理链接路径：{candidate}")
     project, data = project.resolve(), data.resolve()
     # 实例显式选择独立数据根时，不读取另一个实例的旧目录。
     use_legacy = data == (project / "user_data").resolve()
-    if data.is_symlink() or data.is_junction():
+    if _is_link(data):
         raise MigrationError("user_data 不能是链接目录。")
     state = _check_versions(data)
     with storage_lock(data / "migrations/startup.lock"), storage_lock(data / "migrations/service.lock"):
@@ -174,12 +187,12 @@ def prepare_files(project: Path = PROJECT_ROOT, data: Path = USER_DATA_DIR, *, l
         run = data / "backups" / f"layout-{uuid.uuid4().hex}"
         for number, (source, target, copy_only) in enumerate(sources):
             for candidate in (source, target, *source.parents, *target.parents):
-                if candidate.is_symlink() or candidate.is_junction():
+                if _is_link(candidate):
                     raise MigrationError(f"请先处理链接路径：{candidate}")
             files = inventory(source)
             if target.exists() and (source.is_dir() != target.is_dir() or inventory(target) != files):
                 raise MigrationError(f"旧、新目录内容不同，未覆盖任何文件。请核对：{source} 与 {target}")
-            if target.is_symlink() or target.is_junction():
+            if _is_link(target):
                 raise MigrationError(f"请先处理链接路径：{target}")
             items.append(dict(source=str(source), target=str(target), files=files, copy_only=copy_only,
                               backup=str(run / f"copy-{number}"), retired=str(run / f"original-{number}"),
