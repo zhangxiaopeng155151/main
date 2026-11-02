@@ -280,6 +280,64 @@ def start_mongodb() -> None:
     die("副本集未成为可写主节点", "运行 docker compose -f compose.mongodb.yaml ps 检查状态")
 
 
+# 由虚拟环境解释器执行：脚本本身只用标准库，避免把 yaml 等依赖加到启动器上。
+_PERSIST_SCRIPT = """
+import sys
+sys.path.insert(0, sys.argv[1])
+from backend.config import config as config_module
+
+uri, db_name = sys.argv[2], sys.argv[3]
+current_uri = str(config_module.get_config_value("mongodb_url", "") or "").strip()
+current_db = str(config_module.get_config_value("mongo_database_name", "") or "").strip()
+if current_uri and current_uri != uri:
+    print(f"配置文件已有其他数据库地址，保持不变：{current_uri}")
+    raise SystemExit(0)
+if current_uri == uri and current_db == db_name:
+    print("配置文件中的数据库设置已是最新")
+    raise SystemExit(0)
+version = int(config_module.get_config_value("config_version", 1) or 1)
+try:
+    # 连接地址属于敏感字段，必须通过 mongodb_url_update.replace 显式提交。
+    config_module.update_config(
+        {
+            "mongodb_url_update": {"action": "replace", "value": uri},
+            "mongo_database_name": db_name,
+        },
+        expected_config_version=version,
+    )
+except Exception as exc:
+    print(f"写入配置文件失败（{exc}），本次仍通过环境变量生效")
+    raise SystemExit(0)
+print(f"已写入 {config_module.CONFIG_PATH}（数据库 {db_name}）")
+"""
+
+
+def persist_config(uri: str, db_name: str) -> None:
+    """把数据库地址写入 user_data/config/config.yaml，方便之后用其他方式启动。
+
+    通过虚拟环境解释器执行，避免在启动器进程里引入后端依赖；
+    原有配置已指向别的地址时保持不动。
+
+    Args:
+        uri: MongoDB 连接串。
+        db_name: 数据库名。
+    Returns: 无。
+    """
+    py = venv_python()
+    if not py.exists():
+        say("跳过写入配置文件（尚未创建 .venv）")
+        return
+    result = run([str(py), "-c", _PERSIST_SCRIPT, str(ROOT), uri, db_name],
+                 cwd=ROOT, capture=True, check=False)
+    lines = [line for line in (result.stdout or "").strip().splitlines() if line.strip()]
+    if result.returncode != 0:
+        tail = " / ".join(lines[-3:]) or f"退出码 {result.returncode}"
+        say(f"跳过写入配置文件（{tail}）")
+        return
+    for line in lines:
+        say(line)
+
+
 def wait_http(url: str, seconds: int = 120, process: subprocess.Popen | None = None) -> bool:
     """轮询等待 HTTP 服务可用；被监视的进程提前退出时立即返回。
 
@@ -322,6 +380,8 @@ def main() -> None:
     parser.add_argument("--reinstall", action="store_true", help="强制重装依赖")
     parser.add_argument("--rebuild", action="store_true", help="强制重新构建前端")
     parser.add_argument("--no-browser", action="store_true", help="不自动打开浏览器")
+    parser.add_argument("--persist-config", action="store_true",
+                        help="把数据库地址写入 user_data/config/config.yaml（之后用 start.bat 也能直接跑）")
     args = parser.parse_args()
 
     say(f"项目目录：{ROOT}")
@@ -341,6 +401,9 @@ def main() -> None:
 
     if not args.no_mongo:
         start_mongodb()
+
+    if args.persist_config:
+        persist_config(args.mongo_uri, args.db_name)
 
     env = {
         "NOVEL_GENERATOR_MONGODB_URL": args.mongo_uri,
@@ -364,7 +427,9 @@ def main() -> None:
 
     try:
         if not wait_http(f"http://127.0.0.1:{args.backend_port}/api/startup", 120, backend):
-            die("后端未能启动", "查看上方后端日志；同一 user_data 目录不能被两个实例同时使用")
+            die("后端未能启动",
+                "查看上方后端日志。若报\"这个数据目录正在使用\"，说明已有一个实例在使用同一份用户数据："
+                "先关掉之前的窗口，或直接用浏览器打开应用地址")
         if not wait_http(f"http://127.0.0.1:{args.frontend_port}/", 180, frontend):
             die("前端未能启动", "查看上方前端日志（首次 dev 编译较慢）")
         url = f"http://127.0.0.1:{args.frontend_port}"
