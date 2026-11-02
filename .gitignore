@@ -54,3 +54,6 @@ Thumbs.db
 Desktop.ini
 *.swp
 *.swo
+
+# 图标生成中间产物（源图与最终 .ico/.icns/PNG 需要入库，这些不需要）
+/assets/app-icon.iconset/

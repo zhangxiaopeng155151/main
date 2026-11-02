@@ -1,0 +1,6 @@
+#!/bin/bash
+# 由 scripts/create_shortcuts.py 生成：双击本应用 → 启动服务 → 打开新建小说页
+cd "$(dirname "$0")/../../.." || exit 1
+PY=python3
+command -v "$PY" >/dev/null 2>&1 || PY=/usr/bin/python3
+exec "$PY" scripts/quickstart.py --persist-config --open-workspace new

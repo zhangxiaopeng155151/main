@@ -382,6 +382,8 @@ def main() -> None:
     parser.add_argument("--no-browser", action="store_true", help="不自动打开浏览器")
     parser.add_argument("--persist-config", action="store_true",
                         help="把数据库地址写入 user_data/config/config.yaml（之后用 start.bat 也能直接跑）")
+    parser.add_argument("--open-workspace", choices=("shelf", "new"), default=None,
+                        help="启动后自动打开的页面：shelf 书架 / new 新建小说（桌面图标默认用 new）")
     args = parser.parse_args()
 
     say(f"项目目录：{ROOT}")
@@ -433,11 +435,18 @@ def main() -> None:
         if not wait_http(f"http://127.0.0.1:{args.frontend_port}/", 180, frontend):
             die("前端未能启动", "查看上方前端日志（首次 dev 编译较慢）")
         url = f"http://127.0.0.1:{args.frontend_port}"
+        target = url
+        if args.open_workspace == "new":
+            target = f"{url}/zh/writing/new"
+        elif args.open_workspace == "shelf":
+            target = f"{url}/zh"
         say(f"应用已启动：{url}")
         say(f"数据库：{args.mongo_uri}（库名 {args.db_name}）")
         say(f"接口文档：http://127.0.0.1:{args.backend_port}/docs")
         if not args.no_browser:
-            webbrowser.open(url)
+            webbrowser.open(target)
+            if target != url:
+                say(f"已直接打开：{target}")
         say("按 Ctrl+C 停止前后端（MongoDB 由 Docker 单独管理）")
         while backend.poll() is None and frontend.poll() is None:
             time.sleep(1)
