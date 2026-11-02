@@ -1,11 +1,15 @@
 @echo off
 chcp 65001 >nul
-cd /d %~dp0
-where python >nul 2>&1
+cd /d "%~dp0"
+title AI Novel Generator
+rem Thin wrapper: same as the Chinese-named launcher but without --persist-config.
+set "PYEXE=python"
+where py >nul 2>&1 && set "PYEXE=py -3"
+%PYEXE% -c "import sys;raise SystemExit(0 if sys.version_info>=(3,11) else 1)" >nul 2>&1
 if errorlevel 1 (
-    echo 未找到 python，请先安装 Python 3.13 并勾选 Add python.exe to PATH
+    echo [ERROR] Python 3.11+ was not found: https://www.python.org/downloads/
     pause
     exit /b 1
 )
-python scripts\quickstart.py %*
+%PYEXE% scripts\quickstart.py %*
 if errorlevel 1 pause
