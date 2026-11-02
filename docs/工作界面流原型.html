@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AI 小说生成器 · 工作界面流原型</title>
+<style>
+  :root{
+    --bg:#f5f6fa; --panel:#ffffff; --panel-2:#fbfbfe; --line:#e5e7f0; --line-2:#eef0f7;
+    --text:#171a23; --muted:#6b7280; --muted-2:#9aa1b1;
+    --primary:#4f6ef7; --primary-2:#7c93ff; --primary-weak:#eef1ff; --primary-line:#d7deff;
+    --ok:#12a874; --ok-weak:#e7f7f0; --warn:#c9791a; --warn-weak:#fdf3e3; --danger:#dc2626; --danger-weak:#fdecec;
+    --radius:14px; --shadow:0 1px 2px rgba(23,26,35,.06),0 8px 24px rgba(23,26,35,.06);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{font:14px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+       color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased}
+  button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+  input,textarea{font:inherit;color:inherit}
+  .app{display:grid;grid-template-columns:232px 1fr;height:100vh;overflow:hidden}
+
+  /* ---------- sidebar ---------- */
+  .side{background:var(--panel);border-right:1px solid var(--line);display:flex;flex-direction:column;min-height:0}
+  .brand{display:flex;gap:10px;align-items:center;padding:16px 16px 12px}
+  .logo{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--primary),#8f6df7);
+        display:grid;place-items:center;color:#fff;font-weight:700;font-size:14px}
+  .brand b{font-size:14px;letter-spacing:.2px}
+  .brand small{display:block;color:var(--muted-2);font-size:11px;font-weight:400}
+  .side-scroll{overflow:auto;padding:6px 10px 14px;flex:1;min-height:0}
+  .nav-group{margin:10px 0 4px;padding:0 8px;color:var(--muted-2);font-size:11px;letter-spacing:.08em}
+  .nav-item{display:flex;align-items:center;gap:9px;width:100%;padding:8px 10px;border-radius:10px;color:#3b4256;
+            text-align:left;font-size:13.5px;transition:.15s}
+  .nav-item:hover{background:var(--panel-2)}
+  .nav-item.on{background:var(--primary-weak);color:#2b3bb0;font-weight:600;box-shadow:inset 0 0 0 1px var(--primary-line)}
+  .nav-item .ic{width:18px;text-align:center;opacity:.85;font-size:14px}
+  .nav-item .badge{margin-left:auto;font-size:10.5px;padding:1px 6px;border-radius:20px;background:var(--panel-2);
+                   color:var(--muted);border:1px solid var(--line)}
+  .nav-item.on .badge{background:#fff;border-color:var(--primary-line);color:#2b3bb0}
+  .side-foot{border-top:1px solid var(--line);padding:10px;display:grid;gap:6px}
+
+  /* ---------- main ---------- */
+  .main{display:flex;flex-direction:column;min-width:0;min-height:0}
+  .top{background:var(--panel);border-bottom:1px solid var(--line);padding:12px 20px 10px}
+  .top-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .book{display:flex;align-items:center;gap:10px;min-width:0}
+  .cover{width:34px;height:46px;border-radius:6px;background:linear-gradient(150deg,#2f4a8a,#5d7fd6 60%,#8fb4e8);
+         box-shadow:var(--shadow);flex:0 0 auto}
+  .book h1{margin:0;font-size:15px;font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .book p{margin:0;color:var(--muted);font-size:12px}
+  .spacer{flex:1}
+  .btn{padding:7px 13px;border-radius:9px;border:1px solid var(--line);background:var(--panel);font-size:13px;
+       transition:.15s;white-space:nowrap}
+  .btn:hover{border-color:#d3d8e8;background:var(--panel-2)}
+  .btn.primary{background:var(--primary);border-color:var(--primary);color:#fff;font-weight:600;
+               box-shadow:0 2px 8px rgba(79,110,247,.28)}
+  .btn.primary:hover{background:#4460e6}
+  .btn.ghost{background:transparent}
+  .btn.sm{padding:4px 9px;font-size:12px;border-radius:8px}
+  .progress{margin-top:12px;border:1px solid var(--line-2);border-radius:12px;background:var(--panel-2);padding:10px 12px}
+  .phases{display:flex;gap:6px;flex-wrap:wrap}
+  .phase{flex:1 1 130px;min-width:0;padding:7px 10px;border-radius:9px;background:#fff;border:1px solid var(--line-2);
+         font-size:12px;color:var(--muted);position:relative}
+  .phase b{display:block;font-size:12.5px;color:#39405a;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .phase.done{background:var(--ok-weak);border-color:#cdeee1;color:#0e8a5f}
+  .phase.done b{color:#0e8a5f}
+  .phase.current{background:var(--primary-weak);border-color:var(--primary-line);color:#3a49b8;box-shadow:0 0 0 2px #eaefff}
+  .phase.current b{color:#2b3bb0}
+  .next{display:flex;align-items:center;gap:10px;margin-top:9px;font-size:13px;flex-wrap:wrap}
+  .next .dot{width:7px;height:7px;border-radius:50%;background:var(--primary);box-shadow:0 0 0 4px var(--primary-weak)}
+
+  .content{flex:1;min-height:0;overflow:auto;padding:18px 20px 26px}
+  .api-note{margin-top:14px;padding:8px 12px;border-radius:10px;background:#f0f2fb;border:1px dashed #ccd5f7;
+            color:#4a5480;font-size:11.5px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:anywhere}
+
+  /* ---------- generic ---------- */
+  .grid{display:grid;gap:14px}
+  .cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+  @media(max-width:1100px){.cols-3,.cols-4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+  .card-h{display:flex;align-items:center;gap:10px;padding:13px 15px;border-bottom:1px solid var(--line-2)}
+  .card-h h3{margin:0;font-size:13.5px;font-weight:650}
+  .card-h .sub{color:var(--muted);font-size:12px;font-weight:400}
+  .card-b{padding:14px 15px}
+  .tag{display:inline-flex;align-items:center;gap:4px;padding:1.5px 8px;border-radius:20px;font-size:11.5px;
+       background:var(--primary-weak);color:#33429e;border:1px solid var(--primary-line)}
+  .tag.ok{background:var(--ok-weak);color:#0e8a5f;border-color:#cdeee1}
+  .tag.warn{background:var(--warn-weak);color:#9a6212;border-color:#f3dcc0}
+  .tag.gray{background:var(--panel-2);color:var(--muted);border-color:var(--line)}
+  .muted{color:var(--muted)}
+  .kv{display:grid;grid-template-columns:84px 1fr;gap:6px 10px;font-size:13px}
+  .kv dt{color:var(--muted);font-size:12.5px}
+  .kv dd{margin:0}
+  .field{display:block;margin-bottom:10px}
+  .field span{display:block;color:var(--muted);font-size:12px;margin-bottom:4px}
+  .field input,.field textarea,.field select{width:100%;padding:8px 10px;border:1px solid var(--line);
+       border-radius:9px;background:#fff;outline:none;transition:.15s}
+  .field input:focus,.field textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-weak)}
+  .field textarea{resize:vertical;min-height:64px;line-height:1.7}
+  .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .tabs{display:flex;gap:4px;padding:4px;background:var(--panel-2);border:1px solid var(--line-2);border-radius:10px;width:max-content;max-width:100%;overflow:auto}
+  .tab{padding:5px 12px;border-radius:7px;font-size:12.5px;color:var(--muted);white-space:nowrap}
+  .tab.on{background:#fff;color:#2b3bb0;font-weight:600;box-shadow:0 1px 3px rgba(23,26,35,.1)}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:11px 13px}
+  .stat b{display:block;font-size:20px;line-height:1.25;letter-spacing:-.01em}
+  .stat span{color:var(--muted);font-size:12px}
+  .empty{padding:26px;text-align:center;color:var(--muted-2);font-size:13px}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th{text-align:left;color:var(--muted);font-weight:500;font-size:12px;padding:7px 10px;border-bottom:1px solid var(--line)}
+  td{padding:9px 10px;border-bottom:1px solid var(--line-2);vertical-align:top}
+  tr:last-child td{border-bottom:0}
+  .avatar{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-size:12px;font-weight:600;
+          background:var(--primary-weak);color:#33429e;flex:0 0 auto}
+  .stack{display:flex;flex-direction:column;gap:12px}
+  .hint{font-size:12px;color:var(--muted)}
+  .dotline{border-left:2px dotted var(--primary-line);margin-left:8px;padding-left:14px}
+  .tree-item{display:flex;align-items:center;gap:8px;padding:7px 9px;border-radius:8px;font-size:13px}
+  .tree-item:hover{background:var(--panel-2)}
+  .tree-item.on{background:var(--primary-weak);color:#2b3bb0;font-weight:600}
+
+  /* ---------- bookshelf ---------- */
+  .shelf{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:16px}
+  .book-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+             box-shadow:var(--shadow);transition:.18s}
+  .book-card:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(23,26,35,.12)}
+  .book-card .art{height:86px;background:linear-gradient(150deg,#2f4a8a,#5d7fd6 55%,#a9c6ee);position:relative;padding:10px 12px;color:#fff}
+  .book-card .art b{font-size:14px;text-shadow:0 1px 4px rgba(0,0,0,.25)}
+  .book-card .art em{position:absolute;right:10px;bottom:8px;font-style:normal;font-size:11px;opacity:.85}
+  .book-card .meta{padding:10px 12px;display:grid;gap:6px}
+  .bar{height:5px;border-radius:6px;background:var(--line-2);overflow:hidden}
+  .bar i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--primary),var(--primary-2))}
+
+  /* ---------- chapter editor ---------- */
+  .editor{display:grid;grid-template-columns:214px minmax(0,1fr) 286px;gap:14px;min-height:0}
+  @media(max-width:1180px){.editor{grid-template-columns:1fr}}
+  .editor-paper{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+                display:flex;flex-direction:column;min-height:520px}
+  .paper-head{display:flex;align-items:center;gap:10px;padding:11px 16px;border-bottom:1px solid var(--line-2);flex-wrap:wrap}
+  .paper-body{padding:22px 26px;font-size:15px;line-height:1.95;letter-spacing:.01em;flex:1;outline:none}
+  .paper-body p{margin:0 0 1em}
+  .paper-foot{display:flex;gap:12px;align-items:center;padding:9px 16px;border-top:1px solid var(--line-2);
+              color:var(--muted);font-size:12px;flex-wrap:wrap}
+
+  /* ---------- graph ---------- */
+  .graph{position:relative;height:430px;background:
+      radial-gradient(circle at 30% 20%,#f4f6ff,transparent 60%),radial-gradient(circle at 75% 75%,#f2fbf7,transparent 55%),#fdfdfe;
+      border-radius:12px;border:1px solid var(--line-2);overflow:hidden}
+  .graph svg{width:100%;height:100%;display:block}
+  .gnode{cursor:pointer}
+  .gnode text{font-size:11.5px;fill:#2b3040;pointer-events:none}
+
+  /* ---------- drawer / modal / toast ---------- */
+  .scrim{position:fixed;inset:0;background:rgba(20,24,36,.36);opacity:0;pointer-events:none;transition:.2s;z-index:40}
+  .scrim.on{opacity:1;pointer-events:auto}
+  .drawer{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;background:var(--panel);
+          box-shadow:-12px 0 40px rgba(23,26,35,.16);transform:translateX(102%);transition:transform .24s cubic-bezier(.2,.7,.3,1);
+          z-index:50;display:flex;flex-direction:column}
+  .drawer.on{transform:none}
+  .drawer-h{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line)}
+  .drawer-h b{font-size:14px}
+  .drawer-b{flex:1;overflow:auto;padding:14px 16px}
+  .drawer-f{border-top:1px solid var(--line);padding:12px 16px;display:flex;gap:8px;flex-wrap:wrap}
+  .step{display:flex;gap:9px;align-items:flex-start;padding:7px 0;font-size:13px;color:var(--muted)}
+  .step i{width:16px;height:16px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;
+          font-size:9px;font-style:normal;flex:0 0 auto;margin-top:3px}
+  .step.run{color:#2b3bb0}
+  .step.run i{border-color:var(--primary);border-right-color:transparent;animation:spin .8s linear infinite}
+  .step.ok{color:#0e8a5f}
+  .step.ok i{border-color:var(--ok);background:var(--ok);color:#fff}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .modal{position:fixed;inset:0;display:grid;place-items:center;z-index:60;opacity:0;pointer-events:none;transition:.2s;padding:24px}
+  .modal.on{opacity:1;pointer-events:auto}
+  .modal-card{background:var(--panel);border-radius:16px;max-width:900px;width:100%;max-height:88vh;overflow:auto;
+              box-shadow:0 24px 60px rgba(16,20,32,.28)}
+  .toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);background:#171a23;color:#fff;
+         padding:9px 16px;border-radius:10px;font-size:13px;opacity:0;pointer-events:none;transition:.2s;z-index:70;
+         box-shadow:0 10px 30px rgba(0,0,0,.25);max-width:80vw;text-align:center}
+  .toast.on{opacity:1;transform:translate(-50%,0)}
+  .flowline{display:flex;align-items:stretch;gap:10px;overflow:auto;padding:4px}
+  .fbox{min-width:150px;border:1px solid var(--line);border-radius:11px;padding:10px 12px;background:var(--panel-2);font-size:12.5px}
+  .fbox b{display:block;font-size:12.5px;color:#2b3bb0;margin-bottom:2px}
+  .fbox small{color:var(--muted);font-size:11px}
+  .farrow{display:grid;place-items:center;color:var(--muted-2);font-size:16px}
+  .pill{font-size:11px;padding:1px 7px;border-radius:20px;background:#fff;border:1px solid var(--line);color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="brand">
+      <div class="logo">墨</div>
+      <div><b>AI 小说生成器</b><small>工作界面流 · 原型</small></div>
+    </div>
+    <div class="side-scroll" id="nav"></div>
+    <div class="side-foot">
+      <button class="btn ghost sm" data-action="flowmap">🗺 流程地图</button>
+      <button class="btn ghost sm" data-action="note">ℹ 说明：哪些是真的</button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <div class="top" id="top"></div>
+    <div class="content" id="content"></div>
+  </div>
+</div>
+
+<div class="scrim" id="scrim" data-action="close-drawer"></div>
+
+<aside class="drawer" id="drawer">
+  <div class="drawer-h">
+    <b id="drawer-title">AI 生成</b>
+    <span class="tag gray" id="drawer-tag">候选</span>
+    <button class="btn sm" style="margin-left:auto" data-action="close-drawer">关闭</button>
+  </div>
+  <div class="drawer-b" id="drawer-body"></div>
+  <div class="drawer-f" id="drawer-foot"></div>
+</aside>
+
+<div class="modal" id="modal">
+  <div class="modal-card">
+    <div class="drawer-h" style="border-bottom:1px solid var(--line)">
+      <b id="modal-title">流程地图</b>
+      <button class="btn sm" style="margin-left:auto" data-action="close-modal">关闭</button>
+    </div>
+    <div style="padding:16px 18px" id="modal-body"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   数据：全部取自项目真实字段/文案结构，内容为演示用虚构小说
+   ============================================================ */
+const NOVEL = {
+  title: "潮汐档案", subtitle: "第一卷 · 咸水记忆", genre: "悬疑 / 都市奇幻",
+  tags: ["记忆", "填海城市", "档案", "失踪"],
+  tone: "冷静、潮湿、克制的悬疑", target_audience: "成年读者",
+  core_idea: "在一个能听见潮汐记忆的填海城市，档案管理员追查失踪的姐姐，发现整座城市的记忆都被系统性篡改。",
+  core_seed: "记忆可以寄存于潮汐介质，誊抄即失真。",
+  worldview: "填海城「潮汐市」建于旧海湾之上，海水退去后残留的潮声会记录发生过的事。档案局用「潮汐档案匣」保存这些记忆，但任何誊抄都会让原件失去权重。",
+  writing_style: "第三人称限知，短句为主，重视环境声与水体意象。",
+  narrative_pov: "第三人称 · 单视角（林砚）", era_background: "近未来 · 填海完成后的第九年",
+  number_of_chapters: 20, words_per_chapter: 2600,
+  introduction: "林砚在档案局旧库听见了姐姐的声音——但她已经失踪三年，且官方档案里从未记录过这个人。"
+};
+
+const PHASES = ["建立作品", "开场资料", "本卷剧情", "本卷准备", "本卷章节", "继续规划"];
+
+const FACTIONS = [
+  { name: "潮汐档案馆", type: "城市机构", stance: "公开：保管潮声记忆", goal: "维持记忆归档秩序", hidden: "掩盖旧海湾拆迁档案", tags: ["官方", "林砚所属"], level: "核心", id: "f1" },
+  { name: "填海工事局", type: "政府部门", stance: "公开：推进填海二期", goal: "在年底前完成七号闸合拢", hidden: "清理旧海湾住户记录", tags: ["官方", "对立"], level: "核心", id: "f2" },
+  { name: "拾忆会", type: "地下组织", stance: "公开：无", goal: "保存被删改的原始记忆", hidden: "掌握一批未被誊抄的潮声原件", tags: ["地下", "亦敌亦友"], level: "次级", id: "f3" }
+];
+
+const CHARACTERS = [
+  { name: "林砚", role: "主角 · 档案管理员", imp: "核心", desire: "找到姐姐失踪的真相", fear: "自己也是被改写过的记忆", tags: ["限知视角"], bind: "潮汐档案馆 · 编目员", id: "c1" },
+  { name: "林澈", role: "关键人物 · 失踪者", imp: "核心", desire: "留下一份不会被誊抄的证词", fear: "被彻底忘记", tags: ["姐姐", "失踪三年"], bind: "曾属工事局 · 测绘员", id: "c2" },
+  { name: "陆昀", role: "对手/协助者", imp: "重要", desire: "查清七号闸的沉降事故", fear: "重演九年前的溃堤", tags: ["工事局调查员"], bind: "填海工事局 · 调查员", id: "c3" },
+  { name: "阿井", role: "配角", imp: "次要", desire: "把手里的原件卖个好价", fear: "被拾忆会清理", tags: ["黑市中间人"], bind: "拾忆会 · 外围", id: "c4" }
+];
+
+const RELATIONS = [
+  { a: "林砚", b: "林澈", type: "姐妹", state: "失联 · 仍在寻找", intensity: 5, kind: "设计" },
+  { a: "林砚", b: "陆昀", type: "旧识 → 互相试探", state: "合作但隐瞒", intensity: 3, kind: "事实" },
+  { a: "陆昀", b: "填海工事局", type: "隶属", state: "表面服从", intensity: 3, kind: "设计" },
+  { a: "林砚", b: "拾忆会", type: "交易关系", state: "通过阿井接触", intensity: 2, kind: "事实" }
+];
+
+const RULES = [
+  { name: "潮声记忆不可转述", cat: "世界法则", statement: "潮声记录只能被直接聆听；任何转述都会让听者得到失真版本。", scope: "全域", priority: "高" },
+  { name: "档案匣认人", cat: "器物规则", statement: "档案匣只对最初录入者或其血亲开放，强行打开会触发海水灌注。", scope: "档案局 · 器物", priority: "高" },
+  { name: "填海期禁航", cat: "社会规则", statement: "二期工事期间，旧海湾水面禁止任何民间船只通行。", scope: "七号闸周边", priority: "中" }
+];
+
+const ITEMS = [
+  { name: "潮汐档案匣", type: "器物", owner: "林砚（代管）", func: "封装并播放某段潮声", limit: "一次只能封存 40 分钟" },
+  { name: "铜制听针", type: "工具", owner: "林澈 → 林砚", func: "贴附介质放大潮声细节", limit: "连续使用会损伤听觉" },
+  { name: "七号闸测绘图", type: "文本", owner: "陆昀", func: "显示被抹掉的旧海湾街区", limit: "缺少一页" }
+];
+
+const LOCATIONS = [
+  { name: "档案馆旧库", type: "室内 · 水下层", desc: "位于地下一层的水浸书库，潮声最清晰。", func: "林砚发现姐姐声音的起点" },
+  { name: "七号闸", type: "工程设施", desc: "二期填海的合拢口，夜间有持续低鸣。", func: "第一卷高潮地点" },
+  { name: "咸水市场", type: "街区", desc: "旧海湾搬迁户聚集的黑市，交易潮声原件。", func: "接触阿井" }
+];
+
+const VOLUMES = [
+  { id: "v1", title: "第一卷 · 咸水记忆", order: 1, chapters: 20, words: 52000, plot: "ready",
+    premise: "林砚在旧库听见姐姐的声音，开始私下核查档案。", conflict: "她要在工事局合拢七号闸前，证明有人系统性删改记忆。",
+    start: "档案局例行盘点", end: "七号闸开启，第一批原件浮出水面" },
+  { id: "v2", title: "第二卷 · 退潮之后", order: 2, chapters: 18, words: 47000, plot: "draft",
+    premise: "原件公开引发城市记忆震荡。", conflict: "林砚必须决定哪些记忆该被恢复。", start: "闸门开启", end: "城市重新选择遗忘" }
+];
+
+const ARCS = [
+  { id: "a1", title: "第一篇 · 归潮", summary: "从旧库的异常潮声到确认姐姐存在", chapters: 5, scenes: 3, plotReady: true },
+  { id: "a2", title: "第二篇 · 咸水线人", summary: "通过阿井接触拾忆会，换取第一批原件", chapters: 6, scenes: 3, plotReady: true },
+  { id: "a3", title: "第三篇 · 合拢之前", summary: "与陆昀结盟，抢在闸门合拢前取证", chapters: 9, scenes: 4, plotReady: false }
+];
+
+const SCENES = [
+  { id: "s1", arc: "a1", title: "场景 1 · 夜间盘点", summary: "林砚独自核对旧库目录，听到不属于任何档案的潮声。", chapters: 2 },
+  { id: "s2", arc: "a1", title: "场景 2 · 姐姐的名字", summary: "在废弃索引卡里发现被刮掉的姓名。", chapters: 2 },
+  { id: "s3", arc: "a1", title: "场景 3 · 第一次对峙", summary: "陆昀出现，要求她停止调阅。", chapters: 1 }
+];
+
+const CHAPTERS = [
+  { id: "ch1", scene: "s1", no: 1, title: "第一章 · 夜里三点的潮声", words: 2680, status: "saved" },
+  { id: "ch2", scene: "s1", no: 2, title: "第二章 · 不存在的架位", words: 2410, status: "saved" },
+  { id: "ch3", scene: "s2", no: 3, title: "第三章 · 被刮掉的名字", words: 0, status: "planned" },
+  { id: "ch4", scene: "s2", no: 4, title: "第四章 · 听针", words: 0, status: "planned" }
+];
+
+const CHAPTER_TEXT = [
+  "夜里三点，旧库的水位比昨天高了半指。",
+  "林砚把听针贴上第三排的档案匣，铜的凉意顺着指尖往上爬。匣子里没有记忆，只有一段被反复誊抄过的潮声——像有人在很远的地方，一遍一遍地念同一个名字。",
+  "她认得那个节奏。小时候姐姐哄她睡觉，就是用这种半拍停顿的方式叫她的名字。",
+  "可档案局的索引里没有这个人。没有林澈，没有测绘员，也没有三年前那场被写成「设备故障」的溃堤。"
+];
+
+const RECORDS = [
+  { kind: "心理状态", target: "林砚", result: "焦虑上升 · 对陆昀的信任下降", evidence: "第 2 章 · 「她没有把测绘图的事说出口」", state: "待确认" },
+  { kind: "物品持有人", target: "铜制听针", result: "林澈 → 林砚（继承）", evidence: "第 1 章 · 「听针一直放在她外套内侧口袋」", state: "待确认" },
+  { kind: "人物关系", target: "林砚 ↔ 陆昀", result: "旧识 → 合作但互相隐瞒", evidence: "第 2 章 · 两次对话中的回避", state: "已采用" },
+  { kind: "世界规则疑点", target: "潮声记忆不可转述", result: "第 2 章出现转述却未失真，需补规则例外", evidence: "第 2 章 · 阿井转述仍准确", state: "待处理" }
+];
+
+const FORESHADOWS = [
+  { title: "被刮掉的索引卡", plant: "第 1 章", resolve: "第三篇", status: "已埋", effect: "证明删除是人工操作" },
+  { title: "听针的裂纹", plant: "第 2 章", resolve: "第七篇", status: "已埋", effect: "暗示林澈还活着并继续使用" },
+  { title: "七号闸的夜间低鸣", plant: "第 1 章", resolve: "第一卷末", status: "回收中", effect: "闸下封着未誊抄的原件" }
+];
+
+/* ============================================================
+   状态
+   ============================================================ */
+const NAV = [
+  { group: "创作", items: [
+    { id: "novel-info", icon: "📖", label: "小说信息" },
+    { id: "chapter-editor", icon: "✍️", label: "章节编辑" },
+    { id: "arc-planning", icon: "🧭", label: "篇章规划" },
+    { id: "volume-planning", icon: "📚", label: "卷规划" }
+  ]},
+  { group: "资料", items: [
+    { id: "character-cards", icon: "🧑", label: "角色卡" },
+    { id: "location-cards", icon: "📍", label: "地点卡" },
+    { id: "faction-cards", icon: "🏛", label: "势力卡" },
+    { id: "item-cards", icon: "🗝", label: "物品卡" },
+    { id: "rule-cards", icon: "📜", label: "设定规则卡" },
+    { id: "entity-graph", icon: "🕸", label: "关系图谱" },
+    { id: "foreshadowings", icon: "🪝", label: "伏笔" }
+  ]},
+  { group: "其他", items: [
+    { id: "chapter-records", icon: "🔍", label: "章后记录" },
+    { id: "assistant", icon: "💬", label: "AI 助手" },
+    { id: "task-flows", icon: "🧩", label: "任务流程" },
+    { id: "settings", icon: "⚙️", label: "设置" }
+  ]}
+];
+
+const state = {
+  view: "bookshelf", ws: "novel-info", tab: {}, phase: 1, drawer: null,
+  chapters: CHAPTERS.map(c => ({ ...c })), records: RECORDS.map(r => ({ ...r })),
+  activeChapter: "ch1", activeVolume: "v1", activeArc: "a1", graphNode: null
+};
+
+/* ============================================================
+   工具
+   ============================================================ */
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+let toastTimer = null;
+function toast(msg) {
+  const el = $("#toast"); el.textContent = msg; el.classList.add("on");
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => el.classList.remove("on"), 2200);
+}
+const wordCount = (t) => (t || "").replace(/\s/g, "").length;
+
+/* ============================================================
+   侧栏 & 顶栏
+   ============================================================ */
+function renderNav() {
+  const html = NAV.map(g => `
+    <div class="nav-group">${g.group}</div>
+    ${g.items.map(it => `
+      <button class="nav-item ${state.view === "writing" && state.ws === it.id ? "on" : ""}" data-action="ws" data-ws="${it.id}">
+        <span class="ic">${it.icon}</span><span>${it.label}</span>
+        ${it.id === "chapter-records" ? `<span class="badge">${state.records.filter(r => r.state !== "已采用").length}</span>` : ""}
+      </button>`).join("")}
+  `).join("");
+  $("#nav").innerHTML = `
+    <button class="nav-item ${state.view === "bookshelf" ? "on" : ""}" data-action="shelf" style="margin-bottom:6px">
+      <span class="ic">🗂</span><span>书架</span></button>
+    ${html}`;
+}
+
+function renderTop() {
+  if (state.view === "bookshelf") {
+    $("#top").innerHTML = `
+      <div class="top-row">
+        <div class="book"><div><h1>书架</h1><p>2 本作品 · 共 5,090 字 · 本地 MongoDB</p></div></div>
+        <div class="spacer"></div>
+        <button class="btn" data-action="flowmap">流程地图</button>
+        <button class="btn primary" data-action="new-novel">＋ 新建小说</button>
+      </div>`;
+    return;
+  }
+  const phase = state.phase;
+  $("#top").innerHTML = `
+    <div class="top-row">
+      <div class="book">
+        <div class="cover"></div>
+        <div style="min-width:0">
+          <h1>${esc(NOVEL.title)} <span class="pill">${esc(NOVEL.genre)}</span></h1>
+          <p>${esc(NOVEL.subtitle)} · 已写 ${state.chapters.reduce((n, c) => n + c.words, 0).toLocaleString()} 字 / 目标 ${NOVEL.number_of_chapters * NOVEL.words_per_chapter} 字</p>
+        </div>
+      </div>
+      <div class="spacer"></div>
+      <button class="btn" data-action="shelf">返回书架</button>
+      <button class="btn" data-action="flowmap">🗺 流程地图</button>
+      <button class="btn primary" data-action="next-step">继续下一步 →</button>
+    </div>
+    <div class="progress">
+      <div class="phases">
+        ${PHASES.map((p, i) => `<div class="phase ${i < phase ? "done" : i === phase ? "current" : ""}">
+            <b>${p}</b><span>${i < phase ? "已完成" : i === phase ? "进行中" : "未开始"}</span></div>`).join("")}
+      </div>
+      <div class="next">
+        <span class="dot"></span>
+        <span><b>下一步：</b>${esc(nextStepTitle())}</span>
+        <button class="btn sm primary" data-action="next-step">点击继续</button>
+        ${phase === 1 ? `<button class="btn sm ghost" data-action="skip-optional">暂不添加，继续</button>` : ""}
+        <span class="hint">进度由已保存的资料重算，不是勾选出来的</span>
+      </div>
+    </div>`;
+}
+
+function nextStepTitle() {
+  switch (state.phase) {
+    case 0: return "完善小说资料（故事方向 / 世界观 / 风格 / 篇幅）";
+    case 1: return "准备故事中的势力 → 主角 → 人物关系（规则与物品可选）";
+    case 2: return "准备第一卷并完善本卷剧情";
+    case 3: return "确认本卷出场的势力、人物计划与地点";
+    case 4: return "篇章 → 场景 → 章计划，然后写第 3 章";
+    default: return "当前已规划章节写完，可章后核查或继续规划下一卷";
+  }
+}
+
+/* ============================================================
+   书架 / 新建
+   ============================================================ */
+function viewBookshelf() {
+  $("#content").innerHTML = `
+    <div class="shelf">
+      <div class="book-card" data-action="open-book" style="cursor:pointer">
+        <div class="art"><b>${esc(NOVEL.title)}</b><em>更新于今天 15:20</em></div>
+        <div class="meta">
+          <div class="row" style="justify-content:space-between">
+            <span class="tag">${esc(NOVEL.genre)}</span><span class="hint">20 章 / 5.2 万字</span>
+          </div>
+          <div class="bar"><i style="width:14%"></i></div>
+          <div class="hint">进度 14% · 2 章已保存 · 1 处待核查</div>
+        </div>
+      </div>
+      <div class="book-card" style="opacity:.72">
+        <div class="art" style="background:linear-gradient(150deg,#4a3f6b,#7a6a9e 60%,#b6a8d4)"><b>雾中邮差</b><em>草稿</em></div>
+        <div class="meta"><div class="row" style="justify-content:space-between"><span class="tag gray">悬疑</span><span class="hint">未开始</span></div>
+        <div class="bar"><i style="width:0%"></i></div><div class="hint">只有小说资料</div></div>
+      </div>
+      <button class="book-card" data-action="new-novel" style="cursor:pointer;display:grid;place-items:center;min-height:150px;
+        border-style:dashed;background:transparent;box-shadow:none;color:var(--muted)">
+        <div style="text-align:center"><div style="font-size:24px">＋</div><div>新建小说</div><div class="hint">AI 创作 / 手工创建</div></div>
+      </button>
+    </div>
+    <div class="api-note">📡 GET /api/novels/list · POST /api/novels/create · POST /api/llm/create-novel-by-ai</div>`;
+}
+
+function viewNew() {
+  const steps = ["扩写完整剧情", "提炼创意", "生成故事核心", "生成小说设定"];
+  const done = state.newStep || 0;
+  $("#content").innerHTML = `
+    <div class="grid cols-2" style="align-items:start">
+      <div class="card">
+        <div class="card-h"><h3>新建小说</h3><span class="sub">AI 创作</span>
+          <div class="spacer" style="flex:1"></div><div class="tabs"><button class="tab on">AI 创作</button><button class="tab" data-action="toast" data-msg="手工创建：直接填表，跳过 AI 步骤">手工创建</button></div></div>
+        <div class="card-b">
+          <label class="field"><span>你的创意</span>
+            <textarea style="min-height:92px">${esc(NOVEL.core_idea)}</textarea></label>
+          <div class="row" style="gap:12px">
+            <label class="field" style="flex:1"><span>预计章节数</span><input value="20" /></label>
+            <label class="field" style="flex:1"><span>每章字数</span><input value="2600" /></label>
+          </div>
+          <div class="row"><button class="btn primary" data-action="run-steps">${done ? "继续生成" : "开始 AI 创作"}</button>
+            <span class="hint">生成会真实调用模型并计费；每步都可重试</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-h"><h3>生成进度</h3><span class="sub">4 步，失败可单步重试</span></div>
+        <div class="card-b">
+          ${steps.map((s, i) => `
+            <div class="step ${i < done ? "ok" : i === done ? "run" : ""}">
+              <i>${i < done ? "✓" : ""}</i>
+              <div><b style="font-weight:${i === done ? 600 : 400}">${s}</b>
+                <div class="hint">${i < done ? "已生成并可编辑" : i === done ? "正在生成…（流式）" : "等待上一步"}</div></div>
+            </div>`).join("")}
+          ${done >= 4 ? `<div class="card" style="margin-top:10px"><div class="card-b">
+            <b>AI 生成结果预览</b>
+            <p class="hint">设定已生成：${esc(NOVEL.worldview.slice(0, 46))}…</p>
+            <button class="btn primary" data-action="save-novel">保存并创建小说</button></div></div>` : ""}
+        </div>
+      </div>
+    </div>
+    <div class="api-note">📡 POST /api/llm/create-novel-by-ai（/stream 流式）· POST /api/novels/create · 失败步骤单独重试</div>`;
+}
+
+/* ============================================================
+   小说信息
+   ============================================================ */
+function viewNovelInfo() {
+  const fields = [
+    ["title", "标题"], ["subtitle", "副标题"], ["genre", "类型"], ["tags", "标签"],
+    ["tone", "基调"], ["target_audience", "目标读者"], ["core_idea", "核心创意"], ["core_seed", "故事核心种子"],
+    ["worldview", "世界观"], ["writing_style", "写作风格"], ["narrative_pov", "叙述视角"], ["era_background", "时代背景"],
+    ["introduction", "简介"]
+  ];
+  $("#content").innerHTML = `
+    <div class="grid cols-4" style="margin-bottom:14px">
+      <div class="stat"><b>${NOVEL.number_of_chapters}</b><span>计划章节数</span></div>
+      <div class="stat"><b>${NOVEL.words_per_chapter}</b><span>每章目标字数</span></div>
+      <div class="stat"><b>${state.chapters.reduce((n, c) => n + c.words, 0)}</b><span>已写字数</span></div>
+      <div class="stat"><b>${Math.round(7 / 13 * 100)}%</b><span>基础设定完成度 · 7/13 项</span></div>
+    </div>
+    <div class="card">
+      <div class="card-h"><h3>小说资料</h3><span class="sub">每个字段都可以单独让 AI 改写</span>
+        <div style="flex:1"></div><button class="btn sm" data-action="gen" data-kind="novel-field">✨ 改写选中字段</button>
+        <button class="btn sm primary" data-action="toast" data-msg="已保存（版本 +1，乐观锁生效）">保存</button></div>
+      <div class="card-b grid cols-2">
+        ${fields.map(([k, label]) => `
+          <label class="field" style="grid-column:${["worldview", "introduction", "core_idea"].includes(k) ? "span 2" : "auto"}">
+            <span>${label}${["worldview", "introduction", "core_idea"].includes(k) ? " · AI 改写" : ""}</span>
+            ${["worldview", "introduction", "core_idea", "core_seed"].includes(k)
+              ? `<textarea>${esc(NOVEL[k] || "")}</textarea>`
+              : `<input value="${esc(NOVEL[k] || "")}" />`}
+          </label>`).join("")}
+      </div>
+    </div>
+    <div class="api-note">📡 GET/PUT /api/novels/{id}（expected_version 乐观锁）· POST /api/llm/rewrite-novel-field → 字段候选 → 确认</div>`;
+}
+
+/* ============================================================
+   资料类（势力 / 角色 / 规则 / 物品 / 地点）
+   ============================================================ */
+function genBtn(kind, label) {
+  return `<button class="btn sm primary" data-action="gen" data-kind="${kind}">✨ ${label}</button>`;
+}
+function viewFactions() {
+  const tab = state.tab.faction || "profiles";
+  const body = tab === "profiles"
+    ? `<div class="grid cols-3">${FACTIONS.map(f => `
+        <div class="card"><div class="card-b">
+          <div class="row" style="justify-content:space-between">
+            <div class="row" style="gap:8px"><div class="avatar">${f.name[0]}</div><b>${f.name}</b></div>
+            <span class="tag ${f.level === "核心" ? "" : "gray"}">${f.level}</span></div>
+          <p class="hint" style="margin:8px 0">${f.type} · ${f.stance}</p>
+          <dl class="kv"><dt>目标</dt><dd>${f.goal}</dd><dt>隐藏目标</dt><dd>${f.hidden}</dd></dl>
+          <div class="row" style="margin-top:8px">${f.tags.map(t => `<span class="tag gray">${t}</span>`).join("")}</div>
+        </div></div>`).join("")}</div>`
+    : `<table><thead><tr><th>起源</th><th>对象</th><th>关系</th><th>现状</th><th>强度</th></tr></thead><tbody>
+        <tr><td>潮汐档案馆</td><td>填海工事局</td><td>监管 / 被监管</td><td>表面合作，暗中互查</td><td>4</td></tr>
+        <tr><td>填海工事局</td><td>拾忆会</td><td>清剿</td><td>持续中</td><td>5</td></tr>
+        <tr><td>拾忆会</td><td>潮汐档案馆</td><td>渗透</td><td>通过外围中间人</td><td>2</td></tr>
+      </tbody></table>`;
+  $("#content").innerHTML = `
+    <div class="row" style="justify-content:space-between;margin-bottom:12px">
+      <div class="tabs">
+        <button class="tab ${tab === "profiles" ? "on" : ""}" data-action="tab" data-scope="faction" data-tab="profiles">势力档案</button>
+        <button class="tab ${tab === "relations" ? "on" : ""}" data-action="tab" data-scope="faction" data-tab="relations">势力关系</button>
+        <button class="tab ${tab === "trash" ? "on" : ""}" data-action="tab" data-scope="faction" data-tab="trash">回收站</button>
+      </div>
+      <div class="row">${genBtn("factions", "生成核心势力")}${genBtn("faction-relations", "生成势力关系")}</div>
+    </div>
+    <div class="card"><div class="card-b">${tab === "trash" ? `<div class="empty">回收站为空 · 软删的资源可恢复（restore）</div>` : body}</div></div>
+    <div class="api-note">📡 GET /api/factions/novel/{id} · POST /api/factions/novel/{id}/bulk-core-with-relations · 关系：/api/faction-relations/*</div>`;
+}
+function viewCharacters() {
+  const tab = state.tab.character || "profiles";
+  let body = "";
+  if (tab === "profiles") {
+    body = `<div class="grid cols-2">${CHARACTERS.map(c => `
+      <div class="card"><div class="card-b">
+        <div class="row" style="justify-content:space-between">
+          <div class="row" style="gap:9px"><div class="avatar">${c.name[0]}</div>
+            <div><b>${c.name}</b><div class="hint">${c.role}</div></div></div>
+          <span class="tag ${c.imp === "核心" ? "" : "gray"}">${c.imp}</span>
+        </div>
+        <dl class="kv" style="margin-top:10px"><dt>渴望</dt><dd>${c.desire}</dd><dt>恐惧</dt><dd>${c.fear}</dd>
+          <dt>势力归属</dt><dd>${c.bind}</dd></dl>
+        <div class="row" style="margin-top:8px">${c.tags.map(t => `<span class="tag gray">${t}</span>`).join("")}</div>
+      </div></div>`).join("")}</div>`;
+  } else if (tab === "relations") {
+    body = `<table><thead><tr><th>角色 A</th><th>角色 B</th><th>关系类型</th><th>当前状态</th><th>强度</th><th>来源</th></tr></thead><tbody>
+      ${RELATIONS.map(r => `<tr><td>${r.a}</td><td>${r.b}</td><td>${r.type}</td><td>${r.state}</td><td>${r.intensity}</td>
+        <td><span class="tag ${r.kind === "事实" ? "ok" : "gray"}">${r.kind}</span></td></tr>`).join("")}
+    </tbody></table>`;
+  } else if (tab === "bindings") {
+    body = `<table><thead><tr><th>角色</th><th>势力</th><th>成员类型</th><th>职务</th><th>忠诚度</th></tr></thead><tbody>
+      <tr><td>林砚</td><td>潮汐档案馆</td><td>正式成员</td><td>编目员</td><td>4</td></tr>
+      <tr><td>林澈</td><td>填海工事局</td><td>前成员</td><td>测绘员</td><td>—</td></tr>
+      <tr><td>陆昀</td><td>填海工事局</td><td>正式成员</td><td>调查员</td><td>3</td></tr>
+      <tr><td>阿井</td><td>拾忆会</td><td>外围</td><td>中间人</td><td>2</td></tr>
+    </tbody></table>`;
+  } else body = `<div class="empty">回收站为空</div>`;
+  $("#content").innerHTML = `
+    <div class="row" style="justify-content:space-between;margin-bottom:12px">
+      <div class="tabs">
+        ${[["profiles", "角色档案"], ["relations", "人物关系"], ["bindings", "势力归属"], ["trash", "回收站"]]
+          .map(([k, l]) => `<button class="tab ${tab === k ? "on" : ""}" data-action="tab" data-scope="character" data-tab="${k}">${l}</button>`).join("")}
+      </div>
+      <div class="row">${genBtn("characters", "生成核心角色")}${genBtn("character-relations", "生成人物关系")}</div>
+    </div>
+    <div class="card"><div class="card-b">${body}</div></div>
+    <div class="api-note">📡 GET/POST /api/characters/novel/{id} · /api/character-relations/* · /api/character-faction-bindings/*</div>`;
+}
+function simpleList(rows, cols, kind, label, apiNote) {
+  $("#content").innerHTML = `
+    <div class="row" style="justify-content:space-between;margin-bottom:12px">
+      <span class="hint">可选资料：可以手工写，也可以让 AI 生成候选后勾选保存</span>
+      <div class="row">${genBtn(kind, label)}</div>
+    </div>
+    <div class="card"><div class="card-b"><table><thead><tr>${cols.map(c => `<th>${c[1]}</th>`).join("")}</tr></thead>
+      <tbody>${rows.map(r => `<tr>${cols.map(c => `<td>${esc(r[c[0]] ?? "")}</td>`).join("")}</tr>`).join("")}</tbody></table></div></div>
+    <div class="api-note">${apiNote}</div>`;
+}
+const viewRules = () => simpleList(RULES, [["name", "规则"], ["cat", "类别"], ["statement", "条文"], ["scope", "适用范围"], ["priority", "优先级"]], "rules", "生成世界规则", "📡 /api/world-rules/* · bulk-core 批量落库 · context 供生成时引用");
+const viewItems = () => simpleList(ITEMS, [["name", "物品"], ["type", "类型"], ["owner", "持有人"], ["func", "作用"], ["limit", "限制/代价"]], "items", "生成物品", "📡 /api/items/* · item-facts 记录持有人变更（带证据）");
+const viewLocations = () => simpleList(LOCATIONS, [["name", "地点"], ["type", "类型"], ["desc", "描述"], ["func", "剧情作用"]], "locations", "生成本卷地点", "📡 /api/locations/* · 支持父子层级与规则绑定");
+
+/* ============================================================
+   关系图谱
+   ============================================================ */
+function viewGraph() {
+  const nodes = [
+    { id: "c1", label: "林砚", x: 330, y: 120, kind: "character" },
+    { id: "c2", label: "林澈", x: 120, y: 210, kind: "character" },
+    { id: "c3", label: "陆昀", x: 545, y: 210, kind: "character" },
+    { id: "c4", label: "阿井", x: 430, y: 330, kind: "character" },
+    { id: "f1", label: "潮汐档案馆", x: 620, y: 90, kind: "faction" },
+    { id: "f2", label: "填海工事局", x: 660, y: 330, kind: "faction" },
+    { id: "f3", label: "拾忆会", x: 160, y: 350, kind: "faction" }
+  ];
+  const edges = [
+    ["c1", "c2", "姐妹"], ["c1", "c3", "旧识/试探"], ["c3", "f2", "隶属"], ["c1", "f1", "编目员"],
+    ["c2", "f2", "前测绘员"], ["c1", "c4", "交易"], ["c4", "f3", "外围"], ["f1", "f2", "互查"], ["f2", "f3", "清剿"]
+  ];
+  const pos = Object.fromEntries(nodes.map(n => [n.id, n]));
+  const svgEdges = edges.map(([a, b, label]) => {
+    const A = pos[a], B = pos[b];
+    return `<g><line x1="${A.x}" y1="${A.y}" x2="${B.x}" y2="${B.y}" stroke="#c9d1e6" stroke-width="1.6" stroke-dasharray="${A.kind === "faction" || B.kind === "faction" ? "5 4" : "0"}" />
+      <text x="${(A.x + B.x) / 2}" y="${(A.y + B.y) / 2 - 5}" text-anchor="middle" font-size="10" fill="#8b93a8">${label}</text></g>`;
+  }).join("");
+  const svgNodes = nodes.map(n => `
+    <g class="gnode" data-action="gnode" data-id="${n.id}">
+      <circle cx="${n.x}" cy="${n.y}" r="${n.kind === "faction" ? 22 : 18}"
+        fill="${state.graphNode === n.id ? "#4f6ef7" : n.kind === "faction" ? "#fff4e6" : "#eef1ff"}"
+        stroke="${state.graphNode === n.id ? "#3a55c9" : n.kind === "faction" ? "#f0cfa8" : "#c8d2f6"}" stroke-width="2" />
+      <text x="${n.x}" y="${n.y + 4}" text-anchor="middle" fill="${state.graphNode === n.id ? "#fff" : "#2b3040"}">${n.label.slice(0, 3)}</text>
+    </g>`).join("");
+  const picked = state.graphNode ? (CHARACTERS.find(c => c.id === state.graphNode) || FACTIONS.find(f => f.id === state.graphNode)) : null;
+  $("#content").innerHTML = `
+    <div class="grid" style="grid-template-columns:minmax(0,1fr) 268px;align-items:start">
+      <div class="card"><div class="card-h"><h3>人物与势力关系图谱</h3><span class="sub">点击节点查看详情 · 实线=人物关系，虚线=势力关系</span></div>
+        <div class="card-b"><div class="graph"><svg viewBox="0 0 780 430">${svgEdges}${svgNodes}</svg></div></div></div>
+      <div class="card"><div class="card-h"><h3>${picked ? esc(picked.name) : "节点详情"}</h3></div>
+        <div class="card-b">${picked ? (picked.role
+          ? `<dl class="kv"><dt>身份</dt><dd>${picked.role}</dd><dt>渴望</dt><dd>${picked.desire}</dd><dt>恐惧</dt><dd>${picked.fear}</dd><dt>归属</dt><dd>${picked.bind}</dd></dl>`
+          : `<dl class="kv"><dt>类型</dt><dd>${picked.type}</dd><dt>公开立场</dt><dd>${picked.stance}</dd><dt>目标</dt><dd>${picked.goal}</dd><dt>隐藏目标</dt><dd>${picked.hidden}</dd></dl>`)
+          : `<div class="empty">点一个节点</div>`}</div></div>
+    </div>
+    <div class="api-note">📡 GET /api/characters/novel/{id} + /api/factions/novel/{id} + 两类关系与归属接口（前端 d3-force 布局）</div>`;
+}
+
+/* ============================================================
+   卷规划
+   ============================================================ */
+function viewVolumes() {
+  const tab = state.tab.volume || "overview";
+  const v = VOLUMES.find(x => x.id === state.activeVolume);
+  const tabs = [["overview", "卷概览 · 剧情"], ["factions", "本卷势力"], ["characters", "人物计划"], ["locations", "本卷地点"]];
+  const prepReady = { factions: true, characters: true, locations: false };
+  const body = tab === "overview" ? `
+      ${VOLUMES.map(vol => `
+        <div class="card" style="margin-bottom:10px;${vol.id === v.id ? "border-color:var(--primary-line);box-shadow:0 0 0 2px #eef1ff" : ""}">
+          <div class="card-b">
+            <div class="row" style="justify-content:space-between">
+              <div class="row" style="gap:8px"><b>${vol.title}</b>
+                <span class="tag ${vol.plot === "ready" ? "ok" : "warn"}">${vol.plot === "ready" ? "剧情已就绪" : "剧情待完善"}</span></div>
+              <div class="row"><span class="hint">${vol.chapters} 章 / ${(vol.words / 10000).toFixed(1)} 万字</span>
+                <button class="btn sm" data-action="pick-volume" data-id="${vol.id}">设为当前卷</button>
+                ${vol.plot !== "ready" ? `<button class="btn sm primary" data-action="gen" data-kind="volume-plot">✨ 完善本卷剧情</button>` : ""}</div>
+            </div>
+            <dl class="kv" style="margin-top:8px"><dt>一句话</dt><dd>${vol.premise}</dd>
+              <dt>核心冲突</dt><dd>${vol.conflict}</dd><dt>起→止</dt><dd>${vol.start} → ${vol.end}</dd></dl>
+          </div></div>`).join("")}
+      <div class="row"><button class="btn primary" data-action="gen" data-kind="volume-skeleton">✨ 生成全书分卷</button>
+        <span class="hint">生成多卷候选 → 勾选 → 批量落库（含下游影响预览）</span></div>`
+    : tab === "factions" ? `<div class="grid cols-3">${FACTIONS.map(f => `
+        <div class="card"><div class="card-b"><div class="row" style="justify-content:space-between">
+          <b>${f.name}</b><span class="tag ok">已确认出场</span></div>
+          <p class="hint" style="margin:6px 0 0">本卷作用：${f.name === "拾忆会" ? "提供原件线索" : f.name === "填海工事局" ? "主要对抗压力" : "信息与场所来源"}</p>
+        </div></div>`).join("")}
+      </div><div class="row" style="margin-top:10px">${genBtn("volume-factions", "生成本卷势力")}<span class="hint">从全书势力中挑选，或让 AI 补一批卷内势力</span></div>`
+    : tab === "characters" ? `<div class="card"><div class="card-b">
+        <table><thead><tr><th>角色</th><th>本卷状态</th><th>人物弧进度</th><th>关键转折</th></tr></thead><tbody>
+          <tr><td>林砚</td><td>从服从 → 私下调查</td><td>25%</td><td>第 2 章听到姐姐名字</td></tr>
+          <tr><td>陆昀</td><td>从公事公办 → 动摇</td><td>18%</td><td>第 4 章交出缺页测绘图</td></tr>
+          <tr><td>阿井</td><td>首次登场</td><td>5%</td><td>第 6 章交易</td></tr>
+        </tbody></table></div></div>
+      <div class="row" style="margin-top:10px">${genBtn("volume-characters", "生成本卷人物计划")}</div>`
+    : `<div class="card"><div class="card-b"><div class="row" style="justify-content:space-between">
+          <span>${prepReady.locations ? "地点已就绪" : "本卷还没有确认地点，仍是待办步骤"}</span>
+          <span class="tag ${prepReady.locations ? "ok" : "warn"}">${prepReady.locations ? "已就绪" : "待准备"}</span></div>
+        <table style="margin-top:10px"><thead><tr><th>地点</th><th>类型</th><th>本卷作用</th></tr></thead><tbody>
+          ${LOCATIONS.map(l => `<tr><td>${l.name}</td><td>${l.type}</td><td>${l.func}</td></tr>`).join("")}
+        </tbody></table></div></div>
+      <div class="row" style="margin-top:10px">${genBtn("locations", "生成本卷地点")}</div>`;
+
+  $("#content").innerHTML = `
+    <div class="row" style="justify-content:space-between;margin-bottom:12px">
+      <div class="tabs">${tabs.map(([k, l]) => `<button class="tab ${tab === k ? "on" : ""}" data-action="tab" data-scope="volume" data-tab="${k}">${l}</button>`).join("")}</div>
+      <span class="hint">当前卷：${v.title}</span>
+    </div>
+    ${body}
+    <div class="api-note">📡 /api/volumes/* · planning-readiness?target_type=volume&target_id=…（preparation.factions/characters/locations 三项门禁）</div>`;
+}
+
+/* ============================================================
+   篇章 / 场景 / 章 规划
+   ============================================================ */
+function viewArcPlanning() {
+  const arc = ARCS.find(a => a.id === state.activeArc);
+  $("#content").innerHTML = `
+    <div class="grid" style="grid-template-columns:250px minmax(0,1fr);align-items:start">
+      <div class="card"><div class="card-h"><h3>层级树</h3><span class="sub">卷 → 篇章 → 场景 → 章</span></div>
+        <div class="card-b" style="padding:8px">
+          <div class="tree-item"><b>${VOLUMES[0].title}</b></div>
+          <div class="dotline">
+            ${ARCS.map(a => `
+              <div class="tree-item ${a.id === arc.id ? "on" : ""}" data-action="pick-arc" data-id="${a.id}">
+                <span>${a.plotReady ? "📗" : "📕"}</span><span>${a.title}</span>
+                <span class="hint" style="margin-left:auto">${a.chapters}章</span></div>
+              ${a.id === arc.id ? SCENES.filter(s => s.arc === a.id).map(s => `
+                <div class="dotline">
+                  <div class="tree-item"><span>🎬</span><span>${s.title}</span></div>
+                  <div class="dotline">${CHAPTERS.filter(c => c.scene === s.id).map(c => `
+                    <div class="tree-item ${c.id === state.activeChapter ? "on" : ""}" data-action="open-chapter" data-id="${c.id}">
+                      <span>${c.words ? "📄" : "📝"}</span><span>${c.title}</span>
+                      <span class="hint" style="margin-left:auto">${c.words || "未写"}</span></div>`).join("")}</div>
+                </div>`).join("") : ""}
+            `).join("")}
+          </div>
+        </div></div>
+
+      <div class="stack">
+        <div class="card"><div class="card-h"><h3>${arc.title}</h3>
+            <span class="tag ${arc.plotReady ? "ok" : "warn"}">${arc.plotReady ? "剧情已就绪" : "剧情待完善"}</span>
+            <div style="flex:1"></div>
+            ${arc.plotReady ? "" : `<button class="btn sm primary" data-action="gen" data-kind="arc-plot">✨ 完善本篇剧情</button>`}</div>
+          <div class="card-b">
+            <dl class="kv"><dt>概要</dt><dd>${arc.summary}</dd><dt>章数</dt><dd>${arc.chapters} 章 · ${arc.scenes} 个场景</dd>
+              <dt>连续性</dt><dd>承接第一卷「旧库盘点」，需保留听针裂纹伏笔</dd></dl>
+            <div class="row" style="margin-top:10px">${genBtn("plan-arcs", "生成篇章规划")}${genBtn("plan-scenes", "生成场景计划")}${genBtn("plan-chapters", "生成章计划")}</div>
+          </div></div>
+
+        <div class="card"><div class="card-h"><h3>章计划</h3><span class="sub">第 3 章 · 生成正文前必须确认</span>
+          <div style="flex:1"></div><button class="btn sm primary" data-action="open-chapter" data-id="ch3">去写这一章 →</button></div>
+          <div class="card-b grid cols-2">
+            <label class="field"><span>目标</span><input value="确认姐姐存在过，并发现删改痕迹" /></label>
+            <label class="field"><span>视角人物</span><input value="林砚" /></label>
+            <label class="field"><span>起状态</span><input value="只当是噪点" /></label>
+            <label class="field"><span>止状态</span><input value="开始怀疑官方记录" /></label>
+            <label class="field" style="grid-column:span 2"><span>节拍（beats）</span><textarea>1. 索引卡被刮掉的名字<br>2. 与旧名录比对失败<br>3. 她听见姐姐说了自己的名字</textarea></label>
+            <label class="field"><span>必须包含</span><input value="听针、潮声、被刮的卡片" /></label>
+            <label class="field"><span>必须避免</span><input value="不要提前揭示工事局内鬼" /></label>
+          </div></div>
+      </div>
+    </div>
+    <div class="api-note">📡 /api/arcs/* /api/scenes/* /api/chapters/*（confirm + reorder）· planning-readiness?target_type=arc&target_id=…</div>`;
+}
+
+/* ============================================================
+   章节写作
+   ============================================================ */
+function viewChapterEditor() {
+  const ch = state.chapters.find(c => c.id === state.activeChapter) || state.chapters[0];
+  const text = ch.draft != null ? ch.draft : (ch.words ? CHAPTER_TEXT : []);
+  $("#content").innerHTML = `
+    <div class="editor">
+      <div class="card" style="align-self:start"><div class="card-h"><h3>本卷目录</h3></div>
+        <div class="card-b" style="padding:8px">
+          ${state.chapters.map(c => `
+            <div class="tree-item ${c.id === ch.id ? "on" : ""}" data-action="open-chapter" data-id="${c.id}">
+              <span>${c.words ? "📄" : "📝"}</span><span style="flex:1;min-width:0">${c.title}</span>
+              <span class="hint">${c.words ? c.words : "未写"}</span></div>`).join("")}
+        </div></div>
+
+      <div class="editor-paper">
+        <div class="paper-head">
+          <b style="font-size:14px">${ch.title}</b>
+          <span class="tag ${ch.words ? "ok" : "warn"}">${ch.words ? "已保存" : "未写"}</span>
+          <div style="flex:1"></div>
+          <button class="btn sm" data-action="gen" data-kind="write">✨ 生成本章正文</button>
+          <button class="btn sm" data-action="continue" data-id="${ch.id}">⏵ 续写</button>
+          <button class="btn sm primary" data-action="save-chapter" data-id="${ch.id}">保存</button>
+        </div>
+        <div class="paper-body" contenteditable="true" id="paper">${text.length
+          ? text.map(p => `<p>${esc(p)}</p>`).join("")
+          : `<p class="muted" style="font-size:13px">（正文为空）点击「生成本章正文」基于左侧章计划生成候选，或直接手写。</p>`}</div>
+        <div class="paper-foot">
+          <span id="wc">字数 ${wordCount(text.join(""))}</span>
+          <span>·</span><span>版本 ${ch.words ? 3 : 0}</span>
+          <span>·</span><span>草稿自动存在浏览器 localStorage</span>
+          <div style="flex:1"></div>
+          <button class="btn sm ghost" data-action="toast" data-msg="已导出草稿 .md">导出草稿</button>
+          <button class="btn sm ghost" data-action="toast" data-msg="历史版本：可对比与回滚">历史版本</button>
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="card"><div class="card-h"><h3>本章资料</h3><span class="sub">生成时自动带上</span></div>
+          <div class="card-b" style="font-size:12.5px">
+            <div class="row" style="gap:6px;flex-wrap:wrap">
+              <span class="tag gray">林砚</span><span class="tag gray">潮汐档案馆</span><span class="tag gray">档案馆旧库</span>
+              <span class="tag gray">铜制听针</span><span class="tag gray">潮声记忆不可转述</span></div>
+            <p class="hint" style="margin:8px 0 0">上次生成记录：投入 6,420 token · 输出 2,310 token · gpt-4o-mini</p>
+          </div></div>
+        <div class="card"><div class="card-h"><h3>章后检查</h3><span class="sub">保存正文后运行</span></div>
+          <div class="card-b stack" style="gap:8px">
+            ${["心理状态", "物品持有人", "人物关系", "世界规则疑点"].map(k => `
+              <div class="row" style="justify-content:space-between"><span style="font-size:12.5px">${k}</span>
+                <button class="btn sm" data-action="check" data-kind="${k}">运行</button></div>`).join("")}
+          </div></div>
+      </div>
+    </div>
+    <div class="api-note">📡 POST /api/llm/novels/{id}/…/writing（/stream）· PUT /api/chapters/{id} · POST /api/chapters/{id}/content/confirm · 章后 /api/chapter-records/*</div>`;
+  const paper = $("#paper");
+  if (paper) paper.addEventListener("input", () => { $("#wc").textContent = "字数 " + wordCount(paper.innerText); });
+}
+
+/* ============================================================
+   伏笔 / 章后记录 / 助手 / 流程 / 设置
+   ============================================================ */
+function viewForeshadowings() {
+  $("#content").innerHTML = `
+    <div class="card"><div class="card-b"><table>
+      <thead><tr><th>伏笔</th><th>埋设</th><th>回收</th><th>状态</th><th>预期效果</th><th></th></tr></thead>
+      <tbody>${FORESHADOWS.map(f => `<tr><td><b>${f.title}</b></td><td>${f.plant}</td><td>${f.resolve}</td>
+        <td><span class="tag ${f.status === "已埋" ? "gray" : "ok"}">${f.status}</span></td><td>${f.effect}</td>
+        <td><button class="btn sm" data-action="toast" data-msg="已记录埋设证据：第 1 章 · 版本 3 · 字符区间 1204-1268">添加证据</button></td></tr>`).join("")}
+      </tbody></table></div></div>
+    <div class="api-note">📡 /api/foreshadowings/novel/{id} · …/{identity}/records（埋设/回收证据绑定章节 revision）</div>`;
+}
+
+function viewRecords() {
+  $("#content").innerHTML = `
+    <div class="grid cols-4" style="margin-bottom:12px">
+      <div class="stat"><b>${state.records.filter(r => r.state === "已采用").length}</b><span>已采用</span></div>
+      <div class="stat"><b>${state.records.filter(r => r.state === "待确认").length}</b><span>待确认</span></div>
+      <div class="stat"><b>1</b><span>待处理疑点</span></div>
+      <div class="stat"><b>2</b><span>已有证据的变更</span></div>
+    </div>
+    <div class="stack">
+      ${state.records.map((r, i) => `
+        <div class="card"><div class="card-b">
+          <div class="row" style="justify-content:space-between">
+            <div class="row" style="gap:8px"><span class="tag">${r.kind}</span><b>${r.target}</b></div>
+            <span class="tag ${r.state === "已采用" ? "ok" : r.state === "待处理" ? "warn" : "gray"}">${r.state}</span></div>
+          <p style="margin:8px 0 4px">${r.result}</p>
+          <p class="hint" style="margin:0">证据：${r.evidence}</p>
+          <div class="row" style="margin-top:9px">
+            ${r.state === "已采用" ? `<span class="hint">已写入事实历史（含 before/after）</span>`
+              : `<button class="btn sm primary" data-action="adopt" data-i="${i}">采用并写入事实</button>
+                 <button class="btn sm" data-action="void-record" data-i="${i}">作废</button>
+                 <button class="btn sm ghost" data-action="toast" data-msg="已定位到原文并高亮引用区间">定位原文</button>`}
+          </div>
+        </div></div>`).join("")}
+    </div>
+    <div class="api-note">📡 POST /api/chapter-records/novel/{id}/…/check → confirm / void · 每次变更写入 EntityStateHistory（before/after + evidence）</div>`;
+}
+
+function viewAssistant() {
+  $("#content").innerHTML = `
+    <div class="grid" style="grid-template-columns:minmax(0,1fr) 300px;align-items:start">
+      <div class="card"><div class="card-h"><h3>AI 助手</h3><span class="sub">能读写资料，但改动要你审阅</span></div>
+        <div class="card-b stack">
+          <div class="card" style="background:var(--panel-2)"><div class="card-b">
+            <b>你</b><p class="hint" style="margin:4px 0 0">把林砚对陆昀的信任再降一点，并让听针出现第二道裂纹。</p></div></div>
+          <div class="card"><div class="card-b">
+            <b>助手</b>
+            <p style="margin:6px 0">我准备了两处改动，都来自第 2 章已保存的正文：</p>
+            <ol class="hint" style="margin:0 0 8px 18px;padding:0">
+              <li>人物关系「林砚 ↔ 陆昀」：合作但互相隐瞒 → 明显不信任（强度 3 → 2）</li>
+              <li>物品「铜制听针」：新增裂纹事实（承接第一道裂纹伏笔）</li>
+            </ol>
+            <div class="row"><button class="btn sm primary" data-action="assistant-apply">审阅并应用</button>
+              <button class="btn sm" data-action="toast" data-msg="已撤销本轮改动（undo）">撤销</button></div>
+          </div></div>
+          <label class="field" style="margin:0"><span>继续说…</span>
+            <div class="row"><input placeholder="例如：把第三篇的冲突提前到第二篇" style="flex:1" />
+              <button class="btn primary" data-action="toast" data-msg="已发送（SSE 流式返回）">发送</button></div></label>
+        </div></div>
+      <div class="card"><div class="card-h"><h3>改动审阅</h3></div><div class="card-b">
+        <dl class="kv"><dt>变更单</dt><dd>change-2f9c…</dd><dt>状态</dt><dd><span class="tag warn">待审阅</span></dd>
+          <dt>影响</dt><dd>1 条关系 · 1 条物品事实</dd><dt>可回滚</dt><dd>是（apply → undo）</dd></dl></div></div>
+    </div>
+    <div class="api-note">📡 /api/novels/{id}/assistant/*（capabilities / changes/{id} / apply / review / undo）· 工具含 navigate_to_resource</div>`;
+}
+
+function viewTaskFlows() {
+  $("#content").innerHTML = `
+    <div class="grid cols-2" style="align-items:start">
+      <div class="card"><div class="card-h"><h3>任务流程</h3><span class="sub">22 个内置任务，可图形化改写</span></div>
+        <div class="card-b" style="padding:8px">
+          ${[["create_novel_by_ai", "AI 创建小说", 6], ["create_factions_by_ai", "核心势力", 5], ["create_characters_by_ai", "核心角色", 5],
+             ["create_volume_skeleton_by_ai", "全书分卷", 4], ["plan_chapters_by_ai", "生成章计划", 5], ["write_chapter_by_ai", "生成正文", 7],
+             ["check_chapter_world_rules_by_ai", "章后规则疑点", 4]]
+            .map(([k, label, nodes]) => `<div class="tree-item" data-action="toast" data-msg="打开流程画布：${k}">
+              <span>🧩</span><span style="flex:1">${label}</span><span class="hint">${nodes} 节点</span></div>`).join("")}
+        </div></div>
+      <div class="card"><div class="card-h"><h3>节点画布（示意）</h3><span class="sub">输入 → 资料 → 提示词 → AI → 校验 → 输出</span></div>
+        <div class="card-b">
+          <div class="flowline">
+            <div class="fbox"><b>开始输入</b><small>创意 / 参数</small></div><div class="farrow">→</div>
+            <div class="fbox"><b>页面资料</b><small>已保存的小说/角色</small></div><div class="farrow">→</div>
+            <div class="fbox"><b>文本模板</b><small>拼接提示词</small></div><div class="farrow">→</div>
+            <div class="fbox"><b>AI 生成</b><small>provider + 参数</small></div><div class="farrow">→</div>
+            <div class="fbox"><b>任务输出</b><small>候选 + 校验</small></div>
+          </div>
+          <div class="row" style="margin-top:12px">
+            <button class="btn sm" data-action="toast" data-msg="预演已执行：展示每步实际发出的提示词与参数">执行模拟</button>
+            <button class="btn sm" data-action="toast" data-msg="校验通过：端口类型兼容、无孤立节点">检查流程</button>
+            <button class="btn sm ghost" data-action="toast" data-msg="已恢复内置内容（修订版本回退）">恢复内置</button>
+          </div>
+        </div></div>
+    </div>
+    <div class="api-note">📡 /api/task-flows/*（列表 / builtin / default / preview 预演 / validate）· 节点类型 input·context·constant·template·compose·llm·condition·merge·subflow·foreach·agent·output</div>`;
+}
+
+function viewSettings() {
+  $("#content").innerHTML = `
+    <div class="grid cols-2" style="align-items:start">
+      <div class="card"><div class="card-h"><h3>数据库配置</h3><span class="sub">保存后即刷新连接</span></div>
+        <div class="card-b">
+          <label class="field"><span>MongoDB 连接地址</span>
+            <div class="row"><input value="mongodb://127.0.0.1:27017/?replicaSet=rs0&directConnection=true" readonly style="flex:1" />
+              <button class="btn sm" data-action="toast" data-msg="请输入新地址并确认替换">替换连接</button></div>
+            <span class="tag ok" style="margin-top:6px">连接已配置</span></label>
+          <label class="field"><span>数据库名称</span><input value="novel_generator" readonly /></label>
+          <label class="field"><span>连接超时 (ms)</span><input value="5000" /></label>
+          <button class="btn primary" data-action="toast" data-msg="配置已保存，Mongo 连接已刷新">保存</button>
+        </div></div>
+      <div class="card"><div class="card-h"><h3>LLM Provider</h3><span class="sub">可多个，按流程分配</span></div>
+        <div class="card-b stack">
+          <div class="card" style="background:var(--panel-2)"><div class="card-b">
+            <div class="row" style="justify-content:space-between"><b>日常写作 · DeepSeek</b><span class="tag ok">已启用</span></div>
+            <p class="hint" style="margin:6px 0 0">deepseek · deepseek-chat · 流式 ✓ · JSON Schema ✓ · 并发 3</p></div></div>
+          <div class="card" style="background:var(--panel-2)"><div class="card-b">
+            <div class="row" style="justify-content:space-between"><b>审校 · GPT-4o mini</b><span class="tag ok">已启用</span></div>
+            <p class="hint" style="margin:6px 0 0">openai · gpt-4o-mini · 用于格式审校</p></div></div>
+          <div class="row"><button class="btn sm primary" data-action="toast" data-msg="新增 Provider：填类型/基地址/Key/模型后点测试">新增 Provider</button>
+            <button class="btn sm" data-action="toast" data-msg="能力测试：将发 4 次极小请求并回填开关">测试接口</button></div>
+          <p class="hint" style="margin:0">全局默认 Provider 决定未单独指定步骤的模型。</p>
+        </div></div>
+    </div>
+    <div class="api-note">📡 GET/PUT /api/config（密钥只回显掩码）· POST /api/config/llm-providers/test</div>`;
+}
+
+/* ============================================================
+   路由 & 渲染
+   ============================================================ */
+const VIEWS = {
+  "novel-info": viewNovelInfo, "chapter-editor": viewChapterEditor, "arc-planning": viewArcPlanning,
+  "volume-planning": viewVolumes, "character-cards": viewCharacters, "location-cards": viewLocations,
+  "faction-cards": viewFactions, "item-cards": viewItems, "rule-cards": viewRules,
+  "entity-graph": viewGraph, "foreshadowings": viewForeshadowings, "chapter-records": viewRecords,
+  assistant: viewAssistant, "task-flows": viewTaskFlows, settings: viewSettings
+};
+
+function render() {
+  renderNav(); renderTop();
+  if (state.view === "bookshelf") viewBookshelf();
+  else if (state.view === "new") viewNew();
+  else (VIEWS[state.ws] || viewNovelInfo)();
+  const c = $("#content"); if (c) c.scrollTop = 0;
+}
+
+/* ============================================================
+   AI 候选抽屉
+   ============================================================ */
+const GEN = {
+  "novel-field": { title: "改写字段 · 世界观", steps: ["读取当前字段与小说资料", "按风格约束改写", "校验长度与字段契约"] },
+  factions: { title: "生成核心势力", steps: ["读取小说资料与已存势力", "生成势力与势力关系", "校验引用与强度"] },
+  "faction-relations": { title: "生成势力关系", steps: ["读取势力列表", "生成关系候选", "校验端点存在"] },
+  characters: { title: "生成核心角色", steps: ["读取势力与主线冲突", "生成角色与归属候选", "校验必填字段"] },
+  "character-relations": { title: "生成人物关系", steps: ["读取角色列表", "生成关系候选", "检查孤立角色"] },
+  rules: { title: "生成世界规则", steps: ["读取世界观", "生成规则与例外", "校验适用范围"] },
+  items: { title: "生成物品", steps: ["读取角色与地点", "生成物品候选", "校验持有人"] },
+  locations: { title: "生成本卷地点", steps: ["读取本卷剧情", "生成地点候选", "校验父子层级"] },
+  "volume-skeleton": { title: "生成全书分卷", steps: ["汇总全书资料", "规划多卷结构", "评估下游影响"] },
+  "volume-plot": { title: "完善本卷剧情", steps: ["读取本卷上下文", "生成详细剧情稿", "比对前后卷衔接"] },
+  "arc-plot": { title: "完善本篇剧情", steps: ["读取篇章上下文", "生成剧情稿", "检查连续性备注"] },
+  "plan-arcs": { title: "生成篇章规划", steps: ["读取本卷剧情", "切分篇章", "校验章数预算"] },
+  "plan-scenes": { title: "生成场景计划", steps: ["读取篇章规划", "切分场景", "校验参与资料"] },
+  "plan-chapters": { title: "生成章计划", steps: ["读取场景计划", "生成章计划", "校验节拍完整性"] },
+  write: { title: "生成本章正文", steps: ["装配本章资料与章计划", "流式生成正文", "校验字数与禁忌项"] }
+};
+const GEN_BODY = {
+  factions: () => `<p class="hint">候选 3 项 · 勾选后写入</p>${FACTIONS.map(f => `
+      <div class="card" style="margin-bottom:8px"><div class="card-b">
+        <div class="row" style="justify-content:space-between"><label class="row" style="gap:6px"><input type="checkbox" checked /><b>${f.name}</b></label>
+          <span class="tag gray">${f.type}</span></div>
+        <p class="hint" style="margin:6px 0 0">${f.goal} · 隐藏：${f.hidden}</p></div></div>`).join("")}`,
+  characters: () => `<p class="hint">候选 4 项（含 3 条势力归属）</p>${CHARACTERS.slice(0, 3).map(c => `
+      <div class="card" style="margin-bottom:8px"><div class="card-b">
+        <div class="row" style="justify-content:space-between"><label class="row" style="gap:6px"><input type="checkbox" checked /><b>${c.name}</b></label>
+          <span class="tag">${c.role}</span></div>
+        <p class="hint" style="margin:6px 0 0">渴望：${c.desire} · 恐惧：${c.fear}</p></div></div>`).join("")}`,
+  write: () => `<p class="hint">候选正文（可编辑后再采用）</p>
+      <div class="card"><div class="card-b" style="font-size:14px;line-height:1.85">
+        ${CHAPTER_TEXT.map(p => `<p style="margin:0 0 .8em">${p}</p>`).join("")}</div></div>
+      <p class="hint" style="margin-top:8px">字数 1,142 · 目标 2,600 · 已引用 4 条资料</p>`
+};
+function openDrawer(kind) {
+  const meta = GEN[kind] || { title: "AI 生成", steps: ["准备上下文", "调用模型", "校验结果"] };
+  state.drawer = { kind, step: 0 };
+  $("#drawer-title").textContent = meta.title;
+  $("#drawer-tag").textContent = "候选";
+  $("#drawer-foot").innerHTML = `<button class="btn primary" data-action="adopt-gen">采用并保存</button>
+    <button class="btn" data-action="toast" data-msg="已重新生成（会再次计费）">重新生成</button>
+    <button class="btn ghost" data-action="close-drawer">取消</button>`;
+  paintDrawer(meta);
+  $("#drawer").classList.add("on"); $("#scrim").classList.add("on");
+  const tick = () => {
+    const d = state.drawer; if (!d || d.kind !== kind) return;
+    d.step += 1;
+    if (d.step < meta.steps.length) { paintDrawer(meta); setTimeout(tick, 620); }
+    else {
+      $("#drawer-body").innerHTML = `
+        <div class="stack" style="gap:10px">
+          <div class="row"><span class="tag ok">生成完成</span><span class="hint">用时 2.4s · 1,860 token</span></div>
+          <div class="row" style="gap:6px;flex-wrap:wrap">
+            <span class="pill">输入：小说资料 v3</span><span class="pill">provider：deepseek-chat</span><span class="pill">流式</span></div>
+          ${(GEN_BODY[kind] || (() => `<p class="hint">（原型演示：此处展示结构化候选，勾选后可编辑字段再保存）</p>`))()}
+        </div>`;
+      $("#drawer-tag").textContent = "待确认";
+    }
+  };
+  setTimeout(tick, 500);
+}
+function paintDrawer(meta) {
+  const d = state.drawer;
+  $("#drawer-body").innerHTML = `
+    <div class="stack" style="gap:6px">
+      ${meta.steps.map((s, i) => `<div class="step ${i < d.step ? "ok" : i === d.step ? "run" : ""}">
+        <i>${i < d.step ? "✓" : ""}</i><div><b style="font-weight:${i === d.step ? 600 : 400}">${s}</b>
+        <div class="hint">${i < d.step ? "完成" : i === d.step ? "进行中…" : "等待"}</div></div></div>`).join("")}
+      <p class="hint" style="margin-top:8px">生成结果不会自动写入；采用后才会落库并推送资料变更。</p>
+    </div>`;
+}
+function closeDrawer() { $("#drawer").classList.remove("on"); $("#scrim").classList.remove("on"); state.drawer = null; }
+
+/* ============================================================
+   流程地图 / 说明
+   ============================================================ */
+function openModal(title, body) { $("#modal-title").textContent = title; $("#modal-body").innerHTML = body; $("#modal").classList.add("on"); }
+function flowMap() {
+  const box = (t, s, cls = "") => `<div class="fbox ${cls}"><b>${t}</b><small>${s}</small></div>`;
+  openModal("流程地图 · 从创意到成章", `
+    <p class="hint" style="margin:0 0 12px">上半部分：用户看到的 6 阶段（由已保存事实重算）。下半部分：每次生成背后的 AI 任务链。</p>
+    <div class="flowline">
+      ${box("0 建立作品", "小说资料 / 创意四步")} <div class="farrow">→</div>
+      ${box("1 开场资料", "势力→关系→主角→角色→归属→关系")} <div class="farrow">→</div>
+      ${box("2 本卷剧情", "分卷 → 本卷 planning")} <div class="farrow">→</div>
+      ${box("3 本卷准备", "势力 / 人物 / 地点 三项门禁")} <div class="farrow">→</div>
+      ${box("4 本卷章节", "篇章→场景→章计划→正文")} <div class="farrow">→</div>
+      ${box("5 继续规划", "章后核查 / 下一卷")}
+    </div>
+    <div style="margin:14px 0 6px;font-size:12.5px;color:var(--muted)">门禁：初始化 7 步全 ready → 才可生成世界规则与分卷</div>
+    <div class="flowline">
+      ${box("创意", "create_novel_by_ai")} <div class="farrow">→</div>
+      ${box("势力 + 势力关系", "create_factions_by_ai")} <div class="farrow">→</div>
+      ${box("角色 + 归属", "create_characters_by_ai")} <div class="farrow">→</div>
+      ${box("人物关系", "create_character_relations_by_ai")} <div class="farrow">→</div>
+      ${box("分卷 / 开卷包", "volume_skeleton · volume_launch")} <div class="farrow">→</div>
+      ${box("篇章 / 场景 / 章", "plan_arcs · plan_scenes · plan_chapters")} <div class="farrow">→</div>
+      ${box("正文", "write_chapter_by_ai")} <div class="farrow">→</div>
+      ${box("章后核查", "心理 / 物品 / 关系 / 规则")}
+    </div>
+    <div style="margin-top:16px" class="card"><div class="card-b">
+      <b>数据流三原则</b>
+      <ul class="hint" style="margin:6px 0 0 18px;padding:0">
+        <li>AI 只产出「候选 + 依据」，确认后才写库（可反复比对）；</li>
+        <li>每个实体带 version，写入需 expected_version，冲突返回 409；</li>
+        <li>章后改动必须带证据（章节 + 版本 + 字符区间 + 原文），并写入状态历史。</li>
+      </ul>
+    </div></div>`);
+}
+function noteModal() {
+  openModal("说明：这是界面流原型", `
+    <div class="card"><div class="card-b" style="line-height:1.9;font-size:13px">
+      <p style="margin:0 0 10px"><b>真的部分</b>：屏幕划分、侧栏 11 个 workspace、6 阶段进度与判定顺序、
+      22 个 AI 任务、字段名、接口路径，全部来自本仓库代码与运行中后端的 OpenAPI。</p>
+      <p style="margin:0 0 10px"><b>演示的部分</b>：小说《潮汐档案》、人物与势力内容为虚构示例；
+      生成过程与耗时是动画模拟；"采用并保存"只更新原型内的状态，不写数据库。</p>
+      <p style="margin:0"><b>怎么变成真界面</b>：把本文件的屏幕逐一映射到
+      <code>frontend/src/components/writing/&lt;模块&gt;/</code>，接口按每个屏幕底部的路径对接；
+      进度条逻辑照抄 <code>WritingFlowProgress.tsx</code> 的判定顺序即可。</p>
+    </div></div>`);
+}
+
+/* ============================================================
+   交互
+   ============================================================ */
+document.addEventListener("click", (e) => {
+  const el = e.target.closest("[data-action]"); if (!el) return;
+  const { action } = el.dataset;
+  const go = (ws) => { state.view = "writing"; state.ws = ws; render(); };
+
+  if (action === "shelf") { state.view = "bookshelf"; render(); return; }
+  if (action === "open-book") { state.view = "writing"; state.ws = "novel-info"; render(); return; }
+  if (action === "new-novel") { state.view = "new"; state.newStep = 0; render(); return; }
+  if (action === "ws") { go(el.dataset.ws); return; }
+  if (action === "tab") { state.tab[el.dataset.scope] = el.dataset.tab; render(); return; }
+  if (action === "pick-volume") { state.activeVolume = el.dataset.id; render(); return; }
+  if (action === "pick-arc") { state.activeArc = el.dataset.id; render(); return; }
+  if (action === "open-chapter") { state.activeChapter = el.dataset.id; state.activeArc = "a1"; go("chapter-editor"); return; }
+  if (action === "gnode") { state.graphNode = el.dataset.id; render(); return; }
+  if (action === "flowmap") { flowMap(); return; }
+  if (action === "note") { noteModal(); return; }
+  if (action === "close-modal") { $("#modal").classList.remove("on"); return; }
+  if (action === "close-drawer") { closeDrawer(); return; }
+  if (action === "gen") { openDrawer(el.dataset.kind); return; }
+  if (action === "adopt-gen") {
+    const k = state.drawer && state.drawer.kind; closeDrawer();
+    if (k === "write") {
+      const ch = state.chapters.find(c => c.id === state.activeChapter);
+      if (ch) { ch.draft = CHAPTER_TEXT.concat(["她从口袋里摸出听针，铜面上有第二道细纹。"]); ch.words = 2610; }
+      render(); toast("正文候选已采用并保存（版本 +1）");
+    } else {
+      state.phase = Math.max(state.phase, 2); render(); toast("候选已保存，资料变更已广播刷新");
+    }
+    return;
+  }
+  if (action === "toast") { toast(el.dataset.msg || "已执行"); return; }
+  if (action === "next-step") {
+    const map = { 0: "novel-info", 1: "faction-cards", 2: "volume-planning", 3: "volume-planning", 4: "chapter-editor", 5: "chapter-records" };
+    go(map[state.phase] || "chapter-editor");
+    toast("已按「保存的事实」跳到下一步：" + nextStepTitle());
+    return;
+  }
+  if (action === "skip-optional") { state.phase = 2; render(); toast("已记录跳过（仅本地），进度进入本卷剧情"); return; }
+  if (action === "run-steps") {
+    state.newStep = Math.min(4, (state.newStep || 0) + 1); render();
+    toast(state.newStep >= 4 ? "四步全部完成，可以保存并创建小说" : "步骤完成（可重试）");
+    return;
+  }
+  if (action === "save-novel") { state.view = "writing"; state.ws = "novel-info"; state.phase = 1; render(); toast("小说创建成功，进入写作台"); return; }
+  if (action === "save-chapter") {
+    const paper = $("#paper"); const ch = state.chapters.find(c => c.id === state.activeChapter);
+    if (paper && ch) { ch.draft = paper.innerText.split(/\n+/).filter(Boolean); ch.words = wordCount(paper.innerText); }
+    render(); toast("已保存正文（版本 +1，草稿标记清除）"); return;
+  }
+  if (action === "continue") { toast("续写：以上文最后 800 字为上下文，流式追加"); return; }
+  if (action === "check") { toast("已运行「" + el.dataset.kind + "」检查，结果进入章后记录"); return; }
+  if (action === "adopt") { state.records[+el.dataset.i].state = "已采用"; render(); toast("已写入事实历史（before/after + 证据）"); return; }
+  if (action === "void-record") { state.records[+el.dataset.i].state = "已作废"; render(); toast("已作废，保留记录与原因"); return; }
+  if (action === "assistant-apply") { toast("已应用 2 处改动（可 undo）"); return; }
+});
+
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") { closeDrawer(); $("#modal").classList.remove("on"); } });
+
+render();
+</script>
+</body>
+</html>
