@@ -1,27 +1,34 @@
 @echo off
 chcp 65001 >nul
-cd /d %~dp0
-echo ============================================
-echo   AI 小说生成器 - 一键开始创作
-echo   首次运行会自动安装依赖、启动 MongoDB 并构建前端
-echo ============================================
+cd /d "%~dp0"
+title AI Novel Generator
+echo ============================================================
+echo   AI Novel Generator - one click start
+echo   First run: installs dependencies, starts MongoDB via Docker,
+echo   builds the frontend, then opens the app in your browser.
+echo ============================================================
 echo.
 
-set PYEXE=python
-where py >nul 2>&1 && set PYEXE=py -3
+set "PYEXE=python"
+where py >nul 2>&1 && set "PYEXE=py -3"
 
 %PYEXE% -c "import sys;raise SystemExit(0 if sys.version_info>=(3,11) else 1)" >nul 2>&1
-if errorlevel 1 (
-    echo [错误] 未找到可用的 Python 3.11+。
-    echo 请先安装 Python 3.13：https://www.python.org/downloads/
-    echo 安装时记得勾选 "Add python.exe to PATH"。
-    pause
-    exit /b 1
-)
+if errorlevel 1 goto NOPY
 
 %PYEXE% scripts\quickstart.py --persist-config %*
-if errorlevel 1 (
-    echo.
-    echo [失败] 启动未完成，请把上面的报错信息发给助手。
-    pause
-)
+if errorlevel 1 goto FAIL
+exit /b 0
+
+:NOPY
+echo [ERROR] Python 3.11+ was not found.
+echo   Install Python 3.13: https://www.python.org/downloads/
+echo   During setup tick "Add python.exe to PATH", then reopen this file.
+echo.
+pause
+exit /b 1
+
+:FAIL
+echo.
+echo [ERROR] Startup did not finish. Send the log above to your assistant.
+pause
+exit /b 1

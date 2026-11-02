@@ -55,7 +55,7 @@ def die(message: str, hint: str = "") -> "NoReturn":  # type: ignore[valid-type]
     Args: message: 错误描述。hint: 可选的修复建议。
     Returns: 不返回。
     """
-    print(f"\n✗ {message}", file=sys.stderr)
+    print(f"\n[错误] {message}", file=sys.stderr)
     if hint:
         print(f"  建议：{hint}", file=sys.stderr)
     raise SystemExit(1)
