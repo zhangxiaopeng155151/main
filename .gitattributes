@@ -1,2 +1,11 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Windows 批处理必须是 CRLF，否则 cmd 解析 goto/标签 可能出错
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Shell 脚本与 Python 保持 LF
+*.sh text eol=lf
+*.command text eol=lf
+*.py text eol=lf
