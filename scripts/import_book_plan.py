@@ -206,7 +206,7 @@ def build_documents(plan: dict) -> dict[str, list[dict]]:
             "status": volume.get("status") or "draft",
             "arcs_count": arcs_count,
             "chapter_count": chapter_count,
-            "word_count": 0,
+            "word_count": int(volume.get("word_count") or 0),
             "version": 1,
             "is_deleted": False,
             "deleted_at": None,
@@ -225,7 +225,7 @@ def build_documents(plan: dict) -> dict[str, list[dict]]:
                 "planning": arc["planning"],
                 "scenes_count": len(arc_scenes),
                 "chapter_count": arc_chapters,
-                "word_count": 0,
+                "word_count": int(arc.get("word_count") or 0),
                 "version": 1,
                 "is_deleted": False,
                 "deleted_at": None,
@@ -242,7 +242,7 @@ def build_documents(plan: dict) -> dict[str, list[dict]]:
                     "summary": scene["summary"],
                     "planning": scene["planning"],
                     "chapter_count": len(scene_chapters),
-                    "word_count": 0,
+                    "word_count": int(scene.get("word_count") or 0),
                     "version": 1,
                     "is_deleted": False,
                     "deleted_at": None,
@@ -259,7 +259,7 @@ def build_documents(plan: dict) -> dict[str, list[dict]]:
                         "summary": chapter["summary"],
                         "planning": chapter["planning"],
                         "content": chapter.get("content") or "",
-                        "word_count": 0,
+                        "word_count": int(chapter.get("word_count") or 0),
                         "version": 1,
                         "is_deleted": False,
                         "deleted_at": None,
@@ -288,7 +288,7 @@ def build_documents(plan: dict) -> dict[str, list[dict]]:
         "status": "draft",
         "current_volume_count": len(volumes_docs),
         "current_chapter_count": len(chapters_docs),
-        "current_word_count": 0,
+        "current_word_count": sum(int(chapter["word_count"]) for chapter in chapters_docs),
         "version": 1,
         "is_deleted": False,
         "deleted_at": None,
@@ -435,6 +435,9 @@ def main() -> None:
     print(f"  待写入文档：novels {len(documents['novels'])}、volumes {len(documents['volumes'])}、"
           f"arcs {len(documents['arcs'])}、scenes {len(documents['scenes'])}、"
           f"chapters {len(documents['chapters'])}")
+    written = [row for row in documents["chapters"] if row["word_count"]]
+    print(f"  其中含正文：{len(written)} 章 / {sum(row['word_count'] for row in written)} 字"
+          f"（其余 {len(documents['chapters']) - len(written)} 章留空，导入后可用 scripts/app_generate.py 让 AI 续写）")
 
     if args.dry_run:
         print("  --dry-run：未连接数据库，未写入任何内容。")

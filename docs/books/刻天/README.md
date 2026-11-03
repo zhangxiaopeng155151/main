@@ -11,8 +11,10 @@
 | `books/刻天/全书结构与分章计划.md` | 四卷概览 + 每卷规划 + 每篇章场景划分 + **165 章逐章表**（梗概 + 关键节点）+ 伏笔回收表 |
 | `books/刻天/book-plan.json` | 同源的机器可读版，导入用 |
 | `books/刻天/plan/` | 分卷源数据（`meta.py`、`vol1..4.py`），改这里再重新编译 |
+| `books/刻天/prose/` | 已写正文，文件名 `ch001-标题.md`；编译时按章号自动挂进 `book-plan.json` |
 | `scripts/build_book.py` | 编译：源数据 → `book-plan.json` + 计划文档 |
-| `scripts/import_book_plan.py` | 导入：`book-plan.json` → 你的 MongoDB |
+| `scripts/import_book_plan.py` | 导入：`book-plan.json` → 你的 MongoDB（含正文与字数） |
+| `scripts/app_generate.py` | 用 app 自己的接口逐章生成正文，替代手点 165 次「AI 写正文」 |
 
 ## 三种用法
 
@@ -52,6 +54,29 @@ python scripts/import_book_plan.py --plan 别的书/book-plan.json
 把 `00-设定集.md` 整篇贴进 app 的「世界观 / 文风 / 时代背景」字段，或在生成某一章时把该章的
 梗概 + 关键节点作为"本章要求"喂给 AI。设定集第九节「设定一致性条款」建议每次生成都带上。
 
+### 4. 让 app 一章一章往下写（自动化）
+
+导入后，除了在界面上点「AI 写正文」，也可以在项目根目录直接跑：
+
+```bash
+python scripts/app_generate.py --dry-run     # 先看要写哪些章
+python scripts/app_generate.py --limit 3     # 先写 3 章看质量
+python scripts/app_generate.py               # 一直写下去
+python scripts/app_generate.py --from-chapter 12 --limit 5   # 断点续写
+```
+
+它做的事和你在界面上点的完全一样：调 `POST /api/llm/novels/{id}/chapters/{cid}/writing`
+拿候选 → 调 `POST /api/chapters/{cid}/content/confirm` 保存，带 `Idempotency-Key`，
+已写好的章会自动跳过，模型报错会退避重试。
+
+前提：MongoDB 副本集已启动（`开始创作.bat`），且「设置」里 LLM 供应商与 Key 已测试通过。
+
+### 5. 当前进度
+
+- 全书结构：165 章计划全部就绪；
+- 正文：**第 1 章《拓碑夜》、第 2 章《七个字》已成稿**（约 4800 字），作为文风样张；
+- 其余 163 章正文留空，导入后由 `app_generate.py` 或界面逐章生成。
+
 ## 改这本书
 
 ```bash
@@ -72,5 +97,8 @@ python scripts/import_book_plan.py --replace
 ## 已知边界
 
 - 导入是**直接写数据库**，不经过 app 的命令回执；万一写入失败，可用 `--replace` 重来，或直接在界面里删掉这本书。
-- 沙箱里没有 MongoDB，导入路径已用 `mongomock` 跑通关联与统计逻辑，但**没有在你的真实副本集上验证过**；
-  第一次导入建议先 `--dry-run`，再导入，然后看界面里的卷/篇章/章数与本文开头的数字是否一致（4 / 16 / 42 / 165）。
+- 沙箱里没有 MongoDB，导入路径已用 `mongomock` 跑通关联与统计逻辑（含正文、字数、父级统计回填），
+  但**没有在你的真实副本集上验证过**；第一次导入建议先 `--dry-run`，再导入，
+  然后核对界面里的卷/篇章/章数是否为 4 / 16 / 42 / 165、第一章是否有正文。
+- `app_generate.py` 的循环逻辑用本地假后端验证过（生成→采纳→跳过已写→幂等键），
+  但**没有对真实后端+真实模型跑过**；第一次请用 `--limit 3` 试，确认质量再放开。

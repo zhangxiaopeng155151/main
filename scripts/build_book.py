@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import importlib.util
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -72,6 +73,38 @@ def build_chapter(source: tuple[str, str, list[str]], number: int) -> dict:
             "target_word_count": WORDS_PER_CHAPTER,
         },
     }
+
+
+def attach_prose(chapters: list[dict], prose_dir: Path) -> int:
+    """把 prose/ 下与章号对应的正文挂到章节上。
+
+    文件名约定：ch001-任意标题.md，章号取 ch 后三位数字。
+
+    Args:
+        chapters: 已编译的章节列表。
+        prose_dir: 正文目录。
+    Returns:
+        实际挂上正文的章节数。
+    """
+    if not prose_dir.is_dir():
+        return 0
+    by_number: dict[int, Path] = {}
+    for path in sorted(prose_dir.glob("ch*.md")):
+        match = re.match(r"ch(\d{3})", path.name)
+        if match:
+            by_number[int(match.group(1))] = path
+    attached = 0
+    for chapter in chapters:
+        path = by_number.get(chapter["chapter_number"])
+        if path is None:
+            continue
+        text = path.read_text(encoding="utf-8").strip()
+        if not text:
+            continue
+        chapter["content"] = text
+        chapter["word_count"] = word_count(text)
+        attached += 1
+    return attached
 
 
 def plan_from_chapters(chapters: list[dict], goal: str, extra: str = "") -> dict:
@@ -153,6 +186,7 @@ def build(plan_dir: Path) -> dict:
                         "summary": part["summary"],
                         "planning": plan_from_chapters(part["chapters"], part["goal"]),
                         "chapters": part["chapters"],
+                        "word_count": sum(chapter["word_count"] for chapter in part["chapters"]),
                     })
             arc_chapters = [chapter for scene in scenes for chapter in scene["chapters"]]
             arcs.append({
@@ -161,8 +195,14 @@ def build(plan_dir: Path) -> dict:
                 "summary": arc_source["summary"],
                 "planning": plan_from_chapters(arc_chapters, arc_source["planning_goal"]),
                 "scenes": scenes,
+                "word_count": sum(chapter["word_count"] for chapter in arc_chapters),
             })
         arc_chapters = [chapter for arc in arcs for scene in arc["scenes"] for chapter in scene["chapters"]]
+        attach_prose(arc_chapters, plan_dir.parent / "prose")
+        for arc in arcs:
+            arc["word_count"] = sum(chapter["word_count"] for scene in arc["scenes"] for chapter in scene["chapters"])
+            for scene in arc["scenes"]:
+                scene["word_count"] = sum(chapter["word_count"] for chapter in scene["chapters"])
         planning = dict(source["planning"])
         planning["target_chapter_count"] = len(arc_chapters)
         planning["target_word_count"] = len(arc_chapters) * WORDS_PER_CHAPTER
@@ -176,6 +216,8 @@ def build(plan_dir: Path) -> dict:
             "status": "draft",
             "planning": planning,
             "arcs": arcs,
+            "word_count": sum(chapter["word_count"] for arc in arcs for scene in arc["scenes"]
+                              for chapter in scene["chapters"]),
         })
 
     novel["number_of_chapters"] = number
