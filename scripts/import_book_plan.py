@@ -318,10 +318,25 @@ def resolve_uri(cli_uri: str | None) -> str:
     if env_uri:
         return env_uri
     if CONFIG.exists():
-        match = re.search(r"(?m)^\s*mongodb_url\s*:\s*[\"']?([^\"'\n]+)", CONFIG.read_text(encoding="utf-8"))
-        if match:
-            return match.group(1).strip()
+        for match in re.finditer(r"(?m)^\s*mongodb_url\s*:\s*[\"']?([^\"'\n]*)", CONFIG.read_text(encoding="utf-8")):
+            value = match.group(1).strip()
+            if value:
+                return value
     return DEFAULT_URI
+
+
+def config_database_name() -> str | None:
+    """从项目配置里读取库名。
+
+    Returns:
+        配置中的库名，未配置时返回 None。
+    """
+    if not CONFIG.exists():
+        return None
+    match = re.search(r"(?m)^\s*mongo_database_name\s*:\s*[\"']?([^\"'\n]*)",
+                      CONFIG.read_text(encoding="utf-8"))
+    value = (match.group(1).strip() if match else "")
+    return value or None
 
 
 def import_plan(plan: dict, uri: str, database: str, replace: bool) -> dict:
@@ -411,7 +426,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="把《刻天》创作包导入 AI_NovelGenerator")
     parser.add_argument("--plan", default=str(DEFAULT_PLAN), help="book-plan.json 路径")
     parser.add_argument("--mongo-uri", default=None, help="MongoDB 连接串")
-    parser.add_argument("--database", default=DEFAULT_DB, help="目标库名")
+    parser.add_argument("--database", default=None, help="目标库名（默认取配置里的 mongo_database_name，否则 novel_generator）")
     parser.add_argument("--replace", action="store_true", help="已存在同名小说时先删除再导入")
     parser.add_argument("--dry-run", action="store_true", help="只校验数据，不连接数据库")
     args = parser.parse_args()
@@ -443,11 +458,12 @@ def main() -> None:
         print("  --dry-run：未连接数据库，未写入任何内容。")
         return
 
+    database = args.database or config_database_name() or DEFAULT_DB
     uri = resolve_uri(args.mongo_uri)
     masked = re.sub(r"//[^@/]+@", "//***@", uri)
-    print(f"  连接 {masked} ，目标库 {args.database} ...")
+    print(f"  连接 {masked} ，目标库 {database} ...")
     try:
-        result = import_plan(plan, uri, args.database, args.replace)
+        result = import_plan(plan, uri, database, args.replace)
     except RuntimeError as exc:
         print(f"[错误] {exc}")
         sys.exit(1)
