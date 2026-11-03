@@ -1,0 +1,4653 @@
+{
+  "format": "novel-plan/v1",
+  "source": "《刻天》东方玄幻长篇（AI_NovelGenerator 创作包）",
+  "novel": {
+    "title": "刻天",
+    "subtitle": "碑上有名，刀下有路",
+    "genre": "东方玄幻",
+    "tags": [
+      "修真",
+      "悬疑",
+      "群像",
+      "反套路",
+      "记忆与遗忘",
+      "慢热燃"
+    ],
+    "introduction": "这个世界的一切规则，都刻在一座看不见的天碑上。每三百年，天碑换刻一次：山河改名，人命改道，旧事被擦得干干净净。只有碑林七坊的抄碑人，能在换刻之夜抢下几页拓本，把上一个世界的字带过来。\n\n抄碑人有条铁律：只能抄，不能刻。\n\n十九岁的拓工沈砚，是碑林里最没出息的一个——他不会铸文，不会借律，只会拓碑，而且记得太清。三年前姐姐沈黎被一次小换刻抹去，从此世上再没人提起她，只有他一个人记得她笑的时候左眼比右眼低一点。\n\n直到那个夜里，他在天碑拓片上摸到一道不该存在的刻痕：这一次的换刻，提前了。而所有被抹掉的人，都还活着——他们被刻成了碑。",
+    "summary": "换刻提前，旧律作废，碑林抄手沈砚发现自己胎里带着一道逆纹：能把抄下来的旧律在现世重新刻回去，代价是折寿与失去一段记忆。为找回被抹去的姐姐，他从碑林一路追到墨京天碑坛，卷入司刻司、纸人巷、白骨观与四大宗门围绕'私刻天道'的角力，最终在换刻之夜发现：姐姐是最后一块活碑，救她等于让世界随旧律崩解。他选择把自己刻进天碑，成为无字碑。",
+    "core_seed": "如果天道是一份可以被抄写、被伪造的档案，那么'记得'是不是一种罪？",
+    "core_idea": "秩序以遗忘为代价。故事追问：为了让所有人继续活着，该不该允许一部分人被忘记？以及——记录真相的人，是否必须自己也被抹去。",
+    "worldview": "【天碑与换刻】九州之上悬着一座无形天碑，刻着三千六百条'律'，规定风雨、生死、修行、因果。每三百年天碑自行换刻，旧律作废、新律生成，世间随之重排：山川易名，人的命途重算，与旧律绑定过深的一切会被擦去，连同他人对它的记忆。这被称为'换刻'。\n【碑林七坊】墨京西北三百里的碑林，是唯一能抢在换刻之前拓下碑文的所在。七坊各执一技：拓影坊（拓碑）、正字坊（校律）、墨骨坊（制墨）、量天坊（推算换刻之期）、灰烬坊（焚毁违规拓本）、白纸坊（造无字纸）、无字坊（守空碑）。抄碑人被视作匠役，却握着上一个世界的证据。\n【铁律】抄碑人只能抄，不能刻。私刻者称'刻天'，其名会被天碑吞掉，从此无人记得他曾存在。\n【拓本与褪墨】拓本会自然褪墨，越久越淡，直至空白；只有白纸坊的无字纸能久存。\n【司刻司】朝廷设的衙门，掌天碑、定换刻之期、销毁越界拓本。内设'代刻人'，替天子执刀刻碑。",
+    "writing_style": "第一人称限知与第三人称多视角交替：主角线用第一人称，冷、短句、重感官与手感；反派与配角线用第三人称。整体偏冷硬古雅，不堆砌辞藻，动作与器物细节写实，对话短、少解释；战斗写'手感'与代价，而非华丽特效；每章末尾留一个钩子。",
+    "narrative_pov": "第一人称（沈砚）为主，关键反派与配角段落转为第三人称限知",
+    "era_background": "大衍历九百年，表面上是承平之世：墨京繁华、四宗并立、司刻司主持第十三次换刻。实则上一纪的律正在加速腐朽：天灾见怪不怪，修士的文开始'空转'，民间流传'将有大换刻'的谣言。朝廷借换刻之名清理异己，把'被抹者'说成'不合律者'。",
+    "plot": "卷一线（碑林）：沈砚发现换刻提前，师父柳无咎失踪，逆纹初显，为救人第一次重刻旧律，沦为通缉。\n卷二线（墨京）：以拓工身份潜入司刻司，与代刻人裴玄衣亦敌亦友，查换刻清册，发现被抹者被制成'活碑'。\n卷三线（碎律海）：流亡海上，收集作废的律文碎片，与赤霄剑冢结盟，重铸第九碑一角；师父再现并死去。\n卷四线（无字）：回墨京，在天碑坛阻止私刻，找到姐姐沈黎——她是最后一块活碑；沈砚自我刻名，成为无字碑，世界保住，他被所有人遗忘，只有姐姐醒来时手里握着一枚刻着他名字的铜铃。",
+    "tone": "冷峻、克制、悬念驱动，燃点来自代价与选择而非爽感堆叠",
+    "target_audience": "偏好设定严密、悬疑推进、群像与代价感的男频修真读者（亦可女性读者）",
+    "number_of_chapters": 165,
+    "words_per_chapter": 3000
+  },
+  "volumes": [
+    {
+      "order_index": 1,
+      "title": "第一卷 拓影",
+      "subtitle": "碑上多了一道没人刻过的痕",
+      "summary": "碑林拓工沈砚在换刻前夜拓到一道不属于任何人的刻痕：换刻提前了一百二十天。师父柳无咎当夜失踪，拓影坊被查抄。他带着半张无字纸与一枚会响的铜铃逃出碑林，在回音涧听见三年前姐姐被抹那天的声音，第一次动用逆纹重刻旧律——救下一座镇子，代价是一年寿数与姐姐的笑容。卷末，代刻人裴玄衣在他手背上刻下记号，领他走进墨京天碑坛下的活碑工坊。",
+      "goal": "让读者相信'记忆是可以被夺走的实体'，并让主角从逃命者变成追查者。",
+      "theme": "被抹掉的人还在不在？",
+      "status": "draft",
+      "planning": {
+        "premise": "换刻提前，旧律正在作废；唯一能带走证据的人是碑林的末等拓工沈砚。",
+        "major_conflict": "沈砚要保住师父留下的拓片与姐姐存在过的证据，司刻司要在换刻前把所有证据和证据的持有人一起清掉。",
+        "start_state": "沈砚只是拓影坊最不起眼的拓工，最大的秘密是他还记得被抹去的姐姐。",
+        "end_state": "沈砚成为通缉犯，逆纹暴露，被代刻人裴玄衣带进墨京，第一次看见'活碑'——里面有人。",
+        "key_turning_points": [
+          "拓到那道不属于任何人的刻痕，得知换刻提前一百二十日",
+          "柳无咎传下半张无字纸后失踪，全城无人记得他",
+          "回音涧听见姐姐被抹当日的声音，逆纹初醒",
+          "屠镇之夜第一次重刻旧律，付出一年寿命",
+          "裴玄衣手下留情并留下记号，把他带进天碑坛"
+        ],
+        "target_chapter_count": 40,
+        "target_word_count": 120000
+      },
+      "arcs": [
+        {
+          "order_index": 1,
+          "title": "第一篇 换刻前夜",
+          "summary": "拓碑夜的一道刻痕，把碑林的日常撕开一个口子：换刻提前了。",
+          "planning": {
+            "goal": "建立天碑、抄碑人、拓本与褪墨的规则，让异常从最日常的劳作里长出来。",
+            "start_state": "拓影坊的规矩：夜不过三更、纸不过七张",
+            "end_state": "拓碑刀在他腰上，第一次觉得重",
+            "continuity_notes": "",
+            "target_chapter_count": 10,
+            "target_word_count": 30000
+          },
+          "scenes": [
+            {
+              "order_index": 1,
+              "title": "场景一 第七张拓片",
+              "summary": "夜里偷拓天碑，前六张正常，第七张的墨自己游走。",
+              "planning": {
+                "goal": "用拓碑的手艺细节把世界规则交代清楚，同时埋下'碑在被人改'的第一颗钉子。",
+                "start_state": "拓影坊的规矩：夜不过三更、纸不过七张",
+                "end_state": "沈砚第一次问：姐姐算什么？师父没有回答",
+                "continuity_notes": "",
+                "target_chapter_count": 3,
+                "target_word_count": 9000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 1,
+                  "title": "拓碑夜",
+                  "summary": "沈砚在碑林无字空碑下偷拓第七张拓片，墨在纸上自己游走成一道陌生的刻痕。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "沈砚在碑林无字空碑下偷拓第七张拓片，墨在纸上自己游走成一道陌生的刻痕。",
+                    "start_state": "拓影坊的规矩：夜不过三更、纸不过七张",
+                    "end_state": "他用指甲抠那道刻痕，指尖渗出血，血被碑面吸掉",
+                    "beats": [
+                      "拓影坊的规矩：夜不过三更、纸不过七张",
+                      "前六张干净，第七张的墨自己走",
+                      "他用指甲抠那道刻痕，指尖渗出血，血被碑面吸掉"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 2,
+                  "title": "七个字",
+                  "summary": "那道刻痕读出来是七个字：换刻提前一百二十日。坊里没有一个人认得出这笔字。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "那道刻痕读出来是七个字：换刻提前一百二十日。坊里没有一个人认得出这笔字。",
+                    "start_state": "拓片上的字无人能校",
+                    "end_state": "柳无咎听完整夜没说话，天亮前掐了灯",
+                    "beats": [
+                      "拓片上的字无人能校",
+                      "正字坊老校律人看了三眼，把纸还回来，手在抖",
+                      "柳无咎听完整夜没说话，天亮前掐了灯"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 3,
+                  "title": "三根断指",
+                  "summary": "柳无咎把抄碑人的铁律讲给他听，并要他烧掉家里所有拓本。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "柳无咎把抄碑人的铁律讲给他听，并要他烧掉家里所有拓本。",
+                    "start_state": "铁律：只能抄，不能刻",
+                    "end_state": "沈砚第一次问：姐姐算什么？师父没有回答",
+                    "beats": [
+                      "铁律：只能抄，不能刻",
+                      "师父讲自己断三指那年的事，只讲了一半",
+                      "沈砚第一次问：姐姐算什么？师父没有回答"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            },
+            {
+              "order_index": 2,
+              "title": "场景二 灰烬坊来人",
+              "summary": "灰烬坊上门收册，师父失踪，查抄紧随其后。",
+              "planning": {
+                "goal": "把压力从'异常'升级为'人身威胁'，逼主角做出第一个选择。",
+                "start_state": "灰烬坊的规矩：交册时不许看对方的脸",
+                "end_state": "他走出门回头看，师父已经不在屋里，门从里面闩着",
+                "continuity_notes": "",
+                "target_chapter_count": 4,
+                "target_word_count": 12000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 4,
+                  "title": "灰烬坊",
+                  "summary": "灰烬坊带着司刻司的公文来收缴越界拓本，坊里人排着队交册。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "灰烬坊带着司刻司的公文来收缴越界拓本，坊里人排着队交册。",
+                    "start_state": "灰烬坊的规矩：交册时不许看对方的脸",
+                    "end_state": "交册结束后，坊里少了两户人家",
+                    "beats": [
+                      "灰烬坊的规矩：交册时不许看对方的脸",
+                      "沈砚把第七张拓片缝进衣领",
+                      "交册结束后，坊里少了两户人家"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 5,
+                  "title": "我叫沈黎",
+                  "summary": "铜铃里传出姐姐的声音，只有沈砚听得见。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "铜铃里传出姐姐的声音，只有沈砚听得见。",
+                    "start_state": "铜铃是姐姐的耳钉，铃内有刻字但已磨平",
+                    "end_state": "墨七没问他跟谁说话，只问要不要跑",
+                    "beats": [
+                      "铜铃是姐姐的耳钉，铃内有刻字但已磨平",
+                      "墨七从纸人巷来送信，撞见他对空气说话",
+                      "墨七没问他跟谁说话，只问要不要跑"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 6,
+                  "title": "不合律者",
+                  "summary": "司刻司以'不合律者'名义带走碑林七人，其中包括无字坊的老瞎子。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "司刻司以'不合律者'名义带走碑林七人，其中包括无字坊的老瞎子。",
+                    "start_state": "押人时用黑布蒙眼，说是不许被碑看见",
+                    "end_state": "沈砚第一次听见整座碑林在夜里'响'",
+                    "beats": [
+                      "押人时用黑布蒙眼，说是不许被碑看见",
+                      "老瞎子被带走前把一枚钉塞进沈砚手里",
+                      "沈砚第一次听见整座碑林在夜里'响'"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 7,
+                  "title": "夜召",
+                  "summary": "柳无咎深夜召见，把半张无字纸交给他，只说一句'别学我刻'，随后失踪。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "柳无咎深夜召见，把半张无字纸交给他，只说一句'别学我刻'，随后失踪。",
+                    "start_state": "师父的手在抖，断指处结着新痂",
+                    "end_state": "他走出门回头看，师父已经不在屋里，门从里面闩着",
+                    "beats": [
+                      "师父的手在抖，断指处结着新痂",
+                      "无字纸上是空白的，硬得像薄冰",
+                      "他走出门回头看，师父已经不在屋里，门从里面闩着"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            },
+            {
+              "order_index": 3,
+              "title": "场景三 空碑上的名字",
+              "summary": "查抄、逃亡，最后在无字坊的空碑下听见碑刻自己的名字。",
+              "planning": {
+                "goal": "把主角从'旁观异常'推进'异常指向我'，并在卷首埋下最大的钩子。",
+                "start_state": "官兵不点灯，只凭拓片的'气'找东西",
+                "end_state": "拓碑刀在他腰上，第一次觉得重",
+                "continuity_notes": "",
+                "target_chapter_count": 3,
+                "target_word_count": 9000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 8,
+                  "title": "查抄",
+                  "summary": "司刻司查抄拓影坊，指沈砚暗拓天碑，墨七拉着他钻进碑林深处。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "司刻司查抄拓影坊，指沈砚暗拓天碑，墨七拉着他钻进碑林深处。",
+                    "start_state": "官兵不点灯，只凭拓片的'气'找东西",
+                    "end_state": "墨七用一个纸人替他们引开追兵",
+                    "beats": [
+                      "官兵不点灯，只凭拓片的'气'找东西",
+                      "沈砚把第七张拓片吞下去藏",
+                      "墨七用一个纸人替他们引开追兵"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 9,
+                  "title": "空碑会刻字",
+                  "summary": "两人在无字坊的空碑下躲了一夜，听见碑面自己刻字——刻的是沈砚的名字。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "两人在无字坊的空碑下躲了一夜，听见碑面自己刻字——刻的是沈砚的名字。",
+                    "start_state": "空碑本该无字",
+                    "end_state": "天亮时碑面洁净如新，只有他的手指还在抖",
+                    "beats": [
+                      "空碑本该无字",
+                      "刻字声像指甲刮骨，沙沙一响就是一横",
+                      "天亮时碑面洁净如新，只有他的手指还在抖"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 10,
+                  "title": "全城都不认得他",
+                  "summary": "沈砚去城里找师父，才发现城门口的告示上，柳无咎三个字已经被人看不出来。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "沈砚去城里找师父，才发现城门口的告示上，柳无咎三个字已经被人看不出来。",
+                    "start_state": "告示上的字人人读作'某'",
+                    "end_state": "拓碑刀在他腰上，第一次觉得重",
+                    "beats": [
+                      "告示上的字人人读作'某'",
+                      "他念出师父的名字，守门兵卒打了自己一个耳光，以为自己耳鸣",
+                      "拓碑刀在他腰上，第一次觉得重"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order_index": 2,
+          "title": "第二篇 褪墨",
+          "summary": "逃出碑林的路上，拓本在褪墨，旧律在追索，白骨观的人先一步找到他。",
+          "planning": {
+            "goal": "把'记忆实体化'的具体代价写出来：拓本会褪、听旧世会被人领、忘的越多逆纹越饿。",
+            "start_state": "褪墨的速度和'被记住的人'有关",
+            "end_state": "墨七撒谎：只是累了；他信了，因为他不记得自己该怀疑什么",
+            "continuity_notes": "",
+            "target_chapter_count": 10,
+            "target_word_count": 30000
+          },
+          "scenes": [
+            {
+              "order_index": 1,
+              "title": "场景一 无字纸浮字",
+              "summary": "旧拓本一夜变白，无字纸的空处浮出师父留的字。",
+              "planning": {
+                "goal": "让师门线索与记忆代价同时收紧。",
+                "start_state": "褪墨的速度和'被记住的人'有关",
+                "end_state": "回来后他忘了回音涧的位置",
+                "continuity_notes": "",
+                "target_chapter_count": 4,
+                "target_word_count": 12000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 11,
+                  "title": "褪墨",
+                  "summary": "藏身的旧拓本在一夜之间褪成白纸，只有那半张无字纸浮出一行小字。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "藏身的旧拓本在一夜之间褪成白纸，只有那半张无字纸浮出一行小字。",
+                    "start_state": "褪墨的速度和'被记住的人'有关",
+                    "end_state": "墨七把自己记得的事写在手臂上，怕忘",
+                    "beats": [
+                      "褪墨的速度和'被记住的人'有关",
+                      "浮出的字是'去回音涧，听你自己的名字'",
+                      "墨七把自己记得的事写在手臂上，怕忘"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 12,
+                  "title": "未名律",
+                  "summary": "师父留给他的拓片其实是一条没有名字的律，读不出来，只能'感觉'。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "师父留给他的拓片其实是一条没有名字的律，读不出来，只能'感觉'。",
+                    "start_state": "拓片上没有一个完整的字，只有墨的浓淡",
+                    "end_state": "墨七摸了同一张纸，只摸到自己的手汗",
+                    "beats": [
+                      "拓片上没有一个完整的字，只有墨的浓淡",
+                      "沈砚摸着纸背，能摸到一条'路'",
+                      "墨七摸了同一张纸，只摸到自己的手汗"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 13,
+                  "title": "回音涧",
+                  "summary": "两人绕道回音涧，在涧底听见三年前姐姐被抹那天的声音。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "两人绕道回音涧，在涧底听见三年前姐姐被抹那天的声音。",
+                    "start_state": "涧底的声音按'听的人'排列",
+                    "end_state": "墨七听见一个女人的声音在叫他另一个名字",
+                    "beats": [
+                      "涧底的声音按'听的人'排列",
+                      "沈砚听见姐姐替他缝衣袖时哼的调子",
+                      "墨七听见一个女人的声音在叫他另一个名字"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 14,
+                  "title": "旧律认领",
+                  "summary": "听得太久，沈砚差点被旧律认领——身体开始变成碑面。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "听得太久，沈砚差点被旧律认领——身体开始变成碑面。",
+                    "start_state": "皮肤上浮出碑纹，指尖失去触觉",
+                    "end_state": "回来后他忘了回音涧的位置",
+                    "beats": [
+                      "皮肤上浮出碑纹，指尖失去触觉",
+                      "墨七烧掉三个纸人把他拽回来",
+                      "回来后他忘了回音涧的位置"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            },
+            {
+              "order_index": 2,
+              "title": "场景二 白骨观·上",
+              "summary": "覆盖第 15–17 章：出涧时涧口站着一个白衣女人，什么也没做，只是记住他们下山的方向。",
+              "planning": {
+                "goal": "把私人追寻接到主线阴谋上：被抹的人是被人为选出来的。（本场上半/下半对应第 15–17 章）",
+                "start_state": "白衣人手里提着一串无字木牌",
+                "end_state": "沈砚第一次主动要求去做一件事",
+                "continuity_notes": "",
+                "target_chapter_count": 3,
+                "target_word_count": 9000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 15,
+                  "title": "涧口的白衣",
+                  "summary": "出涧时涧口站着一个白衣女人，什么也没做，只是记住他们下山的方向。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "出涧时涧口站着一个白衣女人，什么也没做，只是记住他们下山的方向。",
+                    "start_state": "白衣人手里提着一串无字木牌",
+                    "end_state": "墨七说：那人走路没有声音",
+                    "beats": [
+                      "白衣人手里提着一串无字木牌",
+                      "她不说话，只在沈砚经过时闻了闻他",
+                      "墨七说：那人走路没有声音"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 16,
+                  "title": "白十三",
+                  "summary": "白骨观主现身，直言'你身上背着别人的名字'。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "白骨观主现身，直言'你身上背着别人的名字'。",
+                    "start_state": "她数得出沈砚身上有几处别人的痕迹",
+                    "end_state": "她说：等你想起她的名字，牌上会自己显字",
+                    "beats": [
+                      "她数得出沈砚身上有几处别人的痕迹",
+                      "她递给他一枚白色木牌，牌上无字",
+                      "她说：等你想起她的名字，牌上会自己显字"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 17,
+                  "title": "牌上显字",
+                  "summary": "第二天木牌上真的浮出一个字：黎。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "第二天木牌上真的浮出一个字：黎。",
+                    "start_state": "字是从木牌里'长'出来的，像浸了水",
+                    "end_state": "沈砚第一次主动要求去做一件事",
+                    "beats": [
+                      "字是从木牌里'长'出来的，像浸了水",
+                      "白十三说：她还没死透",
+                      "沈砚第一次主动要求去做一件事"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            },
+            {
+              "order_index": 3,
+              "title": "场景二 白骨观·下",
+              "summary": "覆盖第 18–20 章：白骨观藏着一座无名冢，每块木牌都是空白。",
+              "planning": {
+                "goal": "把私人追寻接到主线阴谋上：被抹的人是被人为选出来的。（本场上半/下半对应第 18–20 章）",
+                "start_state": "冢里埋的不是尸骨，是'被人忘掉的东西'",
+                "end_state": "墨七撒谎：只是累了；他信了，因为他不记得自己该怀疑什么",
+                "continuity_notes": "",
+                "target_chapter_count": 3,
+                "target_word_count": 9000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 18,
+                  "title": "无名冢",
+                  "summary": "白骨观藏着一座无名冢，每块木牌都是空白。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "白骨观藏着一座无名冢，每块木牌都是空白。",
+                    "start_state": "冢里埋的不是尸骨，是'被人忘掉的东西'",
+                    "end_state": "沈砚在其中一块牌前站不住脚",
+                    "beats": [
+                      "冢里埋的不是尸骨，是'被人忘掉的东西'",
+                      "白十三每天给空牌上香",
+                      "沈砚在其中一块牌前站不住脚"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 19,
+                  "title": "换刻清册",
+                  "summary": "白十三出示一页清册：三年前小换刻抹去三十七人，其中一栏是空的。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "白十三出示一页清册：三年前小换刻抹去三十七人，其中一栏是空的。",
+                    "start_state": "清册的笔迹与碑上那道刻痕一样",
+                    "end_state": "白十三说：被改掉的那个，还活着",
+                    "beats": [
+                      "清册的笔迹与碑上那道刻痕一样",
+                      "空白那一栏本该有名字，被人用三寸墨改过",
+                      "白十三说：被改掉的那个，还活着"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 20,
+                  "title": "三天",
+                  "summary": "为救被旧律追索的墨七，沈砚第一次重刻一条小律，逆纹发作，忘了三天内的一切。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "为救被旧律追索的墨七，沈砚第一次重刻一条小律，逆纹发作，忘了三天内的一切。",
+                    "start_state": "重刻的代价不是血，是记忆与寿数",
+                    "end_state": "墨七撒谎：只是累了；他信了，因为他不记得自己该怀疑什么",
+                    "beats": [
+                      "重刻的代价不是血，是记忆与寿数",
+                      "他醒来时手上沾着墨，墨七在哭",
+                      "墨七撒谎：只是累了；他信了，因为他不记得自己该怀疑什么"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order_index": 3,
+          "title": "第三篇 三寸墨",
+          "summary": "守忘镇：一个替别人记住事情的镇子，因为记得而被屠。",
+          "planning": {
+            "goal": "用一个镇的存亡把'记得'从个人选择推到集体罪状，逼主角第一次大规模动刀。",
+            "start_state": "镇上老人替沈砚补全了师父的名字",
+            "end_state": "她走时说：下一次我先杀你，再问话",
+            "continuity_notes": "",
+            "target_chapter_count": 10,
+            "target_word_count": 30000
+          },
+          "scenes": [
+            {
+              "order_index": 1,
+              "title": "场景一 替人记住的镇·上",
+              "summary": "覆盖第 21–23 章：两人到守忘镇，镇上人替他们补上被忘的事，代价是他们要留下一个秘密。",
+              "planning": {
+                "goal": "用一个温暖的小社会为后面的屠镇垫底。（本场上半/下半对应第 21–23 章）",
+                "start_state": "镇上老人替沈砚补全了师父的名字",
+                "end_state": "沈砚抄到第七卷时手自己开始刻",
+                "continuity_notes": "",
+                "target_chapter_count": 3,
+                "target_word_count": 9000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 21,
+                  "title": "守忘镇",
+                  "summary": "两人到守忘镇，镇上人替他们补上被忘的事，代价是他们要留下一个秘密。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "两人到守忘镇，镇上人替他们补上被忘的事，代价是他们要留下一个秘密。",
+                    "start_state": "镇上老人替沈砚补全了师父的名字",
+                    "end_state": "墨七留下的秘密是：他其实不姓墨",
+                    "beats": [
+                      "镇上老人替沈砚补全了师父的名字",
+                      "补全的那一刻，他头痛欲裂",
+                      "墨七留下的秘密是：他其实不姓墨"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 22,
+                  "title": "三寸墨",
+                  "summary": "镇上墨铺老板用三寸墨替他补全拓片上残缺的字。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "镇上墨铺老板用三寸墨替他补全拓片上残缺的字。",
+                    "start_state": "三寸墨会让写下的字自己改一次笔误",
+                    "end_state": "老板说：这墨不该用来改律，会招东西",
+                    "beats": [
+                      "三寸墨会让写下的字自己改一次笔误",
+                      "补上的字读作'回音'",
+                      "老板说：这墨不该用来改律，会招东西"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 23,
+                  "title": "路引",
+                  "summary": "进墨京要路引，镇上唯一的门路是接玄清宗的差事。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "进墨京要路引，镇上唯一的门路是接玄清宗的差事。",
+                    "start_state": "镇长为他们在玄清宗接下抄经的活",
+                    "end_state": "沈砚抄到第七卷时手自己开始刻",
+                    "beats": [
+                      "镇长为他们在玄清宗接下抄经的活",
+                      "差事要求三天抄完一部律",
+                      "沈砚抄到第七卷时手自己开始刻"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            },
+            {
+              "order_index": 2,
+              "title": "场景一 替人记住的镇·下",
+              "summary": "覆盖第 24–26 章：玄清宗弟子借律逼债，沈砚第一次靠'拓'复制对方的文法脱身。",
+              "planning": {
+                "goal": "用一个温暖的小社会为后面的屠镇垫底。（本场上半/下半对应第 24–26 章）",
+                "start_state": "拓不是复制法术，是抄下'律的写法'",
+                "end_state": "沈砚在镇口看见裴玄衣的刀",
+                "continuity_notes": "",
+                "target_chapter_count": 3,
+                "target_word_count": 9000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 24,
+                  "title": "借律",
+                  "summary": "玄清宗弟子借律逼债，沈砚第一次靠'拓'复制对方的文法脱身。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "玄清宗弟子借律逼债，沈砚第一次靠'拓'复制对方的文法脱身。",
+                    "start_state": "拓不是复制法术，是抄下'律的写法'",
+                    "end_state": "墨七说：你抄得比他还顺",
+                    "beats": [
+                      "拓不是复制法术，是抄下'律的写法'",
+                      "他抄了对方一招'借风'，用完就散了",
+                      "墨七说：你抄得比他还顺"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 25,
+                  "title": "宗门账房",
+                  "summary": "沈砚在玄清宗账房见到'不合律者'的赏格，被抹者的价码比活人高。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "沈砚在玄清宗账房见到'不合律者'的赏格，被抹者的价码比活人高。",
+                    "start_state": "账本上按'条'算钱，一条命三两银",
+                    "end_state": "他把那一页抄下来，抄得手很稳",
+                    "beats": [
+                      "账本上按'条'算钱，一条命三两银",
+                      "他在账本上看见师父的名字，金额被划掉",
+                      "他把那一页抄下来，抄得手很稳"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 26,
+                  "title": "雨夜屠镇",
+                  "summary": "司刻司以清除不合律者为名屠镇，理由是镇上藏了不该记的事。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "司刻司以清除不合律者为名屠镇，理由是镇上藏了不该记的事。",
+                    "start_state": "屠镇用'合律'的名目，先封路，再点灯",
+                    "end_state": "沈砚在镇口看见裴玄衣的刀",
+                    "beats": [
+                      "屠镇用'合律'的名目，先封路，再点灯",
+                      "镇长抱着清册站在雨里不肯交",
+                      "沈砚在镇口看见裴玄衣的刀"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            },
+            {
+              "order_index": 3,
+              "title": "场景二 代价是一年",
+              "summary": "重刻回音律，让全镇人的声音被听见一次，主角付出一年阳寿。",
+              "planning": {
+                "goal": "第一次亮出逆纹，完成主角的能力宣言与代价宣言。",
+                "start_state": "刻律要把拓片压在舌下",
+                "end_state": "她走时说：下一次我先杀你，再问话",
+                "continuity_notes": "",
+                "target_chapter_count": 4,
+                "target_word_count": 12000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 27,
+                  "title": "刻回去",
+                  "summary": "沈砚重刻'回音律'，全镇人的声音被风带到四面八方，求救被墨京听见。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "沈砚重刻'回音律'，全镇人的声音被风带到四面八方，求救被墨京听见。",
+                    "start_state": "刻律要把拓片压在舌下",
+                    "end_state": "镇子活了，但镇子也被人记恨",
+                    "beats": [
+                      "刻律要把拓片压在舌下",
+                      "刻到一半石碑从地里长出来",
+                      "镇子活了，但镇子也被人记恨"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 28,
+                  "title": "一年",
+                  "summary": "代价结算：一年寿数、一撮白发，以及忘了姐姐笑起来的样子。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "代价结算：一年寿数、一撮白发，以及忘了姐姐笑起来的样子。",
+                    "start_state": "头发从鬓角白到耳后",
+                    "end_state": "墨七替他记下：你姐姐笑起来左眼比右眼低一点",
+                    "beats": [
+                      "头发从鬓角白到耳后",
+                      "他摸自己的脸，发现他想不起'笑'这个表情该长什么样",
+                      "墨七替他记下：你姐姐笑起来左眼比右眼低一点"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 29,
+                  "title": "代刻人",
+                  "summary": "裴玄衣登场，捡起他落下的白发，问他：谁教你的刻？",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "裴玄衣登场，捡起他落下的白发，问他：谁教你的刻？",
+                    "start_state": "她的刀没有出手",
+                    "end_state": "她说：你这种人不该活过今晚",
+                    "beats": [
+                      "她的刀没有出手",
+                      "她认得逆纹，叫他'私刻者'",
+                      "她说：你这种人不该活过今晚"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 30,
+                  "title": "两只手",
+                  "summary": "两人对峙，裴玄衣没有抓他，只在他手背上刻了一个记号。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "两人对峙，裴玄衣没有抓他，只在他手背上刻了一个记号。",
+                    "start_state": "刻记号像纹身，一笔一划都要流血",
+                    "end_state": "她走时说：下一次我先杀你，再问话",
+                    "beats": [
+                      "刻记号像纹身，一笔一划都要流血",
+                      "记号让她能看见他所见",
+                      "她走时说：下一次我先杀你，再问话"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order_index": 4,
+          "title": "第四篇 刻痕",
+          "summary": "进墨京，见活碑。人还在里面，手还是热的。",
+          "planning": {
+            "goal": "把舞台搬到权力中心，用'活碑'完成全书最重要的世界观揭示。",
+            "start_state": "他试着用手遮住记号，反被烫得更狠",
+            "end_state": "她让他记住这个名字，然后把他推上出城的车",
+            "continuity_notes": "",
+            "target_chapter_count": 10,
+            "target_word_count": 30000
+          },
+          "scenes": [
+            {
+              "order_index": 1,
+              "title": "场景一 进京",
+              "summary": "借玄清宗暗线入城，纸人巷重逢墨七的家人。",
+              "planning": {
+                "goal": "铺设墨京的市井与权力质感，收拢墨七这条支线。",
+                "start_state": "他试着用手遮住记号，反被烫得更狠",
+                "end_state": "她叫墨七'客官'",
+                "continuity_notes": "",
+                "target_chapter_count": 4,
+                "target_word_count": 12000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 31,
+                  "title": "记号",
+                  "summary": "手背记号每夜发烫，裴玄衣借此看见他所见。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "手背记号每夜发烫，裴玄衣借此看见他所见。",
+                    "start_state": "他试着用手遮住记号，反被烫得更狠",
+                    "end_state": "他开始故意在夜里看无聊的东西",
+                    "beats": [
+                      "他试着用手遮住记号，反被烫得更狠",
+                      "墨七出主意：那就让她看些没用的",
+                      "他开始故意在夜里看无聊的东西"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 32,
+                  "title": "进京",
+                  "summary": "借玄清宗暗线入城，城门查验时沈砚用拓纹改了路引上的一个字。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "借玄清宗暗线入城，城门查验时沈砚用拓纹改了路引上的一个字。",
+                    "start_state": "改字只改一笔，改动会自己'长'成合理的字",
+                    "end_state": "进城后他的手抖了两个时辰",
+                    "beats": [
+                      "改字只改一笔，改动会自己'长'成合理的字",
+                      "守门兵卒看了三遍没看出问题",
+                      "进城后他的手抖了两个时辰"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 33,
+                  "title": "城下的墨",
+                  "summary": "雨天，墨京地下渗出墨汁，墨里浮出旧世街名。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "雨天，墨京地下渗出墨汁，墨里浮出旧世街名。",
+                    "start_state": "街上老妇人说：这是'上一个城'在渗",
+                    "end_state": "巡夜的司刻司人看见光，追过来",
+                    "beats": [
+                      "街上老妇人说：这是'上一个城'在渗",
+                      "沈砚蘸墨在纸上写，写出的是一条旧律的开头",
+                      "巡夜的司刻司人看见光，追过来"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 34,
+                  "title": "纸人巷",
+                  "summary": "墨七回家，巷里的纸人认错了人，把他当成另一个孩子。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "墨七回家，巷里的纸人认错了人，把他当成另一个孩子。",
+                    "start_state": "纸人按记忆做脸，做错了就是'别人'",
+                    "end_state": "她叫墨七'客官'",
+                    "beats": [
+                      "纸人按记忆做脸，做错了就是'别人'",
+                      "墨七的妹妹已经被卖过三次记忆",
+                      "她叫墨七'客官'"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            },
+            {
+              "order_index": 2,
+              "title": "场景二 坛下工坊·上",
+              "summary": "覆盖第 35–37 章：要赎一段记忆，得拿'等重'的记忆换——沈砚卖掉了姐姐的一段。",
+              "planning": {
+                "goal": "完成第一卷的世界观炸点，并让男女主从敌对进入交易关系。（本场上半/下半对应第 35–37 章）",
+                "start_state": "铺主称重用的是一杆看不见的秤",
+                "end_state": "裴玄衣说：你姐姐可能也是'料'",
+                "continuity_notes": "",
+                "target_chapter_count": 3,
+                "target_word_count": 9000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 35,
+                  "title": "卖记忆的规矩",
+                  "summary": "要赎一段记忆，得拿'等重'的记忆换——沈砚卖掉了姐姐的一段。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "要赎一段记忆，得拿'等重'的记忆换——沈砚卖掉了姐姐的一段。",
+                    "start_state": "铺主称重用的是一杆看不见的秤",
+                    "end_state": "他忘了姐姐笑起来的样子，只剩'左眼比右眼低'这句话",
+                    "beats": [
+                      "铺主称重用的是一杆看不见的秤",
+                      "卖掉后铜铃的声音变轻了",
+                      "他忘了姐姐笑起来的样子，只剩'左眼比右眼低'这句话"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 36,
+                  "title": "裴玄衣的邀请",
+                  "summary": "裴玄衣替他赎回墨七妹妹的一段记忆，条件是替她拓一次东西。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "裴玄衣替他赎回墨七妹妹的一段记忆，条件是替她拓一次东西。",
+                    "start_state": "她不问他为什么哭",
+                    "end_state": "交易在城隍庙的偏殿里完成，供桌上摆着两块无字牌",
+                    "beats": [
+                      "她不问他为什么哭",
+                      "她要拓的是自己刀上残留的字",
+                      "交易在城隍庙的偏殿里完成，供桌上摆着两块无字牌"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 37,
+                  "title": "坛下工坊",
+                  "summary": "天碑坛下的活碑工坊：人被刻上字，就成了碑。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "天碑坛下的活碑工坊：人被刻上字，就成了碑。",
+                    "start_state": "工坊在半地下，墙面是人的背",
+                    "end_state": "裴玄衣说：你姐姐可能也是'料'",
+                    "beats": [
+                      "工坊在半地下，墙面是人的背",
+                      "工匠管活碑叫'料'",
+                      "裴玄衣说：你姐姐可能也是'料'"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            },
+            {
+              "order_index": 3,
+              "title": "场景二 坛下工坊·下",
+              "summary": "覆盖第 38–40 章：沈砚摸到一块碑面，里面有只手按住了他的掌。",
+              "planning": {
+                "goal": "完成第一卷的世界观炸点，并让男女主从敌对进入交易关系。（本场上半/下半对应第 38–40 章）",
+                "start_state": "碑面是温的",
+                "end_state": "她让他记住这个名字，然后把他推上出城的车",
+                "continuity_notes": "",
+                "target_chapter_count": 3,
+                "target_word_count": 9000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 38,
+                  "title": "第一块碑",
+                  "summary": "沈砚摸到一块碑面，里面有只手按住了他的掌。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "沈砚摸到一块碑面，里面有只手按住了他的掌。",
+                    "start_state": "碑面是温的",
+                    "end_state": "他喊了一声'姐'，碑里敲了三下",
+                    "beats": [
+                      "碑面是温的",
+                      "指甲缝里有缝衣线的红",
+                      "他喊了一声'姐'，碑里敲了三下"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 39,
+                  "title": "三下敲击",
+                  "summary": "沈砚在坛下守到换班，碑里又敲了三下——这是他和姐姐小时候的暗号。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "沈砚在坛下守到换班，碑里又敲了三下——这是他和姐姐小时候的暗号。",
+                    "start_state": "暗号是两短一长，代表'我在'",
+                    "end_state": "裴玄衣站在台阶上看了很久，没有出声",
+                    "beats": [
+                      "暗号是两短一长，代表'我在'",
+                      "他把耳朵贴在碑上，听见布料摩擦的声音",
+                      "裴玄衣站在台阶上看了很久，没有出声"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 40,
+                  "title": "卷末·要刻的人不是天子",
+                  "summary": "裴玄衣说出真相的一角：换刻从来是人刻的，而这一次要刻的人，不是天子。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "裴玄衣说出真相的一角：换刻从来是人刻的，而这一次要刻的人，不是天子。",
+                    "start_state": "换刻清册上的笔迹属于某一个人",
+                    "end_state": "她让他记住这个名字，然后把他推上出城的车",
+                    "beats": [
+                      "换刻清册上的笔迹属于某一个人",
+                      "她给他看自己刀上的字：'宋若'",
+                      "她让他记住这个名字，然后把他推上出城的车"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order_index": 2,
+      "title": "第二卷 墨京",
+      "subtitle": "碑里有人，手还是热的",
+      "summary": "沈砚以拓工身份留在天碑坛下，与代刻人裴玄衣做交易：他替她拓刀上的字，她替他查一页清册。纸人巷在清算内鬼，墨七为救他死过一个纸人；玄清宗长老常无暗示天碑有伪；而所有线索都指向同一件事——被抹的人没有死，他们被刻成了活碑，姐姐沈黎在坛底还醒着。卷末，半枚换刻令失窃，'刻天罪'落到沈砚头上，他的名字开始从纸上消失；裴玄衣放他出城，只留下一句：我需要有人证明我错了。",
+      "goal": "把私人复仇升级为体制对抗，并让男女主从交易走向互相利用、再走向互相信任。",
+      "theme": "秩序需要代价，代价由谁承担？",
+      "status": "draft",
+      "planning": {
+        "premise": "沈砚为了留在墨京查姐姐，必须替司刻司做事；而他做的每件事都在帮宋无极推进私刻。",
+        "major_conflict": "沈砚要在不暴露逆纹的前提下查清清册七与活碑，裴玄衣要在忠于职守与怀疑秩序之间做选择，宋无极要把换刻提前到自己能掌控的那一天。",
+        "start_state": "沈砚是通缉在身的拓工，凭裴玄衣一句担保留在坛下，身份是最底层的役工。",
+        "end_state": "沈砚戴着'刻天罪'逃出墨京，手握半枚换刻令，姐姐确认还活着，师父被证实是伪刻者之一。",
+        "key_turning_points": [
+          "在活碑中确认姐姐还醒着，并收到她的暗号",
+          "认出伪刻笔迹与师父断指手势一致",
+          "纸人巷老匠被灭口，墨七丢了一只手的力气",
+          "常无闯狱送真碑拓本后被杀",
+          "刻天罪成立，名字开始从纸上消失；裴玄衣放他走"
+        ],
+        "target_chapter_count": 42,
+        "target_word_count": 126000
+      },
+      "arcs": [
+        {
+          "order_index": 1,
+          "title": "第五篇 代刻人",
+          "summary": "坛下的活碑、衙门里的粥、还有一位温和的大监。",
+          "planning": {
+            "goal": "展示权力机构如何日常运转，让反派先显得讲道理。",
+            "start_state": "呼吸的节奏是睡着的节奏",
+            "end_state": "墨七第一次在沈砚面前哭",
+            "continuity_notes": "",
+            "target_chapter_count": 10,
+            "target_word_count": 30000
+          },
+          "scenes": [
+            {
+              "order_index": 1,
+              "title": "场景一 活碑·上",
+              "summary": "覆盖第 41–45 章：沈砚把耳朵贴在碑面上，听见有人在里面呼吸。",
+              "planning": {
+                "goal": "把'活碑'从概念变成可感的事实，同时开启男女主的交易关系。（本场上半/下半对应第 41–45 章）",
+                "start_state": "呼吸的节奏是睡着的节奏",
+                "end_state": "一个老役工告诉他：想活久，就别被人记住",
+                "continuity_notes": "",
+                "target_chapter_count": 5,
+                "target_word_count": 15000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 41,
+                  "title": "活碑",
+                  "summary": "沈砚把耳朵贴在碑面上，听见有人在里面呼吸。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "沈砚把耳朵贴在碑面上，听见有人在里面呼吸。",
+                    "start_state": "呼吸的节奏是睡着的节奏",
+                    "end_state": "他在碑下跪了很久，起来时膝盖没知觉",
+                    "beats": [
+                      "呼吸的节奏是睡着的节奏",
+                      "碑面温度随呼吸起伏",
+                      "他在碑下跪了很久，起来时膝盖没知觉"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 42,
+                  "title": "代刻人的活",
+                  "summary": "裴玄衣带他看代刻人如何刻律：一笔一划都要用血。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "裴玄衣带他看代刻人如何刻律：一笔一划都要用血。",
+                    "start_state": "刻律的刀是骨做的，不是铁",
+                    "end_state": "代刻人平均活不过四十岁",
+                    "beats": [
+                      "刻律的刀是骨做的，不是铁",
+                      "每刻一笔要吞一口自己的血",
+                      "代刻人平均活不过四十岁"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 43,
+                  "title": "拓她的刀",
+                  "summary": "裴玄衣要他拓自己刀上残留的字——那是她被刻之前的东西。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "裴玄衣要他拓自己刀上残留的字——那是她被刻之前的东西。",
+                    "start_state": "刀身上有七个字，只余三个还认得出",
+                    "end_state": "拓出来是'宋……若……'",
+                    "beats": [
+                      "刀身上有七个字，只余三个还认得出",
+                      "沈砚拓下时手背记号剧痛",
+                      "拓出来是'宋……若……'"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 44,
+                  "title": "半枚令",
+                  "summary": "拓出的字拼成半枚换刻令的图样。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "拓出的字拼成半枚换刻令的图样。",
+                    "start_state": "令的图样是两半合一才成句",
+                    "end_state": "她把拓片收进自己的袖口，没交上去",
+                    "beats": [
+                      "令的图样是两半合一才成句",
+                      "裴玄衣说：另一半在失窃清单上",
+                      "她把拓片收进自己的袖口，没交上去"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 45,
+                  "title": "司刻司的早饭",
+                  "summary": "衙门里分粥的次序就是权力的次序。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "衙门里分粥的次序就是权力的次序。",
+                    "start_state": "役工喝稀的，代刻人吃干的",
+                    "end_state": "一个老役工告诉他：想活久，就别被人记住",
+                    "beats": [
+                      "役工喝稀的，代刻人吃干的",
+                      "沈砚故意喝最后那碗，被人记住",
+                      "一个老役工告诉他：想活久，就别被人记住"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            },
+            {
+              "order_index": 2,
+              "title": "场景一 活碑·下",
+              "summary": "覆盖第 46–50 章：大监出场，温和地给沈砚一条活路：替他拓一卷不该存在的碑文。",
+              "planning": {
+                "goal": "把'活碑'从概念变成可感的事实，同时开启男女主的交易关系。（本场上半/下半对应第 46–50 章）",
+                "start_state": "他先问沈砚家里还有谁，再问他还记得谁",
+                "end_state": "墨七第一次在沈砚面前哭",
+                "continuity_notes": "",
+                "target_chapter_count": 5,
+                "target_word_count": 15000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 46,
+                  "title": "宋无极",
+                  "summary": "大监出场，温和地给沈砚一条活路：替他拓一卷不该存在的碑文。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "大监出场，温和地给沈砚一条活路：替他拓一卷不该存在的碑文。",
+                    "start_state": "他先问沈砚家里还有谁，再问他还记得谁",
+                    "end_state": "沈砚背后全湿了",
+                    "beats": [
+                      "他先问沈砚家里还有谁，再问他还记得谁",
+                      "他伸手替沈砚拂掉肩上的灰",
+                      "沈砚背后全湿了"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 47,
+                  "title": "清册七",
+                  "summary": "沈砚在档案房翻到'清册七'：一场没被记录在案的换刻。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "沈砚在档案房翻到'清册七'：一场没被记录在案的换刻。",
+                    "start_state": "清册的编号本该到六",
+                    "end_state": "他抄下首页，抄到第三行灯就灭了",
+                    "beats": [
+                      "清册的编号本该到六",
+                      "清册七封皮是新的，纸是旧的",
+                      "他抄下首页，抄到第三行灯就灭了"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 48,
+                  "title": "三十七人",
+                  "summary": "清册七上有三十七个名字，最后一个被涂了。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "清册七上有三十七个名字，最后一个被涂了。",
+                    "start_state": "名字按'被抹的顺序'排列",
+                    "end_state": "他把纸压在舌下，像上次一样",
+                    "beats": [
+                      "名字按'被抹的顺序'排列",
+                      "第三十七个只剩半个字，像'黎'",
+                      "他把纸压在舌下，像上次一样"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 49,
+                  "title": "墨七偷书",
+                  "summary": "墨七偷出半页清册，被巡夜的纸人看见。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "墨七偷出半页清册，被巡夜的纸人看见。",
+                    "start_state": "那半页上有涂改的墨迹",
+                    "end_state": "纸人被他自己做的纸人抓住——原来都是同一批",
+                    "beats": [
+                      "那半页上有涂改的墨迹",
+                      "巡夜纸人认得墨七的手艺",
+                      "纸人被他自己做的纸人抓住——原来都是同一批"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 50,
+                  "title": "合律",
+                  "summary": "纸人巷的老匠被灭口，尸体上刻着'合律'二字。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "纸人巷的老匠被灭口，尸体上刻着'合律'二字。",
+                    "start_state": "刻字不是刀刻的，是'律'自己长出来的",
+                    "end_state": "墨七第一次在沈砚面前哭",
+                    "beats": [
+                      "刻字不是刀刻的，是'律'自己长出来的",
+                      "老匠手里攥着一枚铜铃的碎片",
+                      "墨七第一次在沈砚面前哭"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order_index": 2,
+          "title": "第六篇 纸人巷",
+          "summary": "卖记忆的巷子、城隍庙的生死账、以及一句不敢说出口的实话。",
+          "planning": {
+            "goal": "把'记忆买卖'做成经济与道德的双重压力，让主角亲手卖出姐姐的一段记忆。",
+            "start_state": "灭一盏灯就是死一个人",
+            "end_state": "回坛时他对裴玄衣说的第一句话是：我师父是伪刻者",
+            "continuity_notes": "",
+            "target_chapter_count": 10,
+            "target_word_count": 30000
+          },
+          "scenes": [
+            {
+              "order_index": 1,
+              "title": "场景一 白灯笼",
+              "summary": "纸人巷清算内鬼，沈砚用记忆换消息。",
+              "planning": {
+                "goal": "让主角付出情感代价换取信息，体现这个世界里'忘'是可交易的。",
+                "start_state": "灭一盏灯就是死一个人",
+                "end_state": "墨七拦住他：你打不过规矩",
+                "continuity_notes": "",
+                "target_chapter_count": 5,
+                "target_word_count": 15000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 51,
+                  "title": "白灯笼",
+                  "summary": "纸人巷的白灯笼一盏盏灭，帮会在清算内鬼。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "纸人巷的白灯笼一盏盏灭，帮会在清算内鬼。",
+                    "start_state": "灭一盏灯就是死一个人",
+                    "end_state": "墨七说：那张脸是我",
+                    "beats": [
+                      "灭一盏灯就是死一个人",
+                      "巷口挂着新做的纸人，脸上都涂着同一张脸",
+                      "墨七说：那张脸是我"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 52,
+                  "title": "纸人替死",
+                  "summary": "墨七用自己做的纸人替沈砚挡了一刀，纸人脸上有他的脸。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "墨七用自己做的纸人替沈砚挡了一刀，纸人脸上有他的脸。",
+                    "start_state": "刀砍在纸上，纸人流血",
+                    "end_state": "他笑：省了医药钱，纸比人便宜",
+                    "beats": [
+                      "刀砍在纸上，纸人流血",
+                      "墨七的左手立刻软了",
+                      "他笑：省了医药钱，纸比人便宜"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 53,
+                  "title": "记忆铺子",
+                  "summary": "沈砚拿姐姐的一段记忆换消息。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "沈砚拿姐姐的一段记忆换消息。",
+                    "start_state": "铺主要求'等重'：越私密的越值钱",
+                    "end_state": "秤上浮出一小团白光，被装进瓷瓶",
+                    "beats": [
+                      "铺主要求'等重'：越私密的越值钱",
+                      "他卖掉的是姐姐替他缝袖子的那一个晚上",
+                      "秤上浮出一小团白光，被装进瓷瓶"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 54,
+                  "title": "姐姐的笑",
+                  "summary": "卖掉之后他再也想不起姐姐笑的样子，只剩铜铃里的声音。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "卖掉之后他再也想不起姐姐笑的样子，只剩铜铃里的声音。",
+                    "start_state": "他试着对着镜子笑，笑不出来",
+                    "end_state": "他开始在纸上画姐姐的脸，画到第三十张才像一点",
+                    "beats": [
+                      "他试着对着镜子笑，笑不出来",
+                      "铜铃响了一下，像叹气",
+                      "他开始在纸上画姐姐的脸，画到第三十张才像一点"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 55,
+                  "title": "买不回来",
+                  "summary": "他想买回那段记忆，铺主说卖出去的记忆只会出现在别人身上。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "他想买回那段记忆，铺主说卖出去的记忆只会出现在别人身上。",
+                    "start_state": "铺主给他看一个陌生人：那人正无端地哼一段调子",
+                    "end_state": "墨七拦住他：你打不过规矩",
+                    "beats": [
+                      "铺主给他看一个陌生人：那人正无端地哼一段调子",
+                      "沈砚差点动手",
+                      "墨七拦住他：你打不过规矩"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            },
+            {
+              "order_index": 2,
+              "title": "场景二 城隍庙的账",
+              "summary": "生死账上，沈黎的名字后面写着'在坛'。",
+              "planning": {
+                "goal": "用一份账册把'姐姐还活着'从可能变成证据。",
+                "start_state": "庙里的判官像没有脸",
+                "end_state": "回坛时他对裴玄衣说的第一句话是：我师父是伪刻者",
+                "continuity_notes": "",
+                "target_chapter_count": 5,
+                "target_word_count": 15000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 56,
+                  "title": "城隍庙的账",
+                  "summary": "白十三带他去城隍庙，那里记着被抹者的生死账。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "白十三带他去城隍庙，那里记着被抹者的生死账。",
+                    "start_state": "庙里的判官像没有脸",
+                    "end_state": "白十三用指甲在账上划，划出被人改过的痕迹",
+                    "beats": [
+                      "庙里的判官像没有脸",
+                      "账册用褪墨写，越久越淡",
+                      "白十三用指甲在账上划，划出被人改过的痕迹"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 57,
+                  "title": "生死账",
+                  "summary": "账上沈黎的名字后面写着'在坛'。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "账上沈黎的名字后面写着'在坛'。",
+                    "start_state": "'在坛'的注脚是'未死，未活'",
+                    "end_state": "沈砚把那一页背下来，背到手指掐出血",
+                    "beats": [
+                      "'在坛'的注脚是'未死，未活'",
+                      "同一页上有三十七行'在坛'",
+                      "沈砚把那一页背下来，背到手指掐出血"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 58,
+                  "title": "玄清宗的酒",
+                  "summary": "常无请沈砚喝酒，暗示天碑有伪，但求他别在宗门里说。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "常无请沈砚喝酒，暗示天碑有伪，但求他别在宗门里说。",
+                    "start_state": "常无喝到第三杯才提'笔迹'二字",
+                    "end_state": "他给沈砚一枚可以进藏经阁的铜牌",
+                    "beats": [
+                      "常无喝到第三杯才提'笔迹'二字",
+                      "他说：我六十年前就看出不对，我什么都没做",
+                      "他给沈砚一枚可以进藏经阁的铜牌"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 59,
+                  "title": "伪刻",
+                  "summary": "沈砚第一次见到伪刻的证据：一条律的笔迹和另一条不同。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "沈砚第一次见到伪刻的证据：一条律的笔迹和另一条不同。",
+                    "start_state": "真碑的笔画像刀切，伪刻的像描",
+                    "end_state": "这条律只写了六十年，之前没有",
+                    "beats": [
+                      "真碑的笔画像刀切，伪刻的像描",
+                      "被伪刻的律是'不合律者当没'",
+                      "这条律只写了六十年，之前没有"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 60,
+                  "title": "笔迹",
+                  "summary": "他认出那道笔迹的起笔习惯与师父断指的手势一致。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "他认出那道笔迹的起笔习惯与师父断指的手势一致。",
+                    "start_state": "师父断的是右手三指，起笔有个顿",
+                    "end_state": "回坛时他对裴玄衣说的第一句话是：我师父是伪刻者",
+                    "beats": [
+                      "师父断的是右手三指，起笔有个顿",
+                      "他在藏经阁里坐到闭馆",
+                      "回坛时他对裴玄衣说的第一句话是：我师父是伪刻者"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order_index": 3,
+          "title": "第七篇 活碑",
+          "summary": "姐姐在坛底，一个太温和的敌人，和一场交易。",
+          "planning": {
+            "goal": "完成全书最重要的情感揭示，并把反派的动机写成人而不是恶。",
+            "start_state": "逆纹自己爬上手背，像虫",
+            "end_state": "沈砚在屋里坐到深夜，才开始找别的路",
+            "continuity_notes": "",
+            "target_chapter_count": 13,
+            "target_word_count": 39000
+          },
+          "scenes": [
+            {
+              "order_index": 1,
+              "title": "场景一 姐姐在坛里·上",
+              "summary": "覆盖第 61–64 章：得知师父是伪刻者，沈砚手抖得握不住刀，逆纹自己动了起来。",
+              "planning": {
+                "goal": "把姐弟关系从回忆拉进现实互动，制造'看得见救不到'的张力。（本场上半/下半对应第 61–64 章）",
+                "start_state": "逆纹自己爬上手背，像虫",
+                "end_state": "碑里的敲击回应：两短一长",
+                "continuity_notes": "",
+                "target_chapter_count": 4,
+                "target_word_count": 12000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 61,
+                  "title": "师父的手",
+                  "summary": "得知师父是伪刻者，沈砚手抖得握不住刀，逆纹自己动了起来。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "得知师父是伪刻者，沈砚手抖得握不住刀，逆纹自己动了起来。",
+                    "start_state": "逆纹自己爬上手背，像虫",
+                    "end_state": "她说：你这样会把自己刻死",
+                    "beats": [
+                      "逆纹自己爬上手背，像虫",
+                      "裴玄衣一掌打在他后颈，把他按熄",
+                      "她说：你这样会把自己刻死"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 62,
+                  "title": "坛中一宿",
+                  "summary": "他混进坛底，和一块活碑待了一夜。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "他混进坛底，和一块活碑待了一夜。",
+                    "start_state": "坛底每块碑都贴着一张白纸条，写着'好'或'已合'",
+                    "end_state": "夜里有工匠巡场，提着灯照碑面",
+                    "beats": [
+                      "坛底每块碑都贴着一张白纸条，写着'好'或'已合'",
+                      "他给自己那块碑的白条上偷偷改了一个字",
+                      "夜里有工匠巡场，提着灯照碑面"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 63,
+                  "title": "碑会疼",
+                  "summary": "活碑在换刻前会疼，疼的时候会喊名字。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "活碑在换刻前会疼，疼的时候会喊名字。",
+                    "start_state": "喊名字的声音像从水里传出来",
+                    "end_state": "沈砚把塞子一个个拔掉",
+                    "beats": [
+                      "喊名字的声音像从水里传出来",
+                      "工匠用塞子把碑上的孔堵住",
+                      "沈砚把塞子一个个拔掉"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 64,
+                  "title": "喊的是谁",
+                  "summary": "碑喊的是沈黎。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "碑喊的是沈黎。",
+                    "start_state": "沈砚在地上坐了整夜",
+                    "end_state": "碑里的敲击回应：两短一长",
+                    "beats": [
+                      "沈砚在地上坐了整夜",
+                      "天亮前他在碑面上写了个'砚'字，字被碑吸进去",
+                      "碑里的敲击回应：两短一长"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            },
+            {
+              "order_index": 2,
+              "title": "场景一 姐姐在坛里·下",
+              "summary": "覆盖第 65–68 章：沈砚崩溃，墨七第一次骂他。",
+              "planning": {
+                "goal": "把姐弟关系从回忆拉进现实互动，制造'看得见救不到'的张力。（本场上半/下半对应第 65–68 章）",
+                "start_state": "墨七把热粥端到他面前，粥凉了才开口",
+                "end_state": "沈砚说：我姐在下面，我听得见她敲三下",
+                "continuity_notes": "",
+                "target_chapter_count": 4,
+                "target_word_count": 12000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 65,
+                  "title": "哭有什么用",
+                  "summary": "沈砚崩溃，墨七第一次骂他。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "沈砚崩溃，墨七第一次骂他。",
+                    "start_state": "墨七把热粥端到他面前，粥凉了才开口",
+                    "end_state": "沈砚喝完粥，去洗了脸，回来开始画坛底的图",
+                    "beats": [
+                      "墨七把热粥端到他面前，粥凉了才开口",
+                      "他说：你哭一夜，你姐就多疼一夜",
+                      "沈砚喝完粥，去洗了脸，回来开始画坛底的图"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 66,
+                  "title": "裴玄衣的裂缝",
+                  "summary": "裴玄衣承认自己也听见过碑喊名字。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "裴玄衣承认自己也听见过碑喊名字。",
+                    "start_state": "她说她小时候以为是墙里的老鼠",
+                    "end_state": "她说：我刻了十年的静，才知道静是什么代价",
+                    "beats": [
+                      "她说她小时候以为是墙里的老鼠",
+                      "她带沈砚看自己刻的第一条律，刻的是'静'",
+                      "她说：我刻了十年的静，才知道静是什么代价"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 67,
+                  "title": "代刻人的名字",
+                  "summary": "她让沈砚拓她的名字，拓片上什么都没有。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "她让沈砚拓她的名字，拓片上什么都没有。",
+                    "start_state": "拓片空白得像刚裁下来的纸",
+                    "end_state": "沈砚第一次觉得自己的恨放错了地方",
+                    "beats": [
+                      "拓片空白得像刚裁下来的纸",
+                      "她笑：我本来就不该存在",
+                      "沈砚第一次觉得自己的恨放错了地方"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 68,
+                  "title": "两个不该存在的人",
+                  "summary": "两人在天碑坛顶上坐到天亮。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "两人在天碑坛顶上坐到天亮。",
+                    "start_state": "他们说各自记得的最后一件私事",
+                    "end_state": "沈砚说：我姐在下面，我听得见她敲三下",
+                    "beats": [
+                      "他们说各自记得的最后一件私事",
+                      "她说：我爹是活碑，我娘被抹了",
+                      "沈砚说：我姐在下面，我听得见她敲三下"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            },
+            {
+              "order_index": 3,
+              "title": "场景二 温和的刀",
+              "summary": "宋无极摊牌，用一幅画像和一句'你会的'把沈砚逼进死角。",
+              "planning": {
+                "goal": "让反派的诉求成立，把主角的拒绝变成一次主动的道德选择。",
+                "start_state": "画像上的人穿着不合时宜的旧式衣裳",
+                "end_state": "沈砚在屋里坐到深夜，才开始找别的路",
+                "continuity_notes": "",
+                "target_chapter_count": 5,
+                "target_word_count": 15000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 69,
+                  "title": "宋若",
+                  "summary": "宋无极给沈砚看一幅画像：他女儿宋若，死于上一次换刻的重排。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "宋无极给沈砚看一幅画像：他女儿宋若，死于上一次换刻的重排。",
+                    "start_state": "画像上的人穿着不合时宜的旧式衣裳",
+                    "end_state": "他说：她只活了十七年",
+                    "beats": [
+                      "画像上的人穿着不合时宜的旧式衣裳",
+                      "大监讲女儿的时候语速很快，像背过的",
+                      "他说：她只活了十七年"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 70,
+                  "title": "规矩是人写的",
+                  "summary": "宋无极陈述自己的道理：既然换刻是人刻的，那就该刻得让人少疼一点。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "宋无极陈述自己的道理：既然换刻是人刻的，那就该刻得让人少疼一点。",
+                    "start_state": "他拿出自己拟的新律稿，字迹极工整",
+                    "end_state": "代价是半数不合律者被抹",
+                    "beats": [
+                      "他拿出自己拟的新律稿，字迹极工整",
+                      "他说：我要删掉'重排'这一条",
+                      "代价是半数不合律者被抹"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 71,
+                  "title": "一半的人",
+                  "summary": "沈砚问他：那被抹的那一半里，有没有你女儿。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "沈砚问他：那被抹的那一半里，有没有你女儿。",
+                    "start_state": "宋无极沉默了很久",
+                    "end_state": "他笑了，笑得很客气",
+                    "beats": [
+                      "宋无极沉默了很久",
+                      "他说：有，所以我要她不在那一半",
+                      "他笑了，笑得很客气"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 72,
+                  "title": "交易",
+                  "summary": "他提出：替他刻成新碑，他放沈黎出来。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "他提出：替他刻成新碑，他放沈黎出来。",
+                    "start_state": "他说得非常具体，连出城路线都备好了",
+                    "end_state": "手背上的记号忽然烫了一下——裴玄衣在听",
+                    "beats": [
+                      "他说得非常具体，连出城路线都备好了",
+                      "沈砚几乎要答应",
+                      "手背上的记号忽然烫了一下——裴玄衣在听"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 73,
+                  "title": "拒绝",
+                  "summary": "沈砚拒绝，宋无极说：你会的。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "沈砚拒绝，宋无极说：你会的。",
+                    "start_state": "大监起身时替他把椅子推回去",
+                    "end_state": "沈砚在屋里坐到深夜，才开始找别的路",
+                    "beats": [
+                      "大监起身时替他把椅子推回去",
+                      "出门前他说：人在坛里，一年比一年轻",
+                      "沈砚在屋里坐到深夜，才开始找别的路"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order_index": 4,
+          "title": "第八篇 刻天罪",
+          "summary": "半枚换刻令失窃，罪名落下来，名字从纸上开始消失。",
+          "planning": {
+            "goal": "把主角推到全书最低点，同时完成裴玄衣的第一次立场松动。",
+            "start_state": "失窃当夜他确实在档案房",
+            "end_state": "他们上了往东南的船",
+            "continuity_notes": "",
+            "target_chapter_count": 9,
+            "target_word_count": 27000
+          },
+          "scenes": [
+            {
+              "order_index": 1,
+              "title": "场景一 搜巷",
+              "summary": "嫁祸、搜巷、定罪，墨七被抓。",
+              "planning": {
+                "goal": "用体制的合法程序完成迫害，比直接动手更冷。",
+                "start_state": "失窃当夜他确实在档案房",
+                "end_state": "刻上去的字第二天就淡了",
+                "continuity_notes": "",
+                "target_chapter_count": 4,
+                "target_word_count": 12000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 74,
+                  "title": "令失窃",
+                  "summary": "司刻司丢了半枚换刻令，卷宗上的第一嫌疑人是沈砚。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "司刻司丢了半枚换刻令，卷宗上的第一嫌疑人是沈砚。",
+                    "start_state": "失窃当夜他确实在档案房",
+                    "end_state": "他终于明白自己一直被养着当替罪羊",
+                    "beats": [
+                      "失窃当夜他确实在档案房",
+                      "卷宗笔迹是新的，纸是旧的",
+                      "他终于明白自己一直被养着当替罪羊"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 75,
+                  "title": "搜巷",
+                  "summary": "纸人巷被搜，墨七被抓。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "纸人巷被搜，墨七被抓。",
+                    "start_state": "搜查队带着纸人认路",
+                    "end_state": "他被拖走时喊的是他妹妹的名字",
+                    "beats": [
+                      "搜查队带着纸人认路",
+                      "墨七把自己做的纸人全烧了，怕被认出来",
+                      "他被拖走时喊的是他妹妹的名字"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 76,
+                  "title": "刻天罪",
+                  "summary": "罪名成立：私刻天道，其名当没。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "罪名成立：私刻天道，其名当没。",
+                    "start_state": "庭审只用了一炷香",
+                    "end_state": "他低头看手心，掌纹淡了一点",
+                    "beats": [
+                      "庭审只用了一炷香",
+                      "判词里没有'沈砚'两个字，只写'某'",
+                      "他低头看手心，掌纹淡了一点"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 77,
+                  "title": "没人记得他的名字",
+                  "summary": "狱卒三次问他的名字，三次都忘。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "狱卒三次问他的名字，三次都忘。",
+                    "start_state": "第一次他说沈砚，狱卒点头；第二次再问，像没见过他",
+                    "end_state": "刻上去的字第二天就淡了",
+                    "beats": [
+                      "第一次他说沈砚，狱卒点头；第二次再问，像没见过他",
+                      "他开始在墙上刻自己的名字",
+                      "刻上去的字第二天就淡了"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            },
+            {
+              "order_index": 2,
+              "title": "场景二 出城",
+              "summary": "常无送真碑拓本被杀，裴玄衣放他走。",
+              "planning": {
+                "goal": "用两次牺牲换来主角的第二次成长与一条新线索。",
+                "start_state": "老人穿的是朝服，说这样他们杀我得写文书",
+                "end_state": "他们上了往东南的船",
+                "continuity_notes": "",
+                "target_chapter_count": 5,
+                "target_word_count": 15000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 78,
+                  "title": "常无的遗言",
+                  "summary": "常无闯狱送他一页真碑拓本，被杀。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "常无闯狱送他一页真碑拓本，被杀。",
+                    "start_state": "老人穿的是朝服，说这样他们杀我得写文书",
+                    "end_state": "他最后说的是：六十年前我该动",
+                    "beats": [
+                      "老人穿的是朝服，说这样他们杀我得写文书",
+                      "拓本只有半页，边角有火燎",
+                      "他最后说的是：六十年前我该动"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 79,
+                  "title": "越狱",
+                  "summary": "裴玄衣打开牢门，理由只有一句。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "裴玄衣打开牢门，理由只有一句。",
+                    "start_state": "她带了两把刀，一把给他",
+                    "end_state": "沈砚问她要不要一起走，她说我留下才有用",
+                    "beats": [
+                      "她带了两把刀，一把给他",
+                      "她说：我需要有人证明我错了",
+                      "沈砚问她要不要一起走，她说我留下才有用"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 80,
+                  "title": "半令在手",
+                  "summary": "沈砚带走半枚换刻令，墨七被救出但废了一只手。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "沈砚带走半枚换刻令，墨七被救出但废了一只手。",
+                    "start_state": "墨七的左手再也做不了纸人",
+                    "end_state": "他说：我这只手本来也不值钱",
+                    "beats": [
+                      "墨七的左手再也做不了纸人",
+                      "他把妹妹的记忆托付给巷里一个老妇",
+                      "他说：我这只手本来也不值钱"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 81,
+                  "title": "墨京的雨",
+                  "summary": "三人从水门出城，雨里全城的碑文都在渗墨。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "三人从水门出城，雨里全城的碑文都在渗墨。",
+                    "start_state": "城基裂缝里流出的墨在地上写出一个个旧名字",
+                    "end_state": "沈砚用拓片压下一行墨字带走",
+                    "beats": [
+                      "城基裂缝里流出的墨在地上写出一个个旧名字",
+                      "守城兵卒捂着耳朵不肯看",
+                      "沈砚用拓片压下一行墨字带走"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 82,
+                  "title": "向海",
+                  "summary": "白十三在城外等他们，说要去碎律海找第八碑。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "白十三在城外等他们，说要去碎律海找第八碑。",
+                    "start_state": "她数出清册七的三十七人还剩几个活着",
+                    "end_state": "他们上了往东南的船",
+                    "beats": [
+                      "她数出清册七的三十七人还剩几个活着",
+                      "她说：要救你姐，得先让碑认得你",
+                      "他们上了往东南的船"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order_index": 3,
+      "title": "第三卷 碎律海",
+      "subtitle": "作废的律还割得伤人",
+      "summary": "三人出海，在碎律海打捞作废的律文碎片，靠一条'不沉'之律活命；船票、名字、法门全都要用记忆买。沈砚在拍卖会上识破伪律，也在风暴里当众重刻定风之律。赤霄剑冢的哑巴冢主用断剑写下被抹者的名字，并与他们结盟；白骨观主白十三交出真相：她就是所有遗忘的集合，最后请他把自己刻成一条律。海底倒城之中，半身成碑的柳无咎说出全部：伪刻过三次，妻子是第一次的代价，第九碑的坐标在这里。他把最后一块碑文交给沈砚，被碑反噬而死——碑文上写着'沈黎'，和一句'她还听得见'。",
+      "goal": "把'旧律'变成可用的武器与可付出的代价，让主角从被动承受转为主动积累。",
+      "theme": "被遗忘的人，能不能自己长回来？",
+      "status": "draft",
+      "planning": {
+        "premise": "换刻在即，唯有手中握着旧律的人才有资格谈条件；而旧律只在碎律海与海底倒城里还留着。",
+        "major_conflict": "沈砚要凑齐重刻门槛（旧律碎片、真碑拓本、第九碑坐标），司刻司要在他凑齐之前清掉所有'不该存在的人'。",
+        "start_state": "沈砚带着半枚换刻令与一个废了手的同伴出海，手里只有半页真碑拓本。",
+        "end_state": "沈砚得到第九碑坐标与最后一块碑文，失去师父与白十三，学会以自己的寿数换律；队伍中出现'失去记忆的墨七'这一最沉重的负担。",
+        "key_turning_points": [
+          "海上捞起'不沉'之律，第一次用别人的律救人",
+          "拍卖会上识破伪律，第一次被同行认作'能刻的人'",
+          "剑冢当众刻律，失去三个月记忆与墨七的名字",
+          "白十三自请被刻成一条律，世间多出'风里有名字'",
+          "海底倒城见到活着的师父，获知第九碑与沈黎仍能听见"
+        ],
+        "target_chapter_count": 38,
+        "target_word_count": 114000
+      },
+      "arcs": [
+        {
+          "order_index": 1,
+          "title": "第九篇 沉律",
+          "summary": "船票是一段记忆，海面浮着的律文像碎冰。",
+          "planning": {
+            "goal": "建立新的空间与规则（碎律海的打捞经济），并把主角放到'被同行承认'的位置。",
+            "start_state": "售票的老头用手在他眉心按了一下",
+            "end_state": "船主当众给他跪下，说这船以后记他的名字",
+            "continuity_notes": "",
+            "target_chapter_count": 10,
+            "target_word_count": 30000
+          },
+          "scenes": [
+            {
+              "order_index": 1,
+              "title": "场景一 出海",
+              "summary": "无量海阁的船，第一片旧律。",
+              "planning": {
+                "goal": "让海上求生与记忆交易同时开始运转。",
+                "start_state": "售票的老头用手在他眉心按了一下",
+                "end_state": "她给沈砚一张价目单，最后一行写着'沈黎：无价'",
+                "continuity_notes": "",
+                "target_chapter_count": 5,
+                "target_word_count": 15000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 83,
+                  "title": "船票",
+                  "summary": "无量海阁的船票要一段记忆，沈砚付了'第一次杀人的记忆'。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "无量海阁的船票要一段记忆，沈砚付了'第一次杀人的记忆'。",
+                    "start_state": "售票的老头用手在他眉心按了一下",
+                    "end_state": "墨七说：省得你夜里做噩梦",
+                    "beats": [
+                      "售票的老头用手在他眉心按了一下",
+                      "他忘了自己杀过谁，只留下手在抖",
+                      "墨七说：省得你夜里做噩梦"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 84,
+                  "title": "碎律海",
+                  "summary": "海面浮着作废的律文碎片，像碎冰，割手。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "海面浮着作废的律文碎片，像碎冰，割手。",
+                    "start_state": "碎片在日光下会自己读出声",
+                    "end_state": "沈砚伸手捞，手背记号亮了",
+                    "beats": [
+                      "碎片在日光下会自己读出声",
+                      "船员用竹竿挑，不敢用手",
+                      "沈砚伸手捞，手背记号亮了"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 85,
+                  "title": "打捞规矩",
+                  "summary": "捞律要先交出'名字'，否则律会认你。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "捞律要先交出'名字'，否则律会认你。",
+                    "start_state": "交名字不是真名，是'别人怎么叫你'",
+                    "end_state": "一个交不出名字的船员当场被律认走，变成一块浮冰",
+                    "beats": [
+                      "交名字不是真名，是'别人怎么叫你'",
+                      "沈砚交的是'拓工'",
+                      "一个交不出名字的船员当场被律认走，变成一块浮冰"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 86,
+                  "title": "第一片",
+                  "summary": "沈砚捞起'不沉'之律，救下翻船的孩子。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "沈砚捞起'不沉'之律，救下翻船的孩子。",
+                    "start_state": "律文在掌心化成一行字，用完就退",
+                    "end_state": "他救起孩子后自己沉下去，被墨七用绳拖上来",
+                    "beats": [
+                      "律文在掌心化成一行字，用完就退",
+                      "'不沉'只管三个时辰",
+                      "他救起孩子后自己沉下去，被墨七用绳拖上来"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 87,
+                  "title": "海阁主人",
+                  "summary": "海阁之主谈条件：要换刻令另一半的消息，拿真碑拓本来换。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "海阁之主谈条件：要换刻令另一半的消息，拿真碑拓本来换。",
+                    "start_state": "主人是个瞎了一只眼的妇人，说话像算账",
+                    "end_state": "她给沈砚一张价目单，最后一行写着'沈黎：无价'",
+                    "beats": [
+                      "主人是个瞎了一只眼的妇人，说话像算账",
+                      "她说：我卖消息，从不说谎",
+                      "她给沈砚一张价目单，最后一行写着'沈黎：无价'"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            },
+            {
+              "order_index": 2,
+              "title": "场景二 拍卖会",
+              "summary": "一条'必死'之律，一次识破，一场同船。",
+              "planning": {
+                "goal": "让主角在众人面前展现'能刻'，同时把裴玄衣送上同一条船。",
+                "start_state": "律文封在琉璃匣里，匣壁有裂纹",
+                "end_state": "船主当众给他跪下，说这船以后记他的名字",
+                "continuity_notes": "",
+                "target_chapter_count": 5,
+                "target_word_count": 15000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 88,
+                  "title": "律文商人",
+                  "summary": "拍卖会开场：一条'必死'之律被当作杀器拍卖。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "拍卖会开场：一条'必死'之律被当作杀器拍卖。",
+                    "start_state": "律文封在琉璃匣里，匣壁有裂纹",
+                    "end_state": "主持人说：这一条只卖一次",
+                    "beats": [
+                      "律文封在琉璃匣里，匣壁有裂纹",
+                      "竞价用寿数报价，不是银子",
+                      "主持人说：这一条只卖一次"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 89,
+                  "title": "假货",
+                  "summary": "沈砚当众指出那条律是伪刻——落笔习惯不对。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "沈砚当众指出那条律是伪刻——落笔习惯不对。",
+                    "start_state": "他请人拿纸笔当场背写一遍",
+                    "end_state": "满场哗然，玄清宗的人记下了他的脸",
+                    "beats": [
+                      "他请人拿纸笔当场背写一遍",
+                      "写到第三笔，匣里的律自己散了",
+                      "满场哗然，玄清宗的人记下了他的脸"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 90,
+                  "title": "船上的暗杀",
+                  "summary": "夜里有人来杀他，追来的裴玄衣替他挡了一刀。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "夜里有人来杀他，追来的裴玄衣替他挡了一刀。",
+                    "start_state": "刺客用的是借律，不带杀气",
+                    "end_state": "她说：我追你不是来杀你的",
+                    "beats": [
+                      "刺客用的是借律，不带杀气",
+                      "裴玄衣的刀断了半截",
+                      "她说：我追你不是来杀你的"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 91,
+                  "title": "同船",
+                  "summary": "两人被迫同行，在船舱里谈'如果秩序本身就是错的'。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "两人被迫同行，在船舱里谈'如果秩序本身就是错的'。",
+                    "start_state": "她说她见过一次小换刻，抹掉一个孩子全家",
+                    "end_state": "她说：我动手就是私刻，私刻就该被没名",
+                    "beats": [
+                      "她说她见过一次小换刻，抹掉一个孩子全家",
+                      "沈砚问她为什么不动手",
+                      "她说：我动手就是私刻，私刻就该被没名"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 92,
+                  "title": "风暴",
+                  "summary": "海上遇律灾，全船靠沈砚重刻一条'定风'之律活下来。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "海上遇律灾，全船靠沈砚重刻一条'定风'之律活下来。",
+                    "start_state": "律灾是律文互相冲突引起的，风会朝一个方向一直吹",
+                    "end_state": "船主当众给他跪下，说这船以后记他的名字",
+                    "beats": [
+                      "律灾是律文互相冲突引起的，风会朝一个方向一直吹",
+                      "他刻完倒下，嘴里全是血",
+                      "船主当众给他跪下，说这船以后记他的名字"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order_index": 2,
+          "title": "第十篇 剑冢",
+          "summary": "岛上插满断剑，每把剑刻着一个被抹者的名字。",
+          "planning": {
+            "goal": "给主角一支真正的军事力量，并让'失去记忆'第一次伤到他最亲近的人。",
+            "start_state": "剑柄朝上，像一片枯林",
+            "end_state": "沈砚答应了，但不知道该怎么做",
+            "continuity_notes": "",
+            "target_chapter_count": 8,
+            "target_word_count": 24000
+          },
+          "scenes": [
+            {
+              "order_index": 1,
+              "title": "场景一 断剑的名单·上",
+              "summary": "覆盖第 93–96 章：赤霄剑冢的岛，岛上插满断剑。",
+              "planning": {
+                "goal": "用剑冢的刚烈对照司刻司的温和，展示另一种反抗方式及其代价。（本场上半/下半对应第 93–96 章）",
+                "start_state": "剑柄朝上，像一片枯林",
+                "end_state": "第二个是'当众'",
+                "continuity_notes": "",
+                "target_chapter_count": 4,
+                "target_word_count": 12000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 93,
+                  "title": "登陆",
+                  "summary": "赤霄剑冢的岛，岛上插满断剑。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "赤霄剑冢的岛，岛上插满断剑。",
+                    "start_state": "剑柄朝上，像一片枯林",
+                    "end_state": "沈砚答：我姐，沈黎",
+                    "beats": [
+                      "剑柄朝上，像一片枯林",
+                      "守岛的人不问来意，先问'你记得谁'",
+                      "沈砚答：我姐，沈黎"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 94,
+                  "title": "斩律",
+                  "summary": "剑冢的修行：斩的不是人，是律。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "剑冢的修行：斩的不是人，是律。",
+                    "start_state": "弟子每日对着空中某一处出剑",
+                    "end_state": "冢主只用剑写字，从不开口",
+                    "beats": [
+                      "弟子每日对着空中某一处出剑",
+                      "斩律要认得律的形状，认错会伤自己",
+                      "冢主只用剑写字，从不开口"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 95,
+                  "title": "断剑的名单",
+                  "summary": "每把断剑的柄上刻着一个被抹者的名字。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "每把断剑的柄上刻着一个被抹者的名字。",
+                    "start_state": "名字都是剑冢弟子替亲人刻的",
+                    "end_state": "沈砚找到一把还没有刻字的剑",
+                    "beats": [
+                      "名字都是剑冢弟子替亲人刻的",
+                      "刻字不算私刻，因为没有律，只有名字",
+                      "沈砚找到一把还没有刻字的剑"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 96,
+                  "title": "冢主",
+                  "summary": "哑巴冢主在沙上写：你能刻，我们跟。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "哑巴冢主在沙上写：你能刻，我们跟。",
+                    "start_state": "他写字用剑尖，一笔一划很慢",
+                    "end_state": "第二个是'当众'",
+                    "beats": [
+                      "他写字用剑尖，一笔一划很慢",
+                      "他写的第一个词是'条件'",
+                      "第二个是'当众'"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            },
+            {
+              "order_index": 2,
+              "title": "场景一 断剑的名单·下",
+              "summary": "覆盖第 97–100 章：沈砚在剑冢前的空地上重刻'雨停'之律，晴了三息。",
+              "planning": {
+                "goal": "用剑冢的刚烈对照司刻司的温和，展示另一种反抗方式及其代价。（本场上半/下半对应第 97–100 章）",
+                "start_state": "三息之间，海上风浪都停了",
+                "end_state": "沈砚答应了，但不知道该怎么做",
+                "continuity_notes": "",
+                "target_chapter_count": 4,
+                "target_word_count": 12000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 97,
+                  "title": "当众刻律",
+                  "summary": "沈砚在剑冢前的空地上重刻'雨停'之律，晴了三息。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "沈砚在剑冢前的空地上重刻'雨停'之律，晴了三息。",
+                    "start_state": "三息之间，海上风浪都停了",
+                    "end_state": "冢主把剑插在他旁边，插得很深",
+                    "beats": [
+                      "三息之间，海上风浪都停了",
+                      "他自己倒下，鼻血滴在沙上",
+                      "冢主把剑插在他旁边，插得很深"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 98,
+                  "title": "三个月",
+                  "summary": "代价结算：他失去三个月记忆，忘了墨七的名字。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "代价结算：他失去三个月记忆，忘了墨七的名字。",
+                    "start_state": "他醒来问：你是谁",
+                    "end_state": "然后墨七一个人走到礁石后面蹲了很久",
+                    "beats": [
+                      "他醒来问：你是谁",
+                      "墨七笑着说：我是墨七，你兄弟",
+                      "然后墨七一个人走到礁石后面蹲了很久"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 99,
+                  "title": "墨七的留信",
+                  "summary": "墨七留信走了，去换妹妹的记忆。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "墨七留信走了，去换妹妹的记忆。",
+                    "start_state": "纸条上写着'别找我，我欠她的'",
+                    "end_state": "裴玄衣说：你记得他，只是忘了名字",
+                    "beats": [
+                      "纸条上写着'别找我，我欠她的'",
+                      "沈砚拿着纸条，认不出这是谁的字",
+                      "裴玄衣说：你记得他，只是忘了名字"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 100,
+                  "title": "她要被记住一次",
+                  "summary": "白十三提出请求：让世上人记住她一次。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "白十三提出请求：让世上人记住她一次。",
+                    "start_state": "她说她存在的方式是'被忘'",
+                    "end_state": "沈砚答应了，但不知道该怎么做",
+                    "beats": [
+                      "她说她存在的方式是'被忘'",
+                      "她说这话时一直在数自己的手指",
+                      "沈砚答应了，但不知道该怎么做"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order_index": 3,
+          "title": "第十一篇 白骨",
+          "summary": "白骨观是被抹者残部的名字；白十三是遗忘本身。",
+          "planning": {
+            "goal": "把配角的牺牲写成主角的方法论转折：他开始用'记住'作为武器。",
+            "start_state": "观里的规矩是每天给空牌上香",
+            "end_state": "司刻司查了三个月，查不出这条律是谁写的",
+            "continuity_notes": "",
+            "target_chapter_count": 10,
+            "target_word_count": 30000
+          },
+          "scenes": [
+            {
+              "order_index": 1,
+              "title": "场景一 她想要一个名字",
+              "summary": "白十三的真相与请求，墨七的归来与失忆。",
+              "planning": {
+                "goal": "用两条线的谷底（自己人被抹、盟友赴死）击碎主角的侥幸。",
+                "start_state": "观里的规矩是每天给空牌上香",
+                "end_state": "墨七哭了，因为他想起自己也曾经忘了",
+                "continuity_notes": "",
+                "target_chapter_count": 5,
+                "target_word_count": 15000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 101,
+                  "title": "白骨观的由来",
+                  "summary": "白骨观其实是被抹者残部的自称，不是魔教。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "白骨观其实是被抹者残部的自称，不是魔教。",
+                    "start_state": "观里的规矩是每天给空牌上香",
+                    "end_state": "有人穷尽一生只想让别人想起母亲叫什么",
+                    "beats": [
+                      "观里的规矩是每天给空牌上香",
+                      "他们搜集旧世的器物、褪墨的拓片、没人记得的名字",
+                      "有人穷尽一生只想让别人想起母亲叫什么"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 102,
+                  "title": "白十三的真相",
+                  "summary": "她是所有人遗忘的集合，越多人忘事，她越强，也越不像人。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "她是所有人遗忘的集合，越多人忘事，她越强，也越不像人。",
+                    "start_state": "她的脸每天都不一样",
+                    "end_state": "她说：我想被人叫一声名字",
+                    "beats": [
+                      "她的脸每天都不一样",
+                      "她说自己记事起就在赶路",
+                      "她说：我想被人叫一声名字"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 103,
+                  "title": "刻一个名字的代价",
+                  "summary": "刻名比刻律更贵：要拿自己'存在的重量'去换。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "刻名比刻律更贵：要拿自己'存在的重量'去换。",
+                    "start_state": "刻律折寿，刻名折'存在感'",
+                    "end_state": "他第一次觉得这是一条可行的路",
+                    "beats": [
+                      "刻律折寿，刻名折'存在感'",
+                      "沈砚试着刻一个小名，刻完别人看他会重影",
+                      "他第一次觉得这是一条可行的路"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 104,
+                  "title": "墨七回来了",
+                  "summary": "墨七换了妹妹的记忆，自己什么都不记得了。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "墨七换了妹妹的记忆，自己什么都不记得了。",
+                    "start_state": "妹妹认得他，他不认得妹妹",
+                    "end_state": "他问沈砚：你是不是我朋友",
+                    "beats": [
+                      "妹妹认得他，他不认得妹妹",
+                      "他伸手就能做出纸人的手，但说不清自己是谁",
+                      "他问沈砚：你是不是我朋友"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 105,
+                  "title": "记得我",
+                  "summary": "沈砚用拓纹替墨七抄回一遍他自己。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "沈砚用拓纹替墨七抄回一遍他自己。",
+                    "start_state": "拓纹能复制'律的写法'，也能复写记忆",
+                    "end_state": "墨七哭了，因为他想起自己也曾经忘了",
+                    "beats": [
+                      "拓纹能复制'律的写法'，也能复写记忆",
+                      "抄回的只有碎片：纸、巷子、一个女孩的名字",
+                      "墨七哭了，因为他想起自己也曾经忘了"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            },
+            {
+              "order_index": 2,
+              "title": "场景二 剑起",
+              "summary": "司刻司发兵清剿剑冢，冢主用自己的死换一条律的废止。",
+              "planning": {
+                "goal": "用一场必败的战斗把'秩序碾压'具体化，同时展示牺牲的意义边界。",
+                "start_state": "战船挂着'合律'的旗",
+                "end_state": "司刻司查了三个月，查不出这条律是谁写的",
+                "continuity_notes": "",
+                "target_chapter_count": 5,
+                "target_word_count": 15000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 106,
+                  "title": "剑起",
+                  "summary": "司刻司发兵清剿剑冢，先封海，再烧林。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "司刻司发兵清剿剑冢，先封海，再烧林。",
+                    "start_state": "战船挂着'合律'的旗",
+                    "end_state": "岛上的断剑一夜之间被磨成铁水",
+                    "beats": [
+                      "战船挂着'合律'的旗",
+                      "他们不喊杀，只喊'请交册'",
+                      "岛上的断剑一夜之间被磨成铁水"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 107,
+                  "title": "剑冢之夜",
+                  "summary": "剑冢被破，弟子死尽，断剑折完。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "剑冢被破，弟子死尽，断剑折完。",
+                    "start_state": "冢主一人守在山口",
+                    "end_state": "沈砚被推上船，看见岛在烧",
+                    "beats": [
+                      "冢主一人守在山口",
+                      "他把所有弟子的名字刻在自己背上",
+                      "沈砚被推上船，看见岛在烧"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 108,
+                  "title": "冢主的最后一剑",
+                  "summary": "他斩的不是敌人，是'清剿'这条律本身。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "他斩的不是敌人，是'清剿'这条律本身。",
+                    "start_state": "这一剑要认出律的形状，他练了四十年",
+                    "end_state": "他倒在沙上，用最后的血写了'快走'",
+                    "beats": [
+                      "这一剑要认出律的形状，他练了四十年",
+                      "剑断的时候，海上的旗子忽然不飘了",
+                      "他倒在沙上，用最后的血写了'快走'"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 109,
+                  "title": "白十三赴死",
+                  "summary": "她让沈砚拓下自己，然后走进火里。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "她让沈砚拓下自己，然后走进火里。",
+                    "start_state": "她要求拓两次，怕一次不够清楚",
+                    "end_state": "沈砚给她刻的名字是'十三'",
+                    "beats": [
+                      "她要求拓两次，怕一次不够清楚",
+                      "她最后说的是：我要一个名字",
+                      "沈砚给她刻的名字是'十三'"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 110,
+                  "title": "一条新律",
+                  "summary": "世间多了一条律：凡被抹者，名字会留在风里。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "世间多了一条律：凡被抹者，名字会留在风里。",
+                    "start_state": "这条律很小，不改变任何命运",
+                    "end_state": "司刻司查了三个月，查不出这条律是谁写的",
+                    "beats": [
+                      "这条律很小，不改变任何命运",
+                      "但从那天起，忘事的人偶尔会听见风里有人叫自己",
+                      "司刻司查了三个月，查不出这条律是谁写的"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order_index": 4,
+          "title": "第十二篇 重铸",
+          "summary": "海底的倒城，半身成碑的师父，最后一块碑文。",
+          "planning": {
+            "goal": "交付全书真相最大的一块，并把主角推上回京的最后一段路。",
+            "start_state": "碑的方位要靠旧街名推算",
+            "end_state": "船靠岸时，天碑坛的影子已经能看见",
+            "continuity_notes": "",
+            "target_chapter_count": 10,
+            "target_word_count": 30000
+          },
+          "scenes": [
+            {
+              "order_index": 1,
+              "title": "场景一 倒城",
+              "summary": "用'不沉'之律下潜，看见一座倒着的城。",
+              "planning": {
+                "goal": "用奇观完成世界观的收束：旧世还在，只是倒着活。",
+                "start_state": "碑的方位要靠旧街名推算",
+                "end_state": "他抬头看见沈砚，说了第一句话：你长了",
+                "continuity_notes": "",
+                "target_chapter_count": 4,
+                "target_word_count": 12000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 111,
+                  "title": "第八碑",
+                  "summary": "碎律海底下有第八碑，是上一次换刻的残件。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "碎律海底下有第八碑，是上一次换刻的残件。",
+                    "start_state": "碑的方位要靠旧街名推算",
+                    "end_state": "海阁主人卖给他最后一句话：别在那儿刻东西",
+                    "beats": [
+                      "碑的方位要靠旧街名推算",
+                      "倒城的位置就是第八碑的影",
+                      "海阁主人卖给他最后一句话：别在那儿刻东西"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 112,
+                  "title": "下潜",
+                  "summary": "沈砚用'不沉'之律下潜，看见海底一座倒着的城。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "沈砚用'不沉'之律下潜，看见海底一座倒着的城。",
+                    "start_state": "城里的人倒着走，倒着说话",
+                    "end_state": "他听见有人在念自己的名字",
+                    "beats": [
+                      "城里的人倒着走，倒着说话",
+                      "屋顶朝下，灯在下面亮",
+                      "他听见有人在念自己的名字"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 113,
+                  "title": "倒城",
+                  "summary": "倒着的城里全是活碑，都还睁着眼。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "倒着的城里全是活碑，都还睁着眼。",
+                    "start_state": "每块碑面前都摆着一碗冷饭",
+                    "end_state": "沈砚在其中一块碑前认出师父的断指",
+                    "beats": [
+                      "每块碑面前都摆着一碗冷饭",
+                      "碑上的字被海水泡得发白",
+                      "沈砚在其中一块碑前认出师父的断指"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 114,
+                  "title": "师父还活着",
+                  "summary": "柳无咎在倒城里，半身已成碑。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "柳无咎在倒城里，半身已成碑。",
+                    "start_state": "他的左半边身体是石头的",
+                    "end_state": "他抬头看见沈砚，说了第一句话：你长了",
+                    "beats": [
+                      "他的左半边身体是石头的",
+                      "他用右手还在抄碑，抄得极慢",
+                      "他抬头看见沈砚，说了第一句话：你长了"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            },
+            {
+              "order_index": 2,
+              "title": "场景二 碑文的重量·上",
+              "summary": "覆盖第 115–117 章：柳无咎承认伪刻过三次，妻子是第一次的代价。",
+              "planning": {
+                "goal": "让师父完成赎罪与交接，用死亡把主角从学徒变成执刀人。（本场上半/下半对应第 115–117 章）",
+                "start_state": "第一次是为了救一个村子，代价是妻子被抹",
+                "end_state": "沈砚笑了：那正好是我",
+                "continuity_notes": "",
+                "target_chapter_count": 3,
+                "target_word_count": 9000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 115,
+                  "title": "师父的账",
+                  "summary": "柳无咎承认伪刻过三次，妻子是第一次的代价。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "柳无咎承认伪刻过三次，妻子是第一次的代价。",
+                    "start_state": "第一次是为了救一个村子，代价是妻子被抹",
+                    "end_state": "他说：我以为我在做对的事，做了才知道刀是别人的",
+                    "beats": [
+                      "第一次是为了救一个村子，代价是妻子被抹",
+                      "第三次是替司刻司改清册",
+                      "他说：我以为我在做对的事，做了才知道刀是别人的"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 116,
+                  "title": "为什么要刻",
+                  "summary": "他说：换刻是天子用来删人的刀，不刻就永远只能被刻。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "他说：换刻是天子用来删人的刀，不刻就永远只能被刻。",
+                    "start_state": "他把自己的拓碑刀交给沈砚",
+                    "end_state": "他说：你比我狠，你刻得下去",
+                    "beats": [
+                      "他把自己的拓碑刀交给沈砚",
+                      "刀背的拓纹已经磨平",
+                      "他说：你比我狠，你刻得下去"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 117,
+                  "title": "第九碑",
+                  "summary": "他给出第九碑的坐标，但需要'一个人'去开门。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "他给出第九碑的坐标，但需要'一个人'去开门。",
+                    "start_state": "坐标是九个字，要倒着念",
+                    "end_state": "沈砚笑了：那正好是我",
+                    "beats": [
+                      "坐标是九个字，要倒着念",
+                      "开门的人必须'已不在任何册上'——即被刻天罪除名的人",
+                      "沈砚笑了：那正好是我"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            },
+            {
+              "order_index": 3,
+              "title": "场景二 碑文的重量·下",
+              "summary": "覆盖第 118–120 章：他把最后一块碑文交给沈砚，被碑反噬而死。",
+              "planning": {
+                "goal": "让师父完成赎罪与交接，用死亡把主角从学徒变成执刀人。（本场上半/下半对应第 118–120 章）",
+                "start_state": "碑文是从他自己骨头上拓下来的",
+                "end_state": "船靠岸时，天碑坛的影子已经能看见",
+                "continuity_notes": "",
+                "target_chapter_count": 3,
+                "target_word_count": 9000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 118,
+                  "title": "柳无咎之死",
+                  "summary": "他把最后一块碑文交给沈砚，被碑反噬而死。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "他把最后一块碑文交给沈砚，被碑反噬而死。",
+                    "start_state": "碑文是从他自己骨头上拓下来的",
+                    "end_state": "他最后一句是：别学我",
+                    "beats": [
+                      "碑文是从他自己骨头上拓下来的",
+                      "他把纸递过去时，石化的半边开始碎",
+                      "他最后一句是：别学我"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 119,
+                  "title": "碑文的内容",
+                  "summary": "那是'沈黎'两个字，以及一句：她还听得见。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "那是'沈黎'两个字，以及一句：她还听得见。",
+                    "start_state": "碑文背面还有一行很小的字：一百二十日，剩十一",
+                    "end_state": "他把碑文贴在胸口，向上浮",
+                    "beats": [
+                      "碑文背面还有一行很小的字：一百二十日，剩十一",
+                      "沈砚在海底坐了很久，直到律即将耗尽",
+                      "他把碑文贴在胸口，向上浮"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 120,
+                  "title": "回京",
+                  "summary": "三人分三路回墨京：沈砚、裴玄衣、失忆的墨七。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "三人分三路回墨京：沈砚、裴玄衣、失忆的墨七。",
+                    "start_state": "裴玄衣带来了司刻司要她执刀的消息",
+                    "end_state": "船靠岸时，天碑坛的影子已经能看见",
+                    "beats": [
+                      "裴玄衣带来了司刻司要她执刀的消息",
+                      "墨七说：我不记得你们，但我知道我要跟着你们",
+                      "船靠岸时，天碑坛的影子已经能看见"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order_index": 4,
+      "title": "第四卷 无字",
+      "subtitle": "碑上无字，风里有名",
+      "summary": "回京时离换刻只剩十一日。司刻司要裴玄衣执刀，玄清宗清算异己，剑冢余部潜入城中，而宋无极在城基下的旧城里给女儿的名字描墨。坛底谈判揭开最后一层：活碑必须自愿，沈黎自愿，她的意思是——别救我。换刻之夜，天碑现影，全城人开始忘记自己的名字；墨七用一个纸人替沈砚挡下致命一击；裴玄衣刀断、倒戈。最终不是打赢，而是选择：沈砚在天碑上一笔一笔刻下自己的名字，每刻一笔，世上就少一个人记得他。世界保住了，他从所有人的记忆里消失，只有沈黎醒来时，手里握着一枚刻着他名字的铜铃。",
+      "goal": "把全书所有埋点收束成一次不可替代的自我牺牲，并把'被记住'还给留下来的那个人。",
+      "theme": "如果必须被忘记，你愿意为谁？",
+      "status": "draft",
+      "planning": {
+        "premise": "换刻之期已定，只有持半令者能登坛；能真正动刀刻碑的，只有一个被除名的人。",
+        "major_conflict": "沈砚要在'救姐姐而世界随旧律崩解'与'让姐姐留作活碑而世界延续'之间做出无法撤回的选择；宋无极要在最后一刻用自己的命换女儿的命；裴玄衣要在执刀与拆掉自己维护的秩序之间站队。",
+        "start_state": "沈砚手握第九碑坐标与最后一块碑文，身后是零落的同盟，面前是全城的戒严。",
+        "end_state": "换刻被终止于'无字'状态：世界延续一个纪元，天碑失主；沈砚从所有人的记忆里消失，成为无字碑；沈黎醒来，墨七与白十三以别的方式被记住。",
+        "key_turning_points": [
+          "旧城里与宋无极谈一夜，确认活碑必须自愿",
+          "沈黎在碑中裂纹里回话：别救我",
+          "裴玄衣查明自己父亲也是活碑，与沈砚互认为同类",
+          "换刻之夜墨七战死，裴玄衣刀断倒戈",
+          "沈砚刻下自己名字，成为无字碑；铜铃上的名字成为唯一的证据"
+        ],
+        "target_chapter_count": 45,
+        "target_word_count": 135000
+      },
+      "arcs": [
+        {
+          "order_index": 1,
+          "title": "第十三篇 归城",
+          "summary": "十日之内，所有人都在做同一件事：把自己的名字安排好。",
+          "planning": {
+            "goal": "用倒计时压缩全书的线，让每条支线都进到墨京这座城里。",
+            "start_state": "白纸是给'将要被抹的人'预备的",
+            "end_state": "他跪下来，第一次不像大监",
+            "continuity_notes": "",
+            "target_chapter_count": 14,
+            "target_word_count": 42000
+          },
+          "scenes": [
+            {
+              "order_index": 1,
+              "title": "场景一 十日·上",
+              "summary": "覆盖第 121–124 章：墨京戒严，天碑坛开始发亮，家家门口挂白纸。",
+              "planning": {
+                "goal": "把城市写成主角，同时完成配角线的收束起手。（本场上半/下半对应第 121–124 章）",
+                "start_state": "白纸是给'将要被抹的人'预备的",
+                "end_state": "领头的少年说：我们忘不掉，就是我们的刀",
+                "continuity_notes": "",
+                "target_chapter_count": 4,
+                "target_word_count": 12000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 121,
+                  "title": "换刻前十日",
+                  "summary": "墨京戒严，天碑坛开始发亮，家家门口挂白纸。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "墨京戒严，天碑坛开始发亮，家家门口挂白纸。",
+                    "start_state": "白纸是给'将要被抹的人'预备的",
+                    "end_state": "沈砚看见有人把孩子的名字写在孩子手上",
+                    "beats": [
+                      "白纸是给'将要被抹的人'预备的",
+                      "街上有人排队改名字，改成简单的字",
+                      "沈砚看见有人把孩子的名字写在孩子手上"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 122,
+                  "title": "裴玄衣的选择",
+                  "summary": "司刻司要她执刀刻新碑，她第一次迟疑。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "司刻司要她执刀刻新碑，她第一次迟疑。",
+                    "start_state": "她去看守旧城的门，看了两个时辰",
+                    "end_state": "沈砚说：那就别刻",
+                    "beats": [
+                      "她去看守旧城的门，看了两个时辰",
+                      "她问沈砚：如果我不刻，谁刻？",
+                      "沈砚说：那就别刻"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 123,
+                  "title": "常无的葬礼",
+                  "summary": "玄清宗内部清算，常无被定为妄议天碑，葬礼不许诵经。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "玄清宗内部清算，常无被定为妄议天碑，葬礼不许诵经。",
+                    "start_state": "宗门把名字从碑上刮掉",
+                    "end_state": "他站了很久，什么也没说",
+                    "beats": [
+                      "宗门把名字从碑上刮掉",
+                      "沈砚在灵前放了一片拓碑刀磨下的铁屑",
+                      "他站了很久，什么也没说"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 124,
+                  "title": "赤霄余部",
+                  "summary": "剑冢残部潜入城内，只剩十九人。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "剑冢残部潜入城内，只剩十九人。",
+                    "start_state": "他们不作战，只做一件事：背名字",
+                    "end_state": "领头的少年说：我们忘不掉，就是我们的刀",
+                    "beats": [
+                      "他们不作战，只做一件事：背名字",
+                      "十九人背了上千个名字",
+                      "领头的少年说：我们忘不掉，就是我们的刀"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            },
+            {
+              "order_index": 2,
+              "title": "场景一 十日·下",
+              "summary": "覆盖第 125–127 章：无字纸涨到一万两一张，白纸坊被抄。",
+              "planning": {
+                "goal": "把城市写成主角，同时完成配角线的收束起手。（本场上半/下半对应第 125–127 章）",
+                "start_state": "富户买纸写遗嘱，穷人买纸写自己的名字",
+                "end_state": "裴玄衣在旁边看着，什么也没问",
+                "continuity_notes": "",
+                "target_chapter_count": 3,
+                "target_word_count": 9000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 125,
+                  "title": "无字纸的价格",
+                  "summary": "无字纸涨到一万两一张，白纸坊被抄。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "无字纸涨到一万两一张，白纸坊被抄。",
+                    "start_state": "富户买纸写遗嘱，穷人买纸写自己的名字",
+                    "end_state": "他没有道谢，只是把纸抱紧",
+                    "beats": [
+                      "富户买纸写遗嘱，穷人买纸写自己的名字",
+                      "白纸坊的匠人被押走时，把最后一叠纸塞给沈砚",
+                      "他没有道谢，只是把纸抱紧"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 126,
+                  "title": "墨七的纸人",
+                  "summary": "失忆的墨七凭手感又做出纸人，纸人长得像沈黎。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "失忆的墨七凭手感又做出纸人，纸人长得像沈黎。",
+                    "start_state": "他照着沈砚画的脸做",
+                    "end_state": "墨七说：我好像很会做这个",
+                    "beats": [
+                      "他照着沈砚画的脸做",
+                      "纸人做完会自己坐起来",
+                      "墨七说：我好像很会做这个"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 127,
+                  "title": "姐姐的耳钉",
+                  "summary": "沈砚把铜铃交给墨七保管。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "沈砚把铜铃交给墨七保管。",
+                    "start_state": "他说：如果我不记得了，你替我记",
+                    "end_state": "裴玄衣在旁边看着，什么也没问",
+                    "beats": [
+                      "他说：如果我不记得了，你替我记",
+                      "墨七把铜铃挂在脖子上，塞进衣领",
+                      "裴玄衣在旁边看着，什么也没问"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            },
+            {
+              "order_index": 3,
+              "title": "场景二 旧城·上",
+              "summary": "覆盖第 128–131 章：三人从雨天渗墨的裂缝进入城基下的旧城。",
+              "planning": {
+                "goal": "把反派的私人性写尽，为最后一夜的谈判做准备。（本场上半/下半对应第 128–131 章）",
+                "start_state": "旧城比墨京大两倍",
+                "end_state": "他说：我算过，半数，算得很准",
+                "continuity_notes": "",
+                "target_chapter_count": 4,
+                "target_word_count": 12000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 128,
+                  "title": "城下旧城",
+                  "summary": "三人从雨天渗墨的裂缝进入城基下的旧城。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "三人从雨天渗墨的裂缝进入城基下的旧城。",
+                    "start_state": "旧城比墨京大两倍",
+                    "end_state": "他们踩在旧城的屋顶上走",
+                    "beats": [
+                      "旧城比墨京大两倍",
+                      "街上的招牌还能读，写着三百年前的店名",
+                      "他们踩在旧城的屋顶上走"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 129,
+                  "title": "旧城的碑",
+                  "summary": "旧城里立着上一纪的天碑残片，刻着'宋若'的名字。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "旧城里立着上一纪的天碑残片，刻着'宋若'的名字。",
+                    "start_state": "残片被雨水泡得发黑",
+                    "end_state": "沈砚认出描字的笔迹与清册七一致",
+                    "beats": [
+                      "残片被雨水泡得发黑",
+                      "名字被人一遍一遍描过，墨积成了壳",
+                      "沈砚认出描字的笔迹与清册七一致"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 130,
+                  "title": "宋无极在旧城",
+                  "summary": "大监一个人在这里给女儿的名字描墨。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "大监一个人在这里给女儿的名字描墨。",
+                    "start_state": "他描得很认真，像在给活人上药",
+                    "end_state": "他问沈砚：你姐还听得见吗？我说的是真话",
+                    "beats": [
+                      "他描得很认真，像在给活人上药",
+                      "他没有拔刀，只是让他们坐",
+                      "他问沈砚：你姐还听得见吗？我说的是真话"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 131,
+                  "title": "谈",
+                  "summary": "三人谈一夜：一个要救女儿，一个要救姐姐。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "三人谈一夜：一个要救女儿，一个要救姐姐。",
+                    "start_state": "宋无极说他查了三十年，唯一的办法是重刻'重排'那一条",
+                    "end_state": "他说：我算过，半数，算得很准",
+                    "beats": [
+                      "宋无极说他查了三十年，唯一的办法是重刻'重排'那一条",
+                      "沈砚问他：重刻之后，谁被抹？",
+                      "他说：我算过，半数，算得很准"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            },
+            {
+              "order_index": 4,
+              "title": "场景二 旧城·下",
+              "summary": "覆盖第 132–134 章：活碑必须自愿，否则字刻不上。",
+              "planning": {
+                "goal": "把反派的私人性写尽，为最后一夜的谈判做准备。（本场上半/下半对应第 132–134 章）",
+                "start_state": "这句话是宋无极说的，也是他最大的难题",
+                "end_state": "他跪下来，第一次不像大监",
+                "continuity_notes": "",
+                "target_chapter_count": 3,
+                "target_word_count": 9000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 132,
+                  "title": "活碑的规矩",
+                  "summary": "活碑必须自愿，否则字刻不上。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "活碑必须自愿，否则字刻不上。",
+                    "start_state": "这句话是宋无极说的，也是他最大的难题",
+                    "end_state": "沈砚站起来，忽然明白宋无极要的是'让不自愿的也能回来'",
+                    "beats": [
+                      "这句话是宋无极说的，也是他最大的难题",
+                      "他说：我女儿不是自愿的，她是被'重排'带走",
+                      "沈砚站起来，忽然明白宋无极要的是'让不自愿的也能回来'"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 133,
+                  "title": "宋若的手记",
+                  "summary": "旧城残留着宋若的手记，写着：我不想变成碑。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "旧城残留着宋若的手记，写着：我不想变成碑。",
+                    "start_state": "手记最后一页被撕掉",
+                    "end_state": "他在心里决定了：有些人的愿不能被替",
+                    "beats": [
+                      "手记最后一页被撕掉",
+                      "沈砚把手记收好，没给宋无极看",
+                      "他在心里决定了：有些人的愿不能被替"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 134,
+                  "title": "宋无极的失败",
+                  "summary": "宋无极试着私刻，发现自己的手已被伪刻的律认领，刻不动。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "宋无极试着私刻，发现自己的手已被伪刻的律认领，刻不动。",
+                    "start_state": "他的笔在碑面上打滑",
+                    "end_state": "他跪下来，第一次不像大监",
+                    "beats": [
+                      "他的笔在碑面上打滑",
+                      "他刻了三十年别人的律，自己的手早就不算自己的",
+                      "他跪下来，第一次不像大监"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order_index": 2,
+          "title": "第十四篇 活碑之名",
+          "summary": "姐姐说：别救我。",
+          "planning": {
+            "goal": "把最重的伦理抉择摆到台面上，并让主角的答案从'救一个人'转向'让一个人被记住'。",
+            "start_state": "裂纹是她在里面用指甲划的",
+            "end_state": "沈砚发现他还记得所有人——这是逆纹给他的刑罚",
+            "continuity_notes": "",
+            "target_chapter_count": 10,
+            "target_word_count": 30000
+          },
+          "scenes": [
+            {
+              "order_index": 1,
+              "title": "场景一 坛中回话·上",
+              "summary": "覆盖第 135–137 章：坛中沈黎用碑面裂纹回话，一个字要挪很久。",
+              "planning": {
+                "goal": "完成全书情感高潮前的最后一次对话，制造不可挽回的决心。（本场上半/下半对应第 135–137 章）",
+                "start_state": "裂纹是她在里面用指甲划的",
+                "end_state": "沈砚在碑前跪下，求她别习惯",
+                "continuity_notes": "",
+                "target_chapter_count": 3,
+                "target_word_count": 9000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 135,
+                  "title": "沈黎还醒着",
+                  "summary": "坛中沈黎用碑面裂纹回话，一个字要挪很久。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "坛中沈黎用碑面裂纹回话，一个字要挪很久。",
+                    "start_state": "裂纹是她在里面用指甲划的",
+                    "end_state": "她划的第一个字是'砚'",
+                    "beats": [
+                      "裂纹是她在里面用指甲划的",
+                      "一个字要花一个时辰",
+                      "她划的第一个字是'砚'"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 136,
+                  "title": "姐弟对话",
+                  "summary": "她说：你长高了，也瘦了。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "她说：你长高了，也瘦了。",
+                    "start_state": "她记得他所有的小毛病",
+                    "end_state": "她说：我听见过你哭",
+                    "beats": [
+                      "她记得他所有的小毛病",
+                      "她说她在里面听了很多年，听了半座城的心事",
+                      "她说：我听见过你哭"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 137,
+                  "title": "为什么",
+                  "summary": "她说：我要是出来，这一纪就没了。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "她说：我要是出来，这一纪就没了。",
+                    "start_state": "她算得很清楚：她是承重的那块",
+                    "end_state": "沈砚在碑前跪下，求她别习惯",
+                    "beats": [
+                      "她算得很清楚：她是承重的那块",
+                      "她说她已经习惯了",
+                      "沈砚在碑前跪下，求她别习惯"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            },
+            {
+              "order_index": 2,
+              "title": "场景一 坛中回话·下",
+              "summary": "覆盖第 138–140 章：沈砚第一次对她说谎：我不救你，我救所有人。",
+              "planning": {
+                "goal": "完成全书情感高潮前的最后一次对话，制造不可挽回的决心。（本场上半/下半对应第 138–140 章）",
+                "start_state": "他撒谎的时候手在抖",
+                "end_state": "沈砚说：我怕的是被忘掉的那个",
+                "continuity_notes": "",
+                "target_chapter_count": 3,
+                "target_word_count": 9000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 138,
+                  "title": "我不愿意",
+                  "summary": "沈砚第一次对她说谎：我不救你，我救所有人。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "沈砚第一次对她说谎：我不救你，我救所有人。",
+                    "start_state": "他撒谎的时候手在抖",
+                    "end_state": "两个人在碑的两面各自哭",
+                    "beats": [
+                      "他撒谎的时候手在抖",
+                      "她说：你从小撒谎就抖手",
+                      "两个人在碑的两面各自哭"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 139,
+                  "title": "裴玄衣的爹",
+                  "summary": "她查到自己的父亲就是上一纪被抹者，他自愿当了活碑。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "她查到自己的父亲就是上一纪被抹者，他自愿当了活碑。",
+                    "start_state": "名册上他父亲的名字后面写着'自愿'",
+                    "end_state": "裴玄衣第一次在沈砚面前坐下，不再站得笔直",
+                    "beats": [
+                      "名册上他父亲的名字后面写着'自愿'",
+                      "他刻的字是'愿此纪长安'",
+                      "裴玄衣第一次在沈砚面前坐下，不再站得笔直"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 140,
+                  "title": "两个碑的孩子",
+                  "summary": "她与沈砚是同一种人：被碑养大的孩子。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "她与沈砚是同一种人：被碑养大的孩子。",
+                    "start_state": "他们都记得别人不记得的事",
+                    "end_state": "沈砚说：我怕的是被忘掉的那个",
+                    "beats": [
+                      "他们都记得别人不记得的事",
+                      "她说：我维护秩序，是因为我怕自己是被删掉的那个",
+                      "沈砚说：我怕的是被忘掉的那个"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            },
+            {
+              "order_index": 3,
+              "title": "场景二 前夜",
+              "summary": "换刻前一夜，各路人马各自动手。",
+              "planning": {
+                "goal": "把所有人都推到起跑线上，最后一刻的悬念全部就位。",
+                "start_state": "司刻司封坛，赤霄余部藏在排水沟里",
+                "end_state": "沈砚发现他还记得所有人——这是逆纹给他的刑罚",
+                "continuity_notes": "",
+                "target_chapter_count": 4,
+                "target_word_count": 12000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 141,
+                  "title": "预备",
+                  "summary": "换刻前一夜，城里所有钟都停在同一刻。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "换刻前一夜，城里所有钟都停在同一刻。",
+                    "start_state": "司刻司封坛，赤霄余部藏在排水沟里",
+                    "end_state": "沈砚在纸上写了一遍全家人的名字",
+                    "beats": [
+                      "司刻司封坛，赤霄余部藏在排水沟里",
+                      "白纸坊最后一批纸被分给百姓",
+                      "沈砚在纸上写了一遍全家人的名字"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 142,
+                  "title": "墨七的托付",
+                  "summary": "墨七把妹妹托付给阿婆，自己留下。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "墨七把妹妹托付给阿婆，自己留下。",
+                    "start_state": "他说他不记得妹妹的脸了，只记得她怕黑",
+                    "end_state": "他说：我记性不好，这个还你",
+                    "beats": [
+                      "他说他不记得妹妹的脸了，只记得她怕黑",
+                      "他把铜铃挂回沈砚脖子上",
+                      "他说：我记性不好，这个还你"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 143,
+                  "title": "裴玄衣的最后一次选择",
+                  "summary": "她烧掉执刀令，被司刻司通缉。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "她烧掉执刀令，被司刻司通缉。",
+                    "start_state": "烧令时她的手很稳",
+                    "end_state": "她把断刀重新磨了一遍",
+                    "beats": [
+                      "烧令时她的手很稳",
+                      "她说：我不是为了你，是为了我爹刻的那四个字",
+                      "她把断刀重新磨了一遍"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 144,
+                  "title": "坛门开",
+                  "summary": "换刻开始，天碑现影，全城人开始忘记自己的名字。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "换刻开始，天碑现影，全城人开始忘记自己的名字。",
+                    "start_state": "第一个忘的是卖粥的老妇",
+                    "end_state": "沈砚发现他还记得所有人——这是逆纹给他的刑罚",
+                    "beats": [
+                      "第一个忘的是卖粥的老妇",
+                      "忘记从'名字'开始，然后是脸，然后是关系",
+                      "沈砚发现他还记得所有人——这是逆纹给他的刑罚"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order_index": 3,
+          "title": "第十五篇 换刻之夜",
+          "summary": "坛上打，坛下死，刀断之后才轮到他刻。",
+          "planning": {
+            "goal": "把所有积累的冲突在一夜之间清账，代价必须具体到人。",
+            "start_state": "坛有九层，每层要答一个问题",
+            "end_state": "裴玄衣哭的时候没有声音，只有手在抖",
+            "continuity_notes": "",
+            "target_chapter_count": 9,
+            "target_word_count": 27000
+          },
+          "scenes": [
+            {
+              "order_index": 1,
+              "title": "场景一 坛上",
+              "summary": "登坛、打斗、墨七之死。",
+              "planning": {
+                "goal": "用最大的一场战斗完成最痛的一次失去。",
+                "start_state": "坛有九层，每层要答一个问题",
+                "end_state": "沈砚一个人站在影子里",
+                "continuity_notes": "",
+                "target_chapter_count": 5,
+                "target_word_count": 15000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 145,
+                  "title": "登坛",
+                  "summary": "沈砚持半枚换刻令登上天碑坛，裴玄衣执刀拦他。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "沈砚持半枚换刻令登上天碑坛，裴玄衣执刀拦他。",
+                    "start_state": "坛有九层，每层要答一个问题",
+                    "end_state": "九层的答案都是同一个名字",
+                    "beats": [
+                      "坛有九层，每层要答一个问题",
+                      "问题是：你记得谁",
+                      "九层的答案都是同一个名字"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 146,
+                  "title": "执刀人",
+                  "summary": "两人在天碑坛上打，打到刀断。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "两人在天碑坛上打，打到刀断。",
+                    "start_state": "她比他快，他比她狠",
+                    "end_state": "她说：你赢了也没用，你不会刻碑文",
+                    "beats": [
+                      "她比他快，他比她狠",
+                      "打到第九层两人都跪在地上",
+                      "她说：你赢了也没用，你不会刻碑文"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 147,
+                  "title": "墨七之死",
+                  "summary": "墨七用最后一个纸人替沈砚挡下致命一击。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "墨七用最后一个纸人替沈砚挡下致命一击。",
+                    "start_state": "纸人的脸是他自己的",
+                    "end_state": "他说：这次我记得了，我叫墨七",
+                    "beats": [
+                      "纸人的脸是他自己的",
+                      "他从背后抱住刺客，让刀穿过去",
+                      "他说：这次我记得了，我叫墨七"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 148,
+                  "title": "我记得你",
+                  "summary": "沈砚拓下墨七，逆纹第一次没有付出代价。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "沈砚拓下墨七，逆纹第一次没有付出代价。",
+                    "start_state": "因为'被记住'是律外的事",
+                    "end_state": "坛上的字第一次自己亮起来",
+                    "beats": [
+                      "因为'被记住'是律外的事",
+                      "他把拓片贴在坛壁的碑面上",
+                      "坛上的字第一次自己亮起来"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 149,
+                  "title": "赤霄的剑",
+                  "summary": "剑冢余部斩开坛门，十九人死绝。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "剑冢余部斩开坛门，十九人死绝。",
+                    "start_state": "他们死前都在念名字，念到一半断了",
+                    "end_state": "沈砚一个人站在影子里",
+                    "beats": [
+                      "他们死前都在念名字，念到一半断了",
+                      "坛门开的那一刻，天碑的影子完整了",
+                      "沈砚一个人站在影子里"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            },
+            {
+              "order_index": 2,
+              "title": "场景二 两条路",
+              "summary": "活碑尽出，姐姐站在他面前，把选择交给他。",
+              "planning": {
+                "goal": "把抉择摆到最纯净的形态：救一人还是救一世，且给出第三条路。",
+                "start_state": "他临死前在碑上写'若'",
+                "end_state": "裴玄衣哭的时候没有声音，只有手在抖",
+                "continuity_notes": "",
+                "target_chapter_count": 4,
+                "target_word_count": 12000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 150,
+                  "title": "宋无极的最后一刻",
+                  "summary": "他想用自己的命换女儿的命，被天碑吞了名字。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "他想用自己的命换女儿的命，被天碑吞了名字。",
+                    "start_state": "他临死前在碑上写'若'",
+                    "end_state": "沈砚替他补完剩下的笔画",
+                    "beats": [
+                      "他临死前在碑上写'若'",
+                      "字写了一半就淡了",
+                      "沈砚替他补完剩下的笔画"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 151,
+                  "title": "活碑尽出",
+                  "summary": "坛底所有活碑被解放，全部崩塌，只有沈黎还站着。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "坛底所有活碑被解放，全部崩塌，只有沈黎还站着。",
+                    "start_state": "崩塌的碑里都有人在说话",
+                    "end_state": "沈黎站着，因为她不知道该往哪里走",
+                    "beats": [
+                      "崩塌的碑里都有人在说话",
+                      "他们说的第一句话是各自的名字",
+                      "沈黎站着，因为她不知道该往哪里走"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 152,
+                  "title": "两条路",
+                  "summary": "沈黎说：救我，世界塌；不救，我替你活下去。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "沈黎说：救我，世界塌；不救，我替你活下去。",
+                    "start_state": "她说这话的时候在笑，左眼比右眼低一点",
+                    "end_state": "他忽然想到第三条路：让碑没有主人",
+                    "beats": [
+                      "她说这话的时候在笑，左眼比右眼低一点",
+                      "沈砚把这句话记了很久",
+                      "他忽然想到第三条路：让碑没有主人"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 153,
+                  "title": "刀",
+                  "summary": "沈砚把拓碑刀交给裴玄衣：我来刻。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "沈砚把拓碑刀交给裴玄衣：我来刻。",
+                    "start_state": "她要拦他，他握住她的手腕",
+                    "end_state": "裴玄衣哭的时候没有声音，只有手在抖",
+                    "beats": [
+                      "她要拦他，他握住她的手腕",
+                      "他说：你替我记住该记住的",
+                      "裴玄衣哭的时候没有声音，只有手在抖"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order_index": 4,
+          "title": "第十六篇 无字碑",
+          "summary": "一笔一笔，把自己从世上抹掉。",
+          "planning": {
+            "goal": "用逐笔的结构完成主题落地：每失去一个人，就救下所有人。",
+            "start_state": "刻自己的名字不折寿，只折'存在'",
+            "end_state": "夜里孩子拓到第七张，纸上的墨自己游走成两个字——沈砚",
+            "continuity_notes": "",
+            "target_chapter_count": 12,
+            "target_word_count": 36000
+          },
+          "scenes": [
+            {
+              "order_index": 1,
+              "title": "场景一 刻自己·上",
+              "summary": "覆盖第 154–157 章：沈砚开始在天碑上刻自己的名字，每刻一笔，别人就忘他一分。",
+              "planning": {
+                "goal": "把牺牲拆成可以计数的痛，让读者跟着一笔一笔失血。（本场上半/下半对应第 154–157 章）",
+                "start_state": "刻自己的名字不折寿，只折'存在'",
+                "end_state": "他替他们念了一遍名字",
+                "continuity_notes": "",
+                "target_chapter_count": 4,
+                "target_word_count": 12000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 154,
+                  "title": "刻自己",
+                  "summary": "沈砚开始在天碑上刻自己的名字，每刻一笔，别人就忘他一分。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "沈砚开始在天碑上刻自己的名字，每刻一笔，别人就忘他一分。",
+                    "start_state": "刻自己的名字不折寿，只折'存在'",
+                    "end_state": "天碑第一次没有发出刻字声",
+                    "beats": [
+                      "刻自己的名字不折寿，只折'存在'",
+                      "第一笔写完，他发现自己没有影子",
+                      "天碑第一次没有发出刻字声"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 155,
+                  "title": "第一笔：墨七的纸人",
+                  "summary": "墨七的纸人脸上他的五官先模糊了。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "墨七的纸人脸上他的五官先模糊了。",
+                    "start_state": "纸人还坐着，但没了脸",
+                    "end_state": "他想：至少我替他记住了自己",
+                    "beats": [
+                      "纸人还坐着，但没了脸",
+                      "沈砚把纸人收进怀里",
+                      "他想：至少我替他记住了自己"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 156,
+                  "title": "第二笔：裴玄衣",
+                  "summary": "裴玄衣忘了为什么恨他，也忘了为什么信他。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "裴玄衣忘了为什么恨他，也忘了为什么信他。",
+                    "start_state": "她抬头看他，像看一个陌生人",
+                    "end_state": "她说：我不知道为什么，但我信这把刀",
+                    "beats": [
+                      "她抬头看他，像看一个陌生人",
+                      "却还是把手里的刀递给他",
+                      "她说：我不知道为什么，但我信这把刀"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 157,
+                  "title": "第三笔：赤霄",
+                  "summary": "赤霄的人忘了是谁开的坛门。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "赤霄的人忘了是谁开的坛门。",
+                    "start_state": "十九把断剑立在坛阶上，没人知道是谁摆的",
+                    "end_state": "他替他们念了一遍名字",
+                    "beats": [
+                      "十九把断剑立在坛阶上，没人知道是谁摆的",
+                      "沈砚一把一把扶正",
+                      "他替他们念了一遍名字"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            },
+            {
+              "order_index": 2,
+              "title": "场景一 刻自己·下",
+              "summary": "覆盖第 158–161 章：宋无极的名字从碑上消失，他成了没人记得的人。",
+              "planning": {
+                "goal": "把牺牲拆成可以计数的痛，让读者跟着一笔一笔失血。（本场上半/下半对应第 158–161 章）",
+                "start_state": "他的尸体旁边围了一圈人，没人认得出",
+                "end_state": "她念出那个名字，风停了一瞬",
+                "continuity_notes": "",
+                "target_chapter_count": 4,
+                "target_word_count": 12000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 158,
+                  "title": "第四笔：宋无极",
+                  "summary": "宋无极的名字从碑上消失，他成了没人记得的人。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "宋无极的名字从碑上消失，他成了没人记得的人。",
+                    "start_state": "他的尸体旁边围了一圈人，没人认得出",
+                    "end_state": "他发现自己在替敌人哭",
+                    "beats": [
+                      "他的尸体旁边围了一圈人，没人认得出",
+                      "沈砚替他合上眼",
+                      "他发现自己在替敌人哭"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 159,
+                  "title": "第五笔：白十三的律",
+                  "summary": "白十三留下的那条律生效：风里有名字。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "白十三留下的那条律生效：风里有名字。",
+                    "start_state": "全城人忽然听见风里有人叫自己",
+                    "end_state": "回头的人，记起了不该忘的一件事",
+                    "beats": [
+                      "全城人忽然听见风里有人叫自己",
+                      "他们下意识回头",
+                      "回头的人，记起了不该忘的一件事"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 160,
+                  "title": "最后一笔",
+                  "summary": "沈砚刻完最后一笔，天碑成了无字碑。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "沈砚刻完最后一笔，天碑成了无字碑。",
+                    "start_state": "换刻停了，旧律与新律一起悬着",
+                    "end_state": "他退后一步，看见所有人都活着",
+                    "beats": [
+                      "换刻停了，旧律与新律一起悬着",
+                      "天碑失去主人，谁也不能再用它删人",
+                      "他退后一步，看见所有人都活着"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 161,
+                  "title": "醒来的人",
+                  "summary": "沈黎醒来，手里握着那枚铜铃。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "沈黎醒来，手里握着那枚铜铃。",
+                    "start_state": "她记得一切，因为她是活碑",
+                    "end_state": "她念出那个名字，风停了一瞬",
+                    "beats": [
+                      "她记得一切，因为她是活碑",
+                      "铃内刻着两个字，被磨过又重新刻上",
+                      "她念出那个名字，风停了一瞬"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            },
+            {
+              "order_index": 3,
+              "title": "场景二 碑上有名",
+              "summary": "尾声：世界照旧，只有一个人不在任何人的记忆里。",
+              "planning": {
+                "goal": "把结局写成开放式余味：牺牲被看见（由读者与沈黎），而不是被奖赏。",
+                "start_state": "换刻之后，墨京恢复了秩序，天碑坛被封",
+                "end_state": "夜里孩子拓到第七张，纸上的墨自己游走成两个字——沈砚",
+                "continuity_notes": "",
+                "target_chapter_count": 4,
+                "target_word_count": 12000
+              },
+              "chapters": [
+                {
+                  "chapter_number": 162,
+                  "title": "碑上有名",
+                  "summary": "碑上无字，风里有名；裴玄衣在坛上流泪，不知道为什么。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "碑上无字，风里有名；裴玄衣在坛上流泪，不知道为什么。",
+                    "start_state": "换刻之后，墨京恢复了秩序，天碑坛被封",
+                    "end_state": "每年那一天，城里人会莫名其妙地哭一场",
+                    "beats": [
+                      "换刻之后，墨京恢复了秩序，天碑坛被封",
+                      "史书上写着'是年换刻未成，天碑失主'",
+                      "每年那一天，城里人会莫名其妙地哭一场"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 163,
+                  "title": "剩下来的事",
+                  "summary": "沈黎开了家拓碑铺，替人抄名字。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "沈黎开了家拓碑铺，替人抄名字。",
+                    "start_state": "她抄的名字都免费",
+                    "end_state": "她把铜铃挂在门口，风一吹就响",
+                    "beats": [
+                      "她抄的名字都免费",
+                      "她说：总有人的名字需要有人抄一遍",
+                      "她把铜铃挂在门口，风一吹就响"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 164,
+                  "title": "裴玄衣的第二把刀",
+                  "summary": "她离开司刻司，去碑林做了第九坊的坊主。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "她离开司刻司，去碑林做了第九坊的坊主。",
+                    "start_state": "坊名叫'无名'",
+                    "end_state": "她教的第一条规矩是：只能抄，不能刻",
+                    "beats": [
+                      "坊名叫'无名'",
+                      "她收的第一个弟子是个记性特别好的孩子",
+                      "她教的第一条规矩是：只能抄，不能刻"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                },
+                {
+                  "chapter_number": 165,
+                  "title": "尾声·抄碑人",
+                  "summary": "三年后，碑林多了个小拓工，口袋里有一枚铜铃。",
+                  "content": "",
+                  "word_count": 0,
+                  "planning": {
+                    "goal": "三年后，碑林多了个小拓工，口袋里有一枚铜铃。",
+                    "start_state": "孩子问她：师父，为什么只能抄不能刻",
+                    "end_state": "夜里孩子拓到第七张，纸上的墨自己游走成两个字——沈砚",
+                    "beats": [
+                      "孩子问她：师父，为什么只能抄不能刻",
+                      "她答：因为刻的人得先把自己刻进去",
+                      "夜里孩子拓到第七张，纸上的墨自己游走成两个字——沈砚"
+                    ],
+                    "pov_character_id": null,
+                    "must_include": [],
+                    "must_avoid": [],
+                    "target_word_count": 3000
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "factions": [
+    {
+      "name": "碑林七坊",
+      "kind": "技匠集团",
+      "stance": "中立偏守序",
+      "desc": "拓碑、校律、制墨、推期、焚册、造纸、守空碑。被视为下九流匠役，却握着旧世证据。",
+      "key": "主角出身；拓本与无字纸的唯一来源"
+    },
+    {
+      "name": "司刻司",
+      "kind": "朝廷衙门",
+      "stance": "秩序方（表面）／私刻者（暗）",
+      "desc": "掌天碑、定换刻之期、销毁越界拓本；设有代刻人，替天子执刀。",
+      "key": "主要对抗机构；宋无极借此推进提前换刻"
+    },
+    {
+      "name": "玄清宗",
+      "kind": "正道魁首",
+      "stance": "顺天派",
+      "desc": "主张顺律而行，讲'天碑不可改'，与司刻司互为表里，实则被司刻司牵着走。",
+      "key": "卷二提供合法外衣与压力"
+    },
+    {
+      "name": "赤霄剑冢",
+      "kind": "剑修宗门",
+      "stance": "斩律派",
+      "desc": "以剑斩律，认为律是枷锁；行事刚烈，屡遭司刻司清算。",
+      "key": "卷三军事同盟"
+    },
+    {
+      "name": "无量海阁",
+      "kind": "商盟兼情报网",
+      "stance": "逐利中立",
+      "desc": "在碎律海打捞作废的律文碎片，明码标价，什么消息都卖。",
+      "key": "卷三信息与物资来源"
+    },
+    {
+      "name": "白骨观",
+      "kind": "魔道",
+      "stance": "被抹者残部",
+      "desc": "收集'被抹之物'：无人记得的名字、旧世的器物、褪墨的拓片。被正道称作魔，实则是一群不肯忘的人。",
+      "key": "揭示活碑真相；白十三"
+    },
+    {
+      "name": "纸人巷",
+      "kind": "地下帮会",
+      "stance": "买卖记忆",
+      "desc": "替人删记忆、卖记忆、造'假记得'的纸人；墨七出身于此。",
+      "key": "卷二地下线；墨七"
+    }
+  ],
+  "characters": [
+    {
+      "name": "沈砚",
+      "role": "主角",
+      "age": "19",
+      "desc": "拓影坊末等拓工。话少、手稳、记性好到病态（怕忘，什么都背下来）。胎里带'逆纹'，能把抄下的旧律在现世重刻一次，代价是寿数与一段等重的记忆。",
+      "want": "找回被抹去的姐姐沈黎",
+      "flaw": "不肯欠人情，恐惧被忘记",
+      "arc": "从'只想被记住'到'甘愿被所有人忘记'"
+    },
+    {
+      "name": "沈黎",
+      "role": "姐姐／核心谜题",
+      "age": "24（被抹时）",
+      "desc": "三年前在一次小换刻中被抹，世上无人记得她，唯沈砚逆纹保留着她的存在。真身是司刻司造的'活碑'。",
+      "want": "——",
+      "flaw": "——",
+      "arc": "从'被删掉的人'到'唯一记得主角的人'"
+    },
+    {
+      "name": "柳无咎",
+      "role": "师父",
+      "age": "五十七",
+      "desc": "拓影坊坊主，断三指。曾为司刻司做过一次伪刻，代价是妻子被抹；此后一生在找'第九碑'。",
+      "want": "赎罪，找到能承接真碑的人",
+      "flaw": "把所有人都当成棋子",
+      "arc": "以死交出最后一块碑文"
+    },
+    {
+      "name": "裴玄衣",
+      "role": "女主／对手",
+      "age": "22",
+      "desc": "司刻司最年轻的代刻人，刻字如刀。坚信换刻是必要的秩序：为了让多数人活，少数人必须被删。她自己是'上一纪被抹者之子'，被司刻司当作证据养大。",
+      "want": "证明自己不属于'错误'",
+      "flaw": "把秩序置于人之上",
+      "arc": "从执行者到拆掉自己要维护的秩序"
+    },
+    {
+      "name": "宋无极",
+      "role": "主要反派",
+      "age": "六十三",
+      "desc": "司刻司大监。要将换刻提前，重造一个'不再有人被重排'的世界——代价是抹掉半数不合律者。其女宋若死于上一次换刻的重排。",
+      "want": "复活女儿／终结重排之苦",
+      "flaw": "以救多数为名行杀少数之实",
+      "arc": "执念成碑，最终自己成了被刻上名字的人"
+    },
+    {
+      "name": "墨七",
+      "role": "同伴",
+      "age": "十七",
+      "desc": "纸人巷的纸人工匠，胆小、贪财、嘴碎，做的纸人能替人挡一次刀。",
+      "want": "攒够钱赎出妹妹的'记忆'",
+      "flaw": "怕死",
+      "arc": "用最不擅长的死法救了所有人"
+    },
+    {
+      "name": "白十三",
+      "role": "关键配角／白骨观主",
+      "age": "不详",
+      "desc": "白骨观主，收集被抹之物。她本身是被抹者的'集合意志'，世上每个人忘记一件事，她就多一分。",
+      "want": "让世界想起被抹的人",
+      "flaw": "为了'被记住'不惜让世界乱掉",
+      "arc": "把自己交出去换一个名字"
+    },
+    {
+      "name": "常无",
+      "role": "玄清宗长老",
+      "age": "百岁开外",
+      "desc": "讲顺天，实则早已看出天碑有伪，只是不敢说。卷二中成为沈砚的半个靠山，卷三死于清算。",
+      "want": "保住宗门",
+      "flaw": "不敢动",
+      "arc": "临终前把真话说出口"
+    }
+  ],
+  "locations": [
+    {
+      "name": "碑林",
+      "desc": "墨京西北三百里，七坊环绕一座无字空碑而建。夜里能听见碑面自行刻字的沙沙声。"
+    },
+    {
+      "name": "墨京",
+      "desc": "帝都，天碑坛所在。城基下埋着上一纪的碑，雨天会渗出墨汁。"
+    },
+    {
+      "name": "天碑坛",
+      "desc": "墨京中心九层黑坛，坛顶悬空无碑，换刻之夜会现出碑影。"
+    },
+    {
+      "name": "纸人巷",
+      "desc": "墨京西市十三条巷子，卖记忆的铺子挂白灯笼，纸人会在雨天自己走。"
+    },
+    {
+      "name": "守忘镇",
+      "desc": "碑林与墨京之间的镇子，镇上人代代做一件事：记住别人不愿记的事。"
+    },
+    {
+      "name": "回音涧",
+      "desc": "禁地。站在涧底能听见旧世的声音，听久了会被旧律认领。"
+    },
+    {
+      "name": "碎律海",
+      "desc": "东南海面漂着作废的律文碎片，捞上来还能用一次，像碎玻璃一样割手。"
+    },
+    {
+      "name": "第九碑",
+      "desc": "不存在的碑。碑林七坊都说有八碑，但守空碑的无字坊只守一座空位。"
+    }
+  ],
+  "items": [
+    {
+      "name": "拓碑刀",
+      "desc": "拓影坊的信物，刀背刻着拓纹。沈砚的刀是师父断指那年给他的。"
+    },
+    {
+      "name": "无字纸",
+      "desc": "白纸坊所造，不褪墨。极贵，一张能换一间铺子。"
+    },
+    {
+      "name": "三寸墨",
+      "desc": "墨骨坊的墨，写下的字会自己改一次笔误——也因此能伪造一条律的'原文'。"
+    },
+    {
+      "name": "换刻令",
+      "desc": "司刻司信物，一分为二。持半令者可入坛观刻，两半合则能改换刻之期。"
+    },
+    {
+      "name": "铜铃",
+      "desc": "沈黎的耳钉，铃身内侧刻着两个字。全书结尾，那两个字是沈砚的名字。"
+    }
+  ],
+  "power_system": "境界六阶，每阶三层（初/中/后）：铭身 → 铸文 → 通律 → 掌律 → 化碑 → 无字。\n·铭身：以气血在骨上铭第一道铭文，力气、感官超人。\n·铸文：把铭文炼成可用的'文法'，可分四类——铭（强化自身）、拓（复制、转移、记录）、律（短时干涉局部规则）、刻（永久改写，禁术）。\n·通律：能听见天碑之律，可在丈许内'借律'，如借火律令水沸、借风律一步三丈。\n·掌律：改写一域小律，可令一场雨不下，一剑必中。\n·化碑：身自成碑，一域之主，寿命极长，代价是逐渐失去人的情绪。\n·无字：传说之境，等同天道本身。无人证实，只有'无字碑'的记载。"
+}
