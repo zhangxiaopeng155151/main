@@ -11,7 +11,7 @@
     "market": "node scripts/market-refresh.mjs",
     "export": "node scripts/export.mjs",
     "check": "node scripts/selftest.mjs",
-    "import": "node scripts/import.mjs novels/十七秒 --reset",
+    "import": "node scripts/import.mjs 小说资料/十七秒 --reset",
     "submission": "node scripts/submission.mjs"
   },
   "engines": {

@@ -30,7 +30,7 @@ import { mockReviewPasses, mockSummarize } from '../server/mock.js';
 import { countWords } from '../server/text.js';
 
 const args = process.argv.slice(2);
-const dirArg = args.find((a) => !a.startsWith('--')) || 'novels/十七秒';
+const dirArg = args.find((a) => !a.startsWith('--')) || '小说资料/十七秒';
 const idArg = args.includes('--id') ? args[args.indexOf('--id') + 1] : null;
 const reset = args.includes('--reset');
 

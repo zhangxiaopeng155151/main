@@ -1,15 +1,17 @@
 /**
- * 生成投稿包 + 正文 txt：把项目 JSON 里的设定、目录、人物与样章拼成可直接投递的稿件。
+ * 从项目 JSON 生成「小说资料」文件夹：正文（md + txt）、设定与人物、大纲、投稿包。
  *
  * 用法：node scripts/submission.mjs <projectId> [输出目录]
- * 默认输出到 novels/十七秒/：
- *   投稿包.md   简介 / 人物 / 24 章目录 / 样章 / 质量自检
- *   正文.txt    纯文本正文（章节用「第N章 标题」单独一行开头）
+ * 默认输出到 小说资料/十七秒/：
+ *   正文.md / 正文.txt     全书正文（md 用于阅读，txt 用于投递/配音）
+ *   设定与人物.md          世界观硬规则、人物小传、伏笔台账
+ *   大纲.md               4 卷 24 章分层大纲（含冲突密度与钩子）
+ *   投稿包.md             简介 / 目录 / 样章 / 质量自检，可直接发给编辑
  */
 import fs from 'node:fs';
 import path from 'node:path';
 import { loadProject, ROOT } from '../server/store.js';
-import { flatChapters, buildTxt } from '../server/pipeline.js';
+import { flatChapters, buildTxt, buildMarkdown } from '../server/pipeline.js';
 import { countWords } from '../server/text.js';
 
 const id = process.argv[2];
@@ -20,7 +22,7 @@ if (!id) {
 const outDirArg = process.argv[3];
 const outDir = outDirArg
   ? path.resolve(ROOT, outDirArg)
-  : path.resolve(ROOT, 'novels/十七秒');
+  : path.resolve(ROOT, '小说资料/十七秒');
 const outPath = path.join(outDir, '投稿包.md');
 const p = loadProject(id);
 const cards = flatChapters(p.outline);
@@ -136,6 +138,89 @@ fs.writeFileSync(outPath, lines.join('\n'), 'utf8');
 const txtPath = path.join(outDir, '正文.txt');
 fs.writeFileSync(txtPath, buildTxt(p), 'utf8');
 
+// —— 正文.md（给人读，查看器/编辑器都能直接打开）
+const chsSorted = chs.map((c) => `## 第 ${c.no} 章　${c.title}\n\n${c.current.trim()}`).join('\n\n---\n\n');
+const novelMd = [
+  `# 《${topic.title || '十七秒'}》`,
+  '',
+  `> ${topic.logline || p.brief.seedIdea}`,
+  '',
+  `> 都市悬疑 / 声音怪谈 · 女主视角 · 已完稿 ${chs.length} 章 / ${totalWords} 字（全书规划 ${p.brief.targetChapters} 章）`,
+  '',
+  '---',
+  '',
+  chsSorted,
+  '',
+].join('\n');
+fs.writeFileSync(path.join(outDir, '正文.md'), novelMd, 'utf8');
+
+// —— 设定与人物.md
+const w = p.world || {};
+const setting = [];
+setting.push(`# 《${topic.title || ''}》设定与人物`, '');
+setting.push('## 一句话', '', topic.logline || p.brief.seedIdea, '');
+setting.push('## 世界观', '', w.premise || '', '');
+setting.push(`**时代**：${w.era || ''}`, '', `**社会**：${w.society || ''}`, '');
+if (w.powerSystem?.length) {
+  setting.push('## 力量 / 异常体系', '');
+  for (const ps of w.powerSystem) {
+    setting.push(`### ${ps.name}（单位：${ps.unit}）`, '');
+    if (ps.tiers?.length) setting.push('**层级**：' + ps.tiers.join('；'), '');
+    if (ps.rules?.length) setting.push('**规则**：', ...ps.rules.map((r) => `- ${r}`), '');
+    if (ps.cost) setting.push(`**代价**：${ps.cost}`, '');
+    if (ps.bounds) setting.push(`**上限**：${ps.bounds}`, '');
+    if (ps.exception) setting.push(`**例外**：${ps.exception}`, '');
+  }
+}
+if (w.hardRules?.length) setting.push('## 硬规则（写错即算设定冲突）', '', ...w.hardRules.map((r) => `- ${r}`), '');
+if (w.glossary?.length) setting.push('## 词条', '', ...w.glossary.map((g) => `- **${g.term}**：${g.def}`), '');
+if (w.factions?.length) setting.push('## 势力', '', ...w.factions.map((f) => `- **${f.name}**：目标 ${f.goal}；资源 ${f.resource}；软肋 ${f.weakness}`), '');
+if (w.geography?.length) setting.push('## 地点', '', ...w.geography.map((g) => `- **${g.name}**：${g.feature}；危险：${g.danger}`), '');
+setting.push('## 人物', '');
+for (const c of p.characters || []) {
+  setting.push(`### ${c.name}（${c.role}｜${c.age} 岁｜${c.rank}）`, '');
+  setting.push(`${c.oneLine}。`, '');
+  setting.push(`- 动机：${c.motivation}`);
+  setting.push(`- 阻碍：${c.obstacle}`);
+  setting.push(`- 误信：${c.misbelief}`);
+  setting.push(`- 秘密：${c.secret}`);
+  setting.push(`- 转折：${c.turn}`);
+  setting.push(`- 弧光：${c.arcStart} → ${c.arcEnd}`);
+  setting.push(`- 说话方式：${c.voice}`, '');
+  for (const r of c.relations || []) setting.push(`- 关系：${r.target}｜${r.type}｜${r.tension}`);
+  setting.push('');
+}
+if (p.foreshadow?.ledger?.length) {
+  setting.push('## 伏笔台账', '');
+  setting.push('| 伏笔 | 类型 | 布置章 | 回收章 | 内容 | 回收方式 |');
+  setting.push('|---|---|---|---|---|---|');
+  for (const f of p.foreshadow.ledger) {
+    setting.push(`| ${f.name} | ${f.type} | ${f.setupChapter} | ${f.payoffChapter} | ${f.content} | ${f.payoff} |`);
+  }
+  setting.push('');
+}
+fs.writeFileSync(path.join(outDir, '设定与人物.md'), setting.join('\n'), 'utf8');
+
+// —— 大纲.md
+const ol = [`# 《${topic.title || ''}》分层大纲`, '', `> ${p.outline.logline || ''}`, '', `**主题**：${p.outline.theme || ''}`, ''];
+for (const v of p.outline.volumes) {
+  ol.push(`## 第 ${v.no} 卷 · ${v.title}`, '', `- 本卷目标：${v.goal}`, `- 卷末状态：${v.endState}`, '');
+  for (const a of v.arcs) {
+    ol.push(`### 第 ${a.no} 弧 · ${a.title}（${a.summary}）`, '');
+    ol.push('| 章 | 标题 | 目标 | 阻碍 | 转折 | 结果 | 密度 | 钩子 |');
+    ol.push('|---|---|---|---|---|---|---|---|');
+    for (const c of a.chapters) {
+      ol.push(`| ${c.no} | ${c.title} | ${c.goal} | ${c.obstacle} | ${c.turn} | ${c.result} | ${c.density} | ${c.hook} |`);
+    }
+    ol.push('');
+  }
+}
+if (p.outline.causalityCheck?.length) {
+  ol.push('## 因果链自检', '', ...p.outline.causalityCheck.map((x) => `- ${x}`), '');
+}
+fs.writeFileSync(path.join(outDir, '大纲.md'), ol.join('\n'), 'utf8');
+
 console.log(`[submission] 已生成 ${path.relative(ROOT, outPath)}（${lines.join('\n').length} 字符）`);
+console.log(`[submission] 已生成 正文.md / 设定与人物.md / 大纲.md`);
 console.log(`[submission] 已生成 ${path.relative(ROOT, txtPath)}`);
 console.log(`[submission] ${chs.length} 章 / ${totalWords} 字 / ${cards.length} 章大纲`);
