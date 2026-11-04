@@ -48,7 +48,7 @@ const fullText = chapters.map((c) => c.text).join('\n\n');
 /* ------------------------------ 规则参数 ------------------------------ */
 
 const MIN_WORDS = 2040;
-const MAX_AI = 4.5;
+const MAX_AI = Number((args.includes('--max-ai') ? args[args.indexOf('--max-ai') + 1] : 1)); // 默认 1：比平台闸门更严
 const MIN_STD = 6;
 const HOOK_MIN = 6;
 const CLICHE_SOFT = ['仿佛', '似乎', '顿时', '缓缓', '微微', '不禁', '一丝', '一抹', '莫名'];
@@ -85,6 +85,19 @@ for (const ch of chapters) {
   const close = (ch.text.match(/」/g) || []).length;
   if (open !== close) add('block', `第${ch.no}章`, `直角引号不配对（「${open} / 」${close}）`, '补齐引号');
   if (/[，。！？；：]{2,}/.test(ch.text.replace(/……/g, ''))) add('warn', `第${ch.no}章`, '出现连续标点', '检查句读');
+
+  // 标点（中文规范：只用全角，引号用「」/‘’）
+  const asciiQuote = (ch.text.match(/["']/g) || []).length;
+  if (asciiQuote) add('block', `第${ch.no}章`, `出现 ${asciiQuote} 个半角引号`, '改用「」或‘’，不要用 " 和 \'');
+  const halfPunct = ch.text.match(/[\u4e00-\u9fff][,.!?;:]/g) || [];
+  if (halfPunct.length) add('block', `第${ch.no}章`, `中文后面跟了半角标点 ${halfPunct.length} 处：${halfPunct.slice(0, 3).join(' ')}`, '改成全角，。！？；：');
+  if (/^---$/m.test(ch.text) || /\*\*[^*\n]{1,30}\*\*/.test(ch.text) || /^#+\s/m.test(ch.text)) add('warn', `第${ch.no}章`, '正文里混进了 Markdown 记号', '正文.txt 只放纯文本（138****6047 这类打码不算）');
+  if (dash > 0) add('warn', `第${ch.no}章`, `破折号 ${dash} 处（本书目标 0，破折号是最容易识别的 AI 痕迹）`, '改成句号、逗号或冒号');
+  const ell = ch.text.match(/(?<!…)…(?!…)/g);
+  if (ell && ell.length) add('warn', `第${ch.no}章`, `省略号只用了单个「…」${ell.length} 处`, '中文省略号是六个点：……');
+  const so = (ch.text.match(/‘/g) || []).length;
+  const sc = (ch.text.match(/’/g) || []).length;
+  if (so !== sc) add('block', `第${ch.no}章`, `单引号不配对（‘${so} / ’${sc}）`, '补齐或删掉');
 
   // 逻辑
   for (const f of fact) add('block', `第${ch.no}章`, `设定冲突：${f.why || f.type}${f.quote ? `（${f.quote}）` : ''}`, f.fix || '');
@@ -199,6 +212,68 @@ const maxNo = Math.max(...nos);
 const planned = cards.length;
 if (maxNo < planned) add('info', '进度', `已写 ${maxNo} 章 / 规划 ${planned} 章，还差 ${planned - maxNo} 章`, '');
 
+/* ------------------------------ 多音字（只出表，不进正文） ------------------------------ */
+
+// 只收「读错就会出戏」的词。演播照着这张表念；正文.txt 里不写任何注音。
+const POLY = [
+  { w: '数数', py: 'shǔ shù', note: '第一个字读 shǔ（清点），第二个字读 shù' },
+  { w: '数到', py: 'shǔ dào', note: '清点义，读 shǔ' },
+  { w: '数着', py: 'shǔ zhe', note: '清点义，读 shǔ' },
+  { w: '数字', py: 'shù zì', note: '名词义，读 shù' },
+  { w: '十七行', py: 'shí qī háng', note: '表格/名单的量词，读 háng，不读 xíng' },
+  { w: '一行', py: 'yī háng', note: '同上，名单的一行读 háng' },
+  { w: '转盘', py: 'zhuàn pán', note: '旋转的盘，读 zhuàn' },
+  { w: '转身', py: 'zhuǎn shēn', note: '改变方向，读 zhuǎn' },
+  { w: '转过来', py: 'zhuǎn guò lái', note: '改变方向，读 zhuǎn' },
+  { w: '重新', py: 'chóng xīn', note: '再一次，读 chóng' },
+  { w: '长大', py: 'zhǎng dà', note: '生长，读 zhǎng' },
+  { w: '睡着', py: 'shuì zháo', note: '入睡的结果，读 zháo' },
+  { w: '还给', py: 'huán gěi', note: '归还，读 huán' },
+  { w: '差不多', py: 'chà bù duō', note: '读 chà' },
+  { w: '觉得', py: 'jué de', note: '读 jué' },
+  { w: '一只', py: 'yī zhī', note: '量词，读 zhī' },
+  { w: '只有', py: 'zhǐ yǒu', note: '读 zhǐ' },
+  { w: '答应', py: 'dā ying', note: '读 dā，第二个字轻声' },
+  { w: '露出', py: 'lù chū', note: '读 lù；口语「露馅」才读 lòu' },
+  { w: '空转', py: 'kōng zhuàn', note: '空=没有负载读 kōng，转=旋转读 zhuàn' },
+  { w: '空白', py: 'kòng bái', note: '读 kòng' },
+  { w: '薄薄', py: 'báo báo', note: '口语单用读 báo' },
+  { w: '划掉', py: 'huá diào', note: '用笔划，读 huá；「计划」读 huà' },
+  { w: '为了', py: 'wèi le', note: '读 wèi' },
+  { w: '落下', py: 'luò xià', note: '读 luò' },
+  { w: '曾经', py: 'céng jīng', note: '读 céng' },
+  { w: '看夜', py: 'kān yè', note: '看守义，读 kān，不读 kàn' },
+];
+
+const polyRows = [];
+for (const e of POLY) {
+  const cnt = fullText.split(e.w).length - 1;
+  if (!cnt) continue;
+  const idx = fullText.indexOf(e.w);
+  const ctx = fullText.slice(Math.max(0, idx - 16), idx + e.w.length + 16).replace(/\n/g, ' ').replace(/\s+/g, ' ');
+  polyRows.push({ ...e, cnt, ctx });
+}
+
+const PY = [];
+PY.push('# 《十七秒》朗读注音表');
+PY.push('');
+PY.push('> **这张表不进正文。** `正文.txt` 保持纯文本，不带任何拼音或注音标记；演播、配音、TTS 校对时照着这份表念即可。');
+PY.push('> 由 `scripts/audit.mjs` 从正文里扫出来，改稿后重跑一次就更新。');
+PY.push('');
+PY.push('| 词 | 读音 | 出现次数 | 例句（正文原句） |');
+PY.push('|---|---|---|---|');
+for (const r of polyRows) PY.push(`| ${r.w} | ${r.py} | ${r.cnt} | ${r.ctx} |`);
+PY.push('');
+PY.push('## 最容易读错的五处');
+PY.push('');
+PY.push('1. **数数**：`shǔ shù`——前面是动词（数），后面是名词（数目），两个字不同音。');
+PY.push('2. **转盘 / 转身**：转盘是 `zhuàn`（旋转），转身是 `zhuǎn`（改变方向）。同一章里两种读法都有。');
+PY.push('3. **十七行**：名单的一行读 `háng`，不是 `xíng`。');
+PY.push('4. **答应**：`dā ying`，第二个字轻声——这是全书出现最频繁的词之一，读成 `dā yìng` 会立刻出戏。');
+PY.push('5. **看夜**：`kān yè`（看守），不是 `kàn yè`。');
+PY.push('');
+fs.writeFileSync(path.join(dir, '朗读注音表.md'), PY.join('\n'), 'utf8');
+
 /* ------------------------------ 报告 ------------------------------ */
 
 const blocks = issues.filter((i) => i.level === 'block');
@@ -237,6 +312,12 @@ if (infos.length) {
   for (const i of infos) L.push(`- ${i.what}`);
   L.push('');
 }
+L.push('## 多音字');
+L.push('');
+L.push(`扫到 ${polyRows.length} 个易读错的词，完整读音表见同目录 \`朗读注音表.md\`（**不进正文**）：`);
+L.push('');
+L.push(polyRows.slice(0, 8).map((r) => `${r.w}（${r.py}）×${r.cnt}`).join('　') || '无');
+L.push('');
 L.push('## 编号 / 数字出现频次（人工核对用）');
 L.push('');
 L.push(Object.entries(numTokens).sort((a, b) => b[1] - a[1]).slice(0, 15).map(([n, c]) => `${n}×${c}`).join('　'));
@@ -251,6 +332,7 @@ fs.writeFileSync(path.join(dir, '审核报告.md'), L.join('\n'), 'utf8');
 console.log(`[audit] ${dirArg}：${chapters.length} 章 / ${fullText.length} 字符`);
 console.log(`[audit] 阻断 ${blocks.length} · 警告 ${warns.length}`);
 for (const i of [...blocks, ...warns].slice(0, 20)) console.log(`  ${i.level === 'block' ? '✗' : '!'} ${i.where}：${i.what}`);
+console.log(`[audit] 注音表已写入 ${path.relative(ROOT, path.join(dir, '朗读注音表.md'))}（${polyRows.length} 条）`);
 console.log(`[audit] 报告已写入 ${path.relative(ROOT, path.join(dir, '审核报告.md'))}`);
 
 if (strict && blocks.length) process.exit(1);
