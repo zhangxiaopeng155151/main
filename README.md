@@ -58,6 +58,18 @@ node scripts/seed.mjs --reset     # 重建演示项目（默认跑满全书，�
 npm run check                     # 引擎自检（25 项：计字/AI味/钩子/事实核对/查重/节奏/闸门/压缩）
 ```
 
+### 导入自己的稿子（人写 + 机器审）
+
+mock 引擎只会生成演示书；如果你手里的稿子是自己（或别的模型）写的，用导入脚本把它塞进流水线，
+照样能跑本地三审、闸门、伏笔核对和导出：
+
+```bash
+node scripts/import.mjs manuscripts/十七秒 --reset   # 书籍目录 → 项目
+node scripts/submission.mjs <projectId>             # 生成投稿包 + 全本样章
+```
+
+目录约定：`manuscripts/<书名>/book.json`（设定）/ `outline.json`（大纲）/ `chapters/chNN.md`（正文）。
+
 ### 接真实模型
 
 界面右上角「设置」里填，或用环境变量：
@@ -83,6 +95,17 @@ export ANTHROPIC_MODEL=claude-sonnet-4-5
 Key 只写入本机 `data/settings.json`（已在 `.gitignore` 中），不会进 Git。
 
 ---
+
+## 示例：为喜马拉雅活动写的《十七秒》
+
+仓库里带了一个完整的真实案例，用来验证「活动调研 → 立项 → 成书 → 投稿包」整条链路：
+
+- `docs/喜马拉雅有声小说活动与投稿方案.md`——2026 年在征集期内的三个官方活动、各自的考核口径、投稿包清单
+- `manuscripts/十七秒/`——24 章大纲（4 卷）、6 人设定、10 条伏笔台账、已完稿 10 章（20851 字）
+- `manuscripts/十七秒/投稿包.md`——一句话简介 / 200 字简介 / 人物小传 / 24 章目录 / 第 1 章全文 / 质量自检表
+- `manuscripts/十七秒/有声化说明书.md`——角色音色表、每章场景声、音效点、制作规格
+
+实测（本地确定性脚本）：10 章全部通过 5 道闸门，三审均分 95，AI 味 1.57，平均 2085 字/章，钩子最低 6.3。
 
 ## 需求对照
 
@@ -168,11 +191,15 @@ Key 只写入本机 `data/settings.json`（已在 `.gitignore` 中），不会�
 │   └── prompts/*.md    # 16 个可编辑的提示词（含温度与输出格式）
 ├── web/                # 零依赖前端（HTML + CSS + 原生 ESM）
 ├── corpus/             # 查重参考库（题材原型摘要，可自行扩充）
+├── manuscripts/        # 书籍工程（book.json + outline.json + chapters/*.md + 投稿包）
+├── docs/               # 活动调研与投稿方案
 ├── scripts/
 │   ├── seed.mjs        # 演示项目生成
 │   ├── selftest.mjs    # 引擎自检
 │   ├── market-refresh.mjs # 市场热度定时刷新
 │   ├── export.mjs      # 命令行导出
+│   ├── import.mjs      # 把自己的稿子导入项目并跑本地三审
+│   ├── submission.mjs  # 生成投稿包（简介/大纲/人物/样章）
 │   └── ui-smoke.mjs    # 前端冒烟测试（需要 jsdom，可选）
 └── data/               # 运行时数据（gitignored）：projects/*.json, settings.json, corpus/
 ```

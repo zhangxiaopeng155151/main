@@ -869,11 +869,15 @@ export function measureChapter(project, text, no, cfg = getSettings()) {
     ...setup.map((f) => ({ name: f.name, kind: 'setup', hint: f.content })),
     ...payoff.map((f) => ({ name: f.name, kind: 'payoff', hint: f.payoff })),
   ];
+  const STOP = new Set('的了在是为着过要会可以被把而且或与和也都就才即'.split(''));
   const missed = expected.filter((e) => {
     if (text.includes(e.name)) return false;
-    // 宽松：名称或说明中的两个关键 2 字词同时出现，也算执行
-    const toks = (e.hint || '').replace(/[^\u4e00-\u9fff]/g, ' ').trim().split(/\s+/).filter((x) => x.length >= 2);
-    const hits = toks.filter((t) => t.length >= 2 && text.includes(t.slice(0, 2)));
+    // 宽松判定：把伏笔说明去掉虚词后切成 2 字窗口，正文命中 ≥2 个窗口就算「写了这一笔」。
+    // 之前按标点切段、要求命中 ≥2 段，遇到「苏雯的腕表永远快三分钟。」这种单句说明会永远判失败。
+    const clean = String(e.hint || '').replace(/[^\u4e00-\u9fff]/g, '').split('').filter((ch) => !STOP.has(ch)).join('');
+    const windows = [];
+    for (let i = 0; i < clean.length - 1; i++) windows.push(clean.slice(i, i + 2));
+    const hits = windows.filter((w) => text.includes(w));
     return hits.length < 2;
   }).map((e) => e.name);
   const minWords = Math.max(cfg.minWords, Math.round((project.brief?.wordsPerChapter || 2400) * 0.85));
@@ -900,7 +904,7 @@ export function measureChapter(project, text, no, cfg = getSettings()) {
   };
 }
 
-function mergeReviews(passes, measured, cfg) {
+export function mergeReviews(passes, measured, cfg) {
   const gateSource = passes.editor?.gates || {};
   const gates = {
     wordCount: { ok: measured.words >= measured.minWords, value: measured.words, require: `≥${measured.minWords}` },

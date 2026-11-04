@@ -103,7 +103,12 @@ export function styleMetrics(text = '') {
   const paras = splitParagraphs(text);
   const sentences = splitSentences(text);
   const lens = sentences.map((s) => countWords(s)).filter((n) => n > 0);
-  const dialogue = (text.match(/[“"][^”"]{2,}[”"]/g) || []).join('');
+  // 中文字幕两种引号都要算：直角引号「」与弯引号“”，并限制单段长度，避免跨段吞掉整章
+  const dialogue = [
+    ...(text.match(/“[^”\n]{2,60}”/g) || []),
+    ...(text.match(/「[^」\n]{1,40}」/g) || []),
+    ...(text.match(/"[^"\n]{2,60}"/g) || []),
+  ].join('');
   const dialogueWords = countWords(dialogue);
   const allChars = text.replace(/[^\u4e00-\u9fff]/g, '');
   const bigrams = new Set();
