@@ -1,13 +1,15 @@
 /**
- * 生成投稿包：把项目 JSON 里的设定、目录、人物与第一章样稿拼成一份可直接投递的 Markdown。
+ * 生成投稿包 + 正文 txt：把项目 JSON 里的设定、目录、人物与样章拼成可直接投递的稿件。
  *
- * 用法：node scripts/submission.mjs <projectId> [输出路径]
- * 默认输出：manuscripts/十七秒/投稿包.md
+ * 用法：node scripts/submission.mjs <projectId> [输出目录]
+ * 默认输出到 novels/十七秒/：
+ *   投稿包.md   简介 / 人物 / 24 章目录 / 样章 / 质量自检
+ *   正文.txt    纯文本正文（章节用「第N章 标题」单独一行开头）
  */
 import fs from 'node:fs';
 import path from 'node:path';
 import { loadProject, ROOT } from '../server/store.js';
-import { flatChapters, buildMarkdown } from '../server/pipeline.js';
+import { flatChapters, buildTxt } from '../server/pipeline.js';
 import { countWords } from '../server/text.js';
 
 const id = process.argv[2];
@@ -15,7 +17,11 @@ if (!id) {
   console.error('用法：node scripts/submission.mjs <projectId> [输出路径]');
   process.exit(1);
 }
-const outPath = path.resolve(ROOT, process.argv[3] || 'manuscripts/十七秒/投稿包.md');
+const outDirArg = process.argv[3];
+const outDir = outDirArg
+  ? path.resolve(ROOT, outDirArg)
+  : path.resolve(ROOT, 'novels/十七秒');
+const outPath = path.join(outDir, '投稿包.md');
 const p = loadProject(id);
 const cards = flatChapters(p.outline);
 const topic = (p.topics || []).find((t) => t.id === p.selectedTopicId) || p.topics?.[0] || {};
@@ -86,7 +92,7 @@ push(cards.map((c) => `第${c.no}章　${c.title}`).join('\n\n'));
 push('');
 push('## 七、正文样稿');
 push('');
-push(`已完稿 ${chs.length} 章，共 ${totalWords} 字。以下附第 1 章全文（其余章节见 \`manuscripts/十七秒/chapters/\`）。`);
+push(`已完稿 ${chs.length} 章，共 ${totalWords} 字。以下附第 1 章全文（完整正文见同目录 \`正文.txt\`）。`);
 push('');
 if (chs[0]) {
   push(`### 第 1 章　${chs[0].title}`);
@@ -126,10 +132,10 @@ push('');
 fs.mkdirSync(path.dirname(outPath), { recursive: true });
 fs.writeFileSync(outPath, lines.join('\n'), 'utf8');
 
-// 顺手导出一份全本 markdown，方便直接发给编辑
-const novelPath = path.join(path.dirname(outPath), '全本样章.md');
-fs.writeFileSync(novelPath, buildMarkdown(p), 'utf8');
+// 顺手导出一份纯文本正文，方便直接发给编辑或用手机看
+const txtPath = path.join(outDir, '正文.txt');
+fs.writeFileSync(txtPath, buildTxt(p), 'utf8');
 
 console.log(`[submission] 已生成 ${path.relative(ROOT, outPath)}（${lines.join('\n').length} 字符）`);
-console.log(`[submission] 已生成 ${path.relative(ROOT, novelPath)}`);
+console.log(`[submission] 已生成 ${path.relative(ROOT, txtPath)}`);
 console.log(`[submission] ${chs.length} 章 / ${totalWords} 字 / ${cards.length} 章大纲`);

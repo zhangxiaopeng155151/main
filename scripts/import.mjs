@@ -3,19 +3,21 @@
  *
  * 为什么需要它：mock 引擎只能生成演示书，真实模型才能从零写新书。
  * 但很多时候你手里已经有设定、大纲和正文——这时你要的是「审稿流水线」，
- * 不是「再生成一遍」。本脚本把 manuscripts/<书名>/ 下的稿件装进项目，
- * 然后用同一套本地度量（字数 / AI 味 / 钩子 / 伏笔 / 设定冲突）跑逻辑审、
- * 读者审、编辑审，结果写回项目，界面里能直接看。
+ * 不是「再生成一遍」。本脚本把一本书的目录装进项目，然后用同一套本地度量
+ * （字数 / AI 味 / 钩子 / 伏笔 / 设定冲突）跑逻辑审、读者审、编辑审，结果写回项目。
  *
- * 目录约定：
- *   manuscripts/<书名>/book.json      brief / market / topics / dedup / world / characters / foreshadow
- *   manuscripts/<书名>/outline.json   logline / theme / volumes[].arcs[].chapters[]
- *   manuscripts/<书名>/chapters/ch01.md ...
+ * 目录约定（推荐：一本一个文件夹）：
+ *   novels/<书名>/书稿.json    设定 + 大纲（brief / market / topics / dedup / world / characters / foreshadow / outline）
+ *   novels/<书名>/正文.txt     正文，章节用「第1章　标题」单独一行开头
+ *
+ * 兼容旧布局：
+ *   <目录>/book.json + outline.json + chapters/ch01.md ...
  *
  * 用法：
- *   node scripts/import.mjs manuscripts/十七秒
- *   node scripts/import.mjs manuscripts/十七秒 --id nov_xxx     # 覆盖已有项目
- *   node scripts/import.mjs manuscripts/十七秒 --reset           # 先删同名项目再建
+ *   node scripts/import.mjs                          # 默认导入 novels/十七秒
+ *   node scripts/import.mjs novels/某本书
+ *   node scripts/import.mjs novels/十七秒 --id nov_xxx   # 覆盖已有项目
+ *   node scripts/import.mjs novels/十七秒 --reset        # 先删同名项目再建
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -28,17 +30,54 @@ import { mockReviewPasses, mockSummarize } from '../server/mock.js';
 import { countWords } from '../server/text.js';
 
 const args = process.argv.slice(2);
-const dirArg = args.find((a) => !a.startsWith('--')) || 'manuscripts/十七秒';
+const dirArg = args.find((a) => !a.startsWith('--')) || 'novels/十七秒';
 const idArg = args.includes('--id') ? args[args.indexOf('--id') + 1] : null;
 const reset = args.includes('--reset');
 
 const dir = path.resolve(import.meta.dirname, '..', dirArg);
-const book = JSON.parse(fs.readFileSync(path.join(dir, 'book.json'), 'utf8'));
-const outlineSrc = JSON.parse(fs.readFileSync(path.join(dir, 'outline.json'), 'utf8'));
-const chapterDir = path.join(dir, 'chapters');
-const chapterFiles = fs.existsSync(chapterDir)
-  ? fs.readdirSync(chapterDir).filter((f) => /^ch\d+\.md$/.test(f)).sort()
-  : [];
+
+/** 把「第N章　标题」切成章节 */
+function parseChapters(txt = '') {
+  const out = [];
+  let cur = null;
+  for (const line of txt.split(/\r?\n/)) {
+    const m = line.match(/^\s*第\s*(\d+)\s*章[　\s:：]*(.*)$/);
+    if (m) {
+      if (cur) out.push(cur);
+      cur = { no: Number(m[1]), title: (m[2] || '').trim(), lines: [] };
+    } else if (cur) {
+      cur.lines.push(line);
+    }
+  }
+  if (cur) out.push(cur);
+  return out
+    .map((c) => ({ no: c.no, title: c.title, text: c.lines.join('\n').replace(/\n{3,}/g, '\n\n').trim() }))
+    .filter((c) => c.text)
+    .sort((a, b) => a.no - b.no);
+}
+
+let book;
+let outlineSrc;
+let chapterTexts = [];
+
+const bookFile = path.join(dir, '书稿.json');
+if (fs.existsSync(bookFile)) {
+  book = JSON.parse(fs.readFileSync(bookFile, 'utf8'));
+  outlineSrc = book.outline;
+  if (!outlineSrc) throw new Error('书稿.json 缺少 outline 字段（需要 volumes[].arcs[].chapters[]）');
+  const txtFile = path.join(dir, '正文.txt');
+  if (fs.existsSync(txtFile)) chapterTexts = parseChapters(fs.readFileSync(txtFile, 'utf8'));
+} else {
+  book = JSON.parse(fs.readFileSync(path.join(dir, 'book.json'), 'utf8'));
+  outlineSrc = JSON.parse(fs.readFileSync(path.join(dir, 'outline.json'), 'utf8'));
+  const chapterDir = path.join(dir, 'chapters');
+  const files = fs.existsSync(chapterDir) ? fs.readdirSync(chapterDir).filter((f) => /^ch\d+\.md$/.test(f)).sort() : [];
+  chapterTexts = files.map((f) => ({
+    no: Number(f.match(/^ch(\d+)\.md$/)[1]),
+    title: '',
+    text: fs.readFileSync(path.join(chapterDir, f), 'utf8').trim(),
+  }));
+}
 
 if (reset) {
   for (const p of listProjects()) {
@@ -131,9 +170,9 @@ let aiSum = 0;
 let scoreSum = 0;
 let doneCount = 0;
 
-for (const file of chapterFiles) {
-  const no = Number(file.match(/^ch(\d+)\.md$/)[1]);
-  const text = fs.readFileSync(path.join(chapterDir, file), 'utf8').trim();
+for (const item of chapterTexts) {
+  const no = item.no;
+  const text = item.text;
   const card = flatChapters(project.outline).find((c) => c.no === no);
   const ch = {
     no,
@@ -246,7 +285,7 @@ console.log(`  · 三审平均 ${project.stats.avgScore} 分；AI 味 ${project.
 console.log(`  · 待人工：${chapters.filter((c) => c.needsAttention).map((c) => `第${c.no}章`).join('、') || '无'}`);
 for (const ch of chapters) {
   const g = ch.review.gates;
-  console.log(`    第 ${String(ch.no).padStart(2)} 章 ${ch.title}｜${ch.metrics.words} 字｜AI ${ch.metrics.aiScore}｜钩子 ${ch.metrics.hook}｜审稿 ${ch.review.score}` +
+  console.log(`    第 ${String(ch.no).padStart(2)} 章 ${ch.title}｜${ch.metrics.words} 字｜AI ${ch.metrics.ai?.score}｜钩子 ${ch.metrics.hook}｜审稿 ${ch.review.score}` +
     `｜${Object.entries(g).filter(([, v]) => !v.ok).map(([k]) => k).join(',') || '全闸门通过'}`);
 }
 for (const a of project.pacing.alarms.slice(0, 3)) {
