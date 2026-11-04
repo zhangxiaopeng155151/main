@@ -415,7 +415,9 @@ async function runWorld(project, emit) {
 }
 
 export function normalizeCharacters(data = {}) {
-  const chars = (data.characters || data || []).map((c) => ({
+  const raw = Array.isArray(data) ? data : Array.isArray(data.characters) ? data.characters : [];
+  if (!raw.length) throw new Error('人物环节没有返回 characters 数组，请重试（模型可能返回了错误的结构）');
+  const chars = raw.map((c) => ({
     name: c.name || '未命名',
     role: c.role || '配角',
     oneLine: c.oneLine || '',
@@ -533,6 +535,7 @@ async function runOutline(project, emit) {
   }
   project.outline = normalizeOutline(data, project);
   const chapters = flatChapters(project.outline);
+  if (!chapters.length) throw new Error('大纲没有解析出任何章节：模型返回的结构不符合 05-outline 约定（需要 volumes[].arcs[].chapters[]），请重试或降低温度');
   const problems = [];
   if (chapters.length !== target) problems.push(`章数 ${chapters.length} ≠ 目标 ${target}`);
   for (const c of chapters) {

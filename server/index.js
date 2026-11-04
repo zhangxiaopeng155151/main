@@ -191,7 +191,8 @@ const server = http.createServer(async (req, res) => {
     if (pathname === '/api/settings' && method === 'GET') return json(res, 200, publicSettings());
     if (pathname === '/api/settings' && method === 'POST') {
       const patch = await readBody(req);
-      if (patch.apiKey === '') delete patch.apiKey;
+      if (patch.apiKey === '') delete patch.apiKey;      // 留空＝保持原密钥
+      if (patch.apiKey === null) patch.apiKey = '';        // null＝显式清除
       const next = saveSettings(patch);
       return json(res, 200, { ...publicSettings(), ok: true });
     }
