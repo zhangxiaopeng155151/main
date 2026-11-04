@@ -1,0 +1,19 @@
+{
+  "name": "inkflow-novel-workflow",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "墨脉 InkFlow —— 可本地运行的长篇小说自动创作工作流（Arena Skill）：选题→查重→世界观→人物→分级大纲→节奏→伏笔→分章写作→三审→修订→去AI味→摘要压缩→导出",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "seed": "node scripts/seed.mjs",
+    "market": "node scripts/market-refresh.mjs",
+    "export": "node scripts/export.mjs",
+    "check": "node scripts/selftest.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT"
+}

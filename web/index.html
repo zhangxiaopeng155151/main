@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>墨脉 InkFlow · 长篇小说创作工作流</title>
+  <meta name="description" content="本地运行的长篇小说自动创作工作流：选题 → 查重 → 世界观 → 人物 → 大纲 → 节奏 → 伏笔 → 分章写作 → 三审 → 修正 → 去AI味 → 摘要压缩 → 导出" />
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231f1d1a'/%3E%3Cpath d='M16 6c3 4 6 6.5 6 10.5A6 6 0 0 1 10 16.5C10 12.5 13 10 16 6z' fill='%23e8c79a'/%3E%3C/svg%3E" />
+</head>
+<body>
+  <div id="app" class="app-shell">
+    <header class="topbar" id="topbar"></header>
+    <main class="workspace" id="workspace">
+      <aside class="pane-left" id="left"></aside>
+      <section class="pane-right" id="right"></section>
+    </main>
+    <div class="drawer" id="drawer"></div>
+  </div>
+
+  <div class="modal-root" id="modal-root" hidden></div>
+  <div class="toasts" id="toasts"></div>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
