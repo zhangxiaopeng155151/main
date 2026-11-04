@@ -50,6 +50,19 @@ const fullText = chapters.map((c) => c.text).join('\n\n');
 const MIN_WORDS = 2040;
 const MAX_AI = Number((args.includes('--max-ai') ? args[args.indexOf('--max-ai') + 1] : 1)); // 默认 1：比平台闸门更严
 const MIN_STD = 6;
+
+// 机械可判的语病规则（宁可少报，不误伤文学性表达）
+const PROSE_RULES = [
+  { label: '重复虚词', level: 'block', re: /(的的|(?<!不)了了|是是|在在|就就|都都|和和|也也)/g, fix: '删掉重复的虚词' },
+  { label: '口误式用词', level: 'block', re: /(奇数的是|奇怪地是|仿佛似的|似乎好像)/g, fix: '改成正常说法（如「奇怪的是」）' },
+  { label: '介词结构淹没主语', level: 'warn', re: /通过[^，。！？]{2,16}(使|使得)/g, fix: '把「通过…使…」改成「因为…所以…」或直接给主语' },
+  { label: '原因重复', level: 'block', re: /原因是(因为|由于)/g, fix: '「原因是」后面不能再接「因为/由于」' },
+  { label: '约数重复', level: 'warn', re: /(大约|约|大概)[^，。！？]{0,8}(左右|上下)/g, fix: '「大约」和「左右」只留一个' },
+  { label: '被…所…句式', level: 'warn', re: /被[^，。！？]{1,8}所[^，。！？]/g, fix: '改成「被…」或「为…所…」，不要混用' },
+  { label: '动词滥用「进行」', level: 'warn', re: /进行(一次|了)?(处理|检查|调查|研究|讨论|比对)/g, fix: '直接用动词：处理、检查、比对' },
+  { label: '存现句多加「了」', level: 'warn', re: /(就|会|要)多了一个/g, fix: '改成「多出一个人」「少一个人」' },
+  { label: '分钟与秒对不上', level: 'warn', re: /\d+\s*分钟[^。！？]{0,8}\d{2,4}\s*秒/g, fix: '核对换算：一分钟 60 秒' },
+];
 const HOOK_MIN = 6;
 const CLICHE_SOFT = ['仿佛', '似乎', '顿时', '缓缓', '微微', '不禁', '一丝', '一抹', '莫名'];
 const issues = []; // { level: 'block'|'warn'|'info', where, what, fix }
@@ -97,6 +110,13 @@ for (const ch of chapters) {
   if (dash > 0) add('warn', `第${ch.no}章`, `破折号 ${dash} 处（本书目标 0，破折号是最容易识别的 AI 痕迹）`, '改成句号、逗号或冒号');
   const ell = ch.text.match(/(?<!…)…(?!…)/g);
   if (ell && ell.length) add('warn', `第${ch.no}章`, `省略号只用了单个「…」${ell.length} 处`, '中文省略号是六个点：……');
+  // 语病（机械可判的几类：重复虚词、搭配错误、成分残缺、语义重复）
+  for (const rule of PROSE_RULES) {
+    const hits = ch.text.match(rule.re) || [];
+    if (!hits.length) continue;
+    const uniq = [...new Set(hits.map((h) => (typeof h === 'string' ? h : h[0])))].slice(0, 3);
+    add(rule.level, `第${ch.no}章`, `语病：${rule.label} ${hits.length} 处（${uniq.join(' / ')}）`, rule.fix);
+  }
   const so = (ch.text.match(/‘/g) || []).length;
   const sc = (ch.text.match(/’/g) || []).length;
   if (so !== sc) add('block', `第${ch.no}章`, `单引号不配对（‘${so} / ’${sc}）`, '补齐或删掉');
