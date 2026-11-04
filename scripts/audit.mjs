@@ -245,6 +245,12 @@ const POLY = [
   { w: '落下', py: 'luò xià', note: '读 luò' },
   { w: '曾经', py: 'céng jīng', note: '读 céng' },
   { w: '看夜', py: 'kān yè', note: '看守义，读 kān，不读 kàn' },
+  { w: '挑人', py: 'tiāo rén', note: '挑选义，读 tiāo，不读 tiǎo' },
+  { w: '挑出', py: 'tiāo chū', note: '挑选义，读 tiāo' },
+  { w: '挑开', py: 'tiāo kāi', note: '用工具拨开，读 tiāo' },
+  { w: '往上一挑', py: 'wǎng shàng yī tiǎo', note: '写字的笔画上挑，读 tiǎo；与「挑人」的 tiāo 不同音' },
+  { w: '倒数', py: 'dào shǔ', note: '倒着数数，读 dào shǔ；名词「dào shù」是数学用语，本书不用' },
+  { w: '差三分钟', py: 'chà sān fēn zhōng', note: '相差义，读 chà，不读 chā' },
 ];
 
 const polyRows = [];
@@ -266,13 +272,14 @@ PY.push('| 词 | 读音 | 出现次数 | 例句（正文原句） |');
 PY.push('|---|---|---|---|');
 for (const r of polyRows) PY.push(`| ${r.w} | ${r.py} | ${r.cnt} | ${r.ctx} |`);
 PY.push('');
-PY.push('## 最容易读错的五处');
+PY.push('## 最容易读错的六处');
 PY.push('');
 PY.push('1. **数数**：`shǔ shù`——前面是动词（数），后面是名词（数目），两个字不同音。');
 PY.push('2. **转盘 / 转身**：转盘是 `zhuàn`（旋转），转身是 `zhuǎn`（改变方向）。同一章里两种读法都有。');
 PY.push('3. **十七行**：名单的一行读 `háng`，不是 `xíng`。');
 PY.push('4. **答应**：`dā ying`，第二个字轻声——这是全书出现最频繁的词之一，读成 `dā yìng` 会立刻出戏。');
 PY.push('5. **看夜**：`kān yè`（看守），不是 `kàn yè`。');
+PY.push('6. **挑人 / 往上一挑**：挑东西是 `tiāo`，笔锋上挑是 `tiǎo`；第 18 章两个词隔了两页，最容易串。');
 PY.push('');
 fs.writeFileSync(path.join(dir, '朗读注音表.md'), PY.join('\n'), 'utf8');
 
