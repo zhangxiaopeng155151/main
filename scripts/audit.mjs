@@ -81,9 +81,11 @@ for (const ch of chapters) {
   if (clicheHits.length > 3) add('warn', `第${ch.no}章`, `套话命中 ${clicheHits.length} 种：${clicheHits.join('、')}`, '替换成具体动作');
   const dash = (ch.text.match(/——/g) || []).length;
   if (dash > 3) add('warn', `第${ch.no}章`, `破折号 ${dash} 处`, '改成句号或逗号');
-  const open = (ch.text.match(/「/g) || []).length;
-  const close = (ch.text.match(/」/g) || []).length;
-  if (open !== close) add('block', `第${ch.no}章`, `直角引号不配对（「${open} / 」${close}）`, '补齐引号');
+  const open = (ch.text.match(/“/g) || []).length;
+  const close = (ch.text.match(/”/g) || []).length;
+  if (open !== close) add('block', `第${ch.no}章`, `双引号不配对（“${open} / ”${close}）`, '补齐引号');
+  const corner = (ch.text.match(/[「」『』]/g) || []).length;
+  if (corner) add('block', `第${ch.no}章`, `残留直角引号 ${corner} 处`, '对话统一用双引号 “”，引语内再引用用 ‘ ’');
   if (/[，。！？；：]{2,}/.test(ch.text.replace(/……/g, ''))) add('warn', `第${ch.no}章`, '出现连续标点', '检查句读');
 
   // 标点（中文规范：只用全角，引号用「」/‘’）
