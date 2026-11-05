@@ -11,7 +11,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
-import { styleMetrics, hookScore, factCheck, proseProfile, splitParagraphs, splitSentences, countWords } from '../server/text.js';
+import { styleMetrics, hookScore, factCheck, proseProfile, sentenceProfile, splitParagraphs, splitSentences, countWords } from '../server/text.js';
 import { ROOT } from '../server/store.js';
 
 const args = process.argv.slice(2);
@@ -24,6 +24,15 @@ const dir = path.resolve(ROOT, dirArg);
 const SENSORY_MIN = 18;      // 五感词密度，每千字
 const SHORT_PARA_MIN = 0.5;  // 20 字以内短段占比
 const EXPLAIN_MAX = 0.04;    // 解释句（因为/也就是说/这说明…）占比
+
+// 句子层阈值：口径见 docs/句子级写法.md，取全书实测的 2–3 倍留余量，只拦明显退化的句子。
+const LONG_SENT_MAX = 0.03;   // 超过 45 字的句子占比
+const DE3_MAX = 0.06;         // 一句含 3 个以上「的」的占比
+const WEAK_VERB_MAX = 2;      // 进行/作出/加以/予以/使得，每千字
+const CONNECTIVE_MAX = 8;     // 因为/所以/但是/然而，每千字
+const PASSIVE_MAX = 6;        // 「被」字句，每千字
+const ADV_OPEN_MAX = 0.05;    // 句首状语（在/当/随着/由于…）占比
+const NOMINAL_MAX = 5;        // 名词化后缀（性/度/化/感），每千字
 
 const book = JSON.parse(fs.readFileSync(path.join(dir, '书稿.json'), 'utf8'));
 const cards = [];
@@ -84,6 +93,7 @@ const rows = [];
 for (const ch of chapters) {
   const m = styleMetrics(ch.text);
   const prof = proseProfile(ch.text);
+  const sent = sentenceProfile(ch.text);
   const hook = hookScore(ch.text, (book.characters || []).map((c) => c.name));
   const fact = factCheck(ch.text, projectLike);
   const card = cards.find((c) => c.no === ch.no);
@@ -153,6 +163,27 @@ for (const ch of chapters) {
   if (prof.shortParaRatio < SHORT_PARA_MIN) {
     add('warn', `第${ch.no}章`, `短段占比 ${(prof.shortParaRatio * 100).toFixed(0)}% < ${SHORT_PARA_MIN * 100}%：段落偏块状`, '把长段拆成单句成段，留白也是节奏');
   }
+  if (sent.over45Ratio > LONG_SENT_MAX) {
+    add('warn', `第${ch.no}章`, `超 45 字长句占 ${(sent.over45Ratio * 100).toFixed(1)}%（最长 ${sent.maxLen} 字，闸门 3%）`, '按「状语前置 / 定语后置 / 动作分解」拆成短句');
+  }
+  if (sent.de3Ratio > DE3_MAX) {
+    add('warn', `第${ch.no}章`, `一句 3 个以上「的」占 ${(sent.de3Ratio * 100).toFixed(1)}%（闸门 6%）`, '删掉多余的「的」：白色的鸭 → 白鸭');
+  }
+  if (sent.weakVerbPer1k > WEAK_VERB_MAX) {
+    add('warn', `第${ch.no}章`, `弱动词 ${sent.weakVerbPer1k}/千字 > ${WEAK_VERB_MAX}（进行/作出/加以/予以/使得）`, '换成实义动词：进行了分析 → 拆成四段听');
+  }
+  if (sent.connectivePer1k > CONNECTIVE_MAX) {
+    add('warn', `第${ch.no}章`, `连词 ${sent.connectivePer1k}/千字 > ${CONNECTIVE_MAX}（因为/所以/但是/然而）`, '删连词，用句号断开，中文靠语序表达逻辑');
+  }
+  if (sent.passivePer1k > PASSIVE_MAX) {
+    add('warn', `第${ch.no}章`, `被动 ${sent.passivePer1k}/千字 > ${PASSIVE_MAX}`, '改主动句，让动作有施者');
+  }
+  if (sent.adverbialOpenRatio > ADV_OPEN_MAX) {
+    add('warn', `第${ch.no}章`, `句首状语占 ${(sent.adverbialOpenRatio * 100).toFixed(1)}%（闸门 5%）`, '把「在……的时候 / 当……时 / 由于……」删掉，直接主谓起句');
+  }
+  if (sent.nominalPer1k > NOMINAL_MAX) {
+    add('warn', `第${ch.no}章`, `名词化后缀 ${sent.nominalPer1k}/千字 > ${NOMINAL_MAX}（性/度/化/感）`, '把「难度很高的」改成「很难的」，把抽象名词还原成动词');
+  }
   if (prof.explanationRatio > EXPLAIN_MAX) {
     add('warn', `第${ch.no}章`, `解释句占比 ${(prof.explanationRatio * 100).toFixed(1)}% > ${EXPLAIN_MAX * 100}%：旁白在替读者总结`, '把「因为/也就是说/这说明」改成一次动作或一句对话');
   }
@@ -170,6 +201,8 @@ for (const ch of chapters) {
     dlg: Math.round(m.dialogueRatio * 100), hook: hook.score, density: card?.density ?? '',
     sensory: prof.sensoryDensity, shortPara: Math.round(prof.shortParaRatio * 100), turns: prof.dialogueTurns,
     explain: Number((prof.explanationRatio * 100).toFixed(1)), numbers: prof.numberDensity, opener: prof.开篇三件套,
+    avgLen: sent.avgLen, lenStd: sent.lenStd, maxLen: sent.maxLen, over45: Number((sent.over45Ratio * 100).toFixed(1)),
+    de3: Number((sent.de3Ratio * 100).toFixed(1)), weak: sent.weakVerbPer1k, conn: sent.connectivePer1k,
     score: Math.max(0, 100 - issues.filter((i) => i.where === `第${ch.no}章` && i.level !== 'info').length * 6),
   });
 }
@@ -349,6 +382,16 @@ L.push('| 章 | 五感/千字 | 短段% | 对话轮/千字 | 解释句% | 数字
 L.push('|---|---|---|---|---|---|---|');
 for (const r of rows) {
   L.push(`| ${r.no} | ${r.sensory}${r.sensory < SENSORY_MIN ? ' ⚠' : ''} | ${r.shortPara}${r.shortPara < SHORT_PARA_MIN * 100 ? ' ⚠' : ''} | ${r.turns} | ${r.explain}${r.explain > EXPLAIN_MAX * 100 ? ' ⚠' : ''} | ${r.numbers} | ${r.opener ? '✅' : '—'} |`);
+}
+L.push('');
+L.push('## 句子体检（同一意思，怎么写最合适）');
+L.push('');
+L.push('> 口径：`docs/句子级写法.md`。长句＝超过 45 字；的字＝一句里含 3 个以上「的」的句子占比；弱动词＝进行/作出/加以/予以/使得；连词＝因为/所以/但是/然而/因此/尽管/虽然。');
+L.push('');
+L.push('| 章 | 平均句长 | 句长σ | 最长句 | 超45字% | 的字句% | 弱动词/千字 | 连词/千字 |');
+L.push('|---|---|---|---|---|---|---|---|');
+for (const r of rows) {
+  L.push(`| ${r.no} | ${r.avgLen} | ${r.lenStd}${r.lenStd < MIN_STD ? ' ⚠' : ''} | ${r.maxLen} | ${r.over45}${r.over45 > LONG_SENT_MAX * 100 ? ' ⚠' : ''} | ${r.de3}${r.de3 > DE3_MAX * 100 ? ' ⚠' : ''} | ${r.weak}${r.weak > WEAK_VERB_MAX ? ' ⚠' : ''} | ${r.conn}${r.conn > CONNECTIVE_MAX ? ' ⚠' : ''} |`);
 }
 L.push('');
 if (blocks.length) {

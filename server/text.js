@@ -132,6 +132,34 @@ export function styleMetrics(text = '') {
   };
 }
 
+/** 句子体检：把「一句一个信息、动词优先、的字预算、句末落点」量成可比指标 */
+export function sentenceProfile(text = '') {
+  const sents = splitSentences(text).map((s) => s.trim()).filter((s) => countWords(s) > 0);
+  const n = sents.length || 1;
+  const lens = sents.map((s) => countWords(s));
+  const cjk = (text.match(CJK) || []).length || 1;
+  const per1k = 1000 / cjk;
+  const avg = lens.reduce((a, b) => a + b, 0) / n;
+  const std = Math.sqrt(lens.reduce((a, b) => a + (b - avg) ** 2, 0) / n);
+  const deCounts = sents.map((s) => (s.match(/的/g) || []).length);
+  const count = (re) => (text.match(re) || []).length;
+
+  return {
+    sentences: sents.length,
+    avgLen: Number(avg.toFixed(1)),
+    lenStd: Number(std.toFixed(1)),
+    maxLen: Math.max(0, ...lens),
+    over45Ratio: Number((lens.filter((x) => x > 45).length / n).toFixed(3)),
+    dePerSentence: Number((deCounts.reduce((a, b) => a + b, 0) / n).toFixed(2)),
+    de3Ratio: Number((deCounts.filter((x) => x >= 3).length / n).toFixed(3)),
+    weakVerbPer1k: Number((count(/进行|作出|加以|予以|给予|使得/g) * per1k).toFixed(2)),
+    connectivePer1k: Number((count(/因为|所以|但是|然而|因此|尽管|虽然/g) * per1k).toFixed(2)),
+    passivePer1k: Number((count(/被/g) * per1k).toFixed(2)),
+    nominalPer1k: Number((count(/[\u4e00-\u9fff](性|度|化|感)(?![格到])/g) * per1k).toFixed(2)),
+    adverbialOpenRatio: Number((sents.filter((s) => /^(在|当|随着|由于|为了|经过|对于|关于)/.test(s)).length / n).toFixed(3)),
+  };
+}
+
 /** 文笔画像：把榜单开篇的共性（感官密度、短段、对话推进、解释句、具体数字）量成可比指标 */
 const SENSORY_LEX = {
   视觉: ['看', '望', '光', '亮', '暗', '影', '雪', '雾', '烟', '红', '白', '黑', '灰', '蓝', '黄', '青'],

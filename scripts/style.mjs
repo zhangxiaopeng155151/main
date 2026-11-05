@@ -10,12 +10,13 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
-import { proseProfile, countWords } from '../server/text.js';
+import { proseProfile, sentenceProfile, countWords } from '../server/text.js';
 import { ROOT } from '../server/store.js';
 
 const args = process.argv.slice(2);
 const dirArg = args.find((a) => !a.startsWith('--')) || '小说资料/十七秒';
 const asJson = args.includes('--json');
+const withSentences = args.includes('--sentences');
 const file = path.resolve(ROOT, dirArg, '正文.txt');
 
 const txt = fs.readFileSync(file, 'utf8');
@@ -63,6 +64,21 @@ if (asJson) {
 
 const pad = (v, n) => String(v).padEnd(n, ' ');
 const padS = (v, n) => String(v).padStart(n, ' ');
+
+if (withSentences) {
+  console.log(`\n[style] 句子体检：${dirArg}\n`);
+  console.log('  章  平均句长  句长σ  最长句  超45字%  的字句%  弱动词/千字  连词/千字');
+  for (const c of chapters) {
+    const text = c.lines.join('\n').replace(/\n{3,}/g, '\n\n').trim();
+    const q = sentenceProfile(text);
+    console.log(
+      ` ${padS(c.no, 3)}  ${padS(q.avgLen, 8)}  ${padS(q.lenStd, 5)}  ${padS(q.maxLen, 6)}  ${padS((q.over45Ratio * 100).toFixed(1), 7)}  ${padS((q.de3Ratio * 100).toFixed(1), 7)}  ${padS(q.weakVerbPer1k, 11)}  ${padS(q.connectivePer1k, 10)}`
+    );
+  }
+  console.log('');
+  process.exit(0);
+}
+
 console.log(`\n[style] ${dirArg}：${rows.length} 章 / ${rows.reduce((a, r) => a + r.words, 0)} 字\n`);
 console.log('  章  五感/千字  短段%  对话轮  解释句%  数字/千字  开篇三件套  警示');
 for (const r of rows) {

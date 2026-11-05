@@ -885,6 +885,7 @@ export function measureChapter(project, text, no, cfg = getSettings()) {
   return {
     metrics,
     prose: T.proseProfile(text),
+    sentence: T.sentenceProfile(text),
     words: metrics.words,
     minWords,
     dialogueRatio: metrics.dialogueRatio,
@@ -939,6 +940,7 @@ export function mergeReviews(passes, measured, cfg) {
   if (!gates.hook.ok) issues.push({ severity: 'medium', type: '钩子弱', quote: '', why: `章末钩子强度 ${measured.hookScoreValue}（${measured.hookReasons.join('；')}）。`, fix: '把最后一句改成具体的信息缺口或威胁。', source: '实测' });
   // 文笔层（对标 2026-11 头部开篇，见 docs/网文头部文笔拆解.md）：只拦「整章没有身体感」这类退化
   const prof = measured.prose;
+  const sentP = measured.sentence;
   if (prof) {
     if (prof.sensoryDensity < 18) {
       issues.push({ severity: 'medium', type: '质感不足', quote: '', why: `五感密度 ${prof.sensoryDensity}/千字（闸门 18），整章缺身体感。`, fix: '补气味、温度、触感；抽象情绪改成生理反应。', source: '实测' });
@@ -948,6 +950,21 @@ export function mergeReviews(passes, measured, cfg) {
     }
     if (prof.explanationRatio > 0.04) {
       issues.push({ severity: 'medium', type: '解释替代', quote: '', why: `解释句占比 ${(prof.explanationRatio * 100).toFixed(1)}%（闸门 4%），旁白在替读者总结。`, fix: '把「因为/也就是说/这说明」改成一次动作或一句对话。', source: '实测' });
+    }
+  }
+  // 句子层（docs/句子级写法.md）：长句、弱动词、连词、的字
+  if (sentP) {
+    if (sentP.over45Ratio > 0.03) {
+      issues.push({ severity: 'low', type: '句子过长', quote: '', why: `超 45 字长句占 ${(sentP.over45Ratio * 100).toFixed(1)}%（最长 ${sentP.maxLen} 字）。`, fix: '按状语前置 / 定语后置 / 动作分解三种拆法改成短句。', source: '实测' });
+    }
+    if (sentP.weakVerbPer1k > 2) {
+      issues.push({ severity: 'medium', type: '弱动词', quote: '', why: `弱动词 ${sentP.weakVerbPer1k}/千字（进行/作出/加以/予以/使得）。`, fix: '换成实义动词：进行了分析 → 拆成四段听。', source: '实测' });
+    }
+    if (sentP.de3Ratio > 0.06) {
+      issues.push({ severity: 'low', type: '的字过多', quote: '', why: `一句 3 个以上「的」占 ${(sentP.de3Ratio * 100).toFixed(1)}%。`, fix: '删掉多余「的」：白色的鸭 → 白鸭；灰暗的凄冷的天空 → 灰暗而凄冷的天空。', source: '实测' });
+    }
+    if (sentP.connectivePer1k > 8) {
+      issues.push({ severity: 'low', type: '连词过密', quote: '', why: `连词 ${sentP.connectivePer1k}/千字（因为/所以/但是/然而）。`, fix: '删连词，用句号断开。', source: '实测' });
     }
   }
 
