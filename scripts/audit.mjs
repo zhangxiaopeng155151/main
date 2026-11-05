@@ -11,13 +11,19 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
-import { styleMetrics, hookScore, factCheck, splitParagraphs, splitSentences, countWords } from '../server/text.js';
+import { styleMetrics, hookScore, factCheck, proseProfile, splitParagraphs, splitSentences, countWords } from '../server/text.js';
 import { ROOT } from '../server/store.js';
 
 const args = process.argv.slice(2);
 const dirArg = args.find((a) => !a.startsWith('--')) || '小说资料/十七秒';
 const strict = args.includes('--strict');
 const dir = path.resolve(ROOT, dirArg);
+
+// 文笔层阈值：按 2026-11 番茄/起点头部开篇归纳的下限（详见 docs/网文头部文笔拆解.md），
+// 取当前全书均值的六到七成，只用来拦「整章没有身体感」这类退化，不做逐句风格审判。
+const SENSORY_MIN = 18;      // 五感词密度，每千字
+const SHORT_PARA_MIN = 0.5;  // 20 字以内短段占比
+const EXPLAIN_MAX = 0.04;    // 解释句（因为/也就是说/这说明…）占比
 
 const book = JSON.parse(fs.readFileSync(path.join(dir, '书稿.json'), 'utf8'));
 const cards = [];
@@ -77,6 +83,7 @@ const rows = [];
 
 for (const ch of chapters) {
   const m = styleMetrics(ch.text);
+  const prof = proseProfile(ch.text);
   const hook = hookScore(ch.text, (book.characters || []).map((c) => c.name));
   const fact = factCheck(ch.text, projectLike);
   const card = cards.find((c) => c.no === ch.no);
@@ -140,6 +147,15 @@ for (const ch of chapters) {
 
   // 阅读体验
   if (hook.score < HOOK_MIN) add('block', `第${ch.no}章`, `章末钩子 ${hook.score} < ${HOOK_MIN}（${hook.reasons.join('；')}）`, '把最后一句改成具体威胁 / 信息缺口');
+  if (prof.sensoryDensity < SENSORY_MIN) {
+    add('warn', `第${ch.no}章`, `感官密度 ${prof.sensoryDensity}/千字 < ${SENSORY_MIN}：整章缺身体感`, '补气味、温度、触感；用生理反应代替抽象情绪');
+  }
+  if (prof.shortParaRatio < SHORT_PARA_MIN) {
+    add('warn', `第${ch.no}章`, `短段占比 ${(prof.shortParaRatio * 100).toFixed(0)}% < ${SHORT_PARA_MIN * 100}%：段落偏块状`, '把长段拆成单句成段，留白也是节奏');
+  }
+  if (prof.explanationRatio > EXPLAIN_MAX) {
+    add('warn', `第${ch.no}章`, `解释句占比 ${(prof.explanationRatio * 100).toFixed(1)}% > ${EXPLAIN_MAX * 100}%：旁白在替读者总结`, '把「因为/也就是说/这说明」改成一次动作或一句对话');
+  }
   if (card?.turn) {
     const clean = String(card.turn).replace(/[^\u4e00-\u9fff]/g, '');
     const wins = [];
@@ -152,6 +168,8 @@ for (const ch of chapters) {
   rows.push({
     no: ch.no, title: ch.title, words: m.words, ai: m.ai.score, std: m.sentenceLenStd,
     dlg: Math.round(m.dialogueRatio * 100), hook: hook.score, density: card?.density ?? '',
+    sensory: prof.sensoryDensity, shortPara: Math.round(prof.shortParaRatio * 100), turns: prof.dialogueTurns,
+    explain: Number((prof.explanationRatio * 100).toFixed(1)), numbers: prof.numberDensity, opener: prof.开篇三件套,
     score: Math.max(0, 100 - issues.filter((i) => i.where === `第${ch.no}章` && i.level !== 'info').length * 6),
   });
 }
@@ -321,6 +339,16 @@ L.push('| 章 | 标题 | 字数 | AI 味 | 句长σ | 对白% | 钩子 | 规划�
 L.push('|---|---|---|---|---|---|---|---|');
 for (const r of rows) {
   L.push(`| ${r.no} | ${r.title} | ${r.words}${r.words < MIN_WORDS ? ' ⚠' : ''} | ${r.ai}${r.ai > MAX_AI ? ' ⚠' : ''} | ${r.std}${r.std < MIN_STD ? ' ⚠' : ''} | ${r.dlg} | ${r.hook}${r.hook < HOOK_MIN ? ' ⚠' : ''} | ${r.density} |`);
+}
+L.push('');
+L.push('## 文笔画像（对标头部开篇的量化层）');
+L.push('');
+L.push('> 口径：`docs/网文头部文笔拆解.md`。五感密度＝视/听/体感/嗅/味词每千字；短段＝20 字以内段落占比；对话轮＝每千字以引号开头的段落数；解释句＝含「因为/也就是说/这说明」的句子占比；数字＝阿拉伯数字每千字。');
+L.push('');
+L.push('| 章 | 五感/千字 | 短段% | 对话轮/千字 | 解释句% | 数字/千字 | 开篇三件套 |');
+L.push('|---|---|---|---|---|---|---|');
+for (const r of rows) {
+  L.push(`| ${r.no} | ${r.sensory}${r.sensory < SENSORY_MIN ? ' ⚠' : ''} | ${r.shortPara}${r.shortPara < SHORT_PARA_MIN * 100 ? ' ⚠' : ''} | ${r.turns} | ${r.explain}${r.explain > EXPLAIN_MAX * 100 ? ' ⚠' : ''} | ${r.numbers} | ${r.opener ? '✅' : '—'} |`);
 }
 L.push('');
 if (blocks.length) {

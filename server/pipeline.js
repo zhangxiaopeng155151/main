@@ -884,6 +884,7 @@ export function measureChapter(project, text, no, cfg = getSettings()) {
 
   return {
     metrics,
+    prose: T.proseProfile(text),
     words: metrics.words,
     minWords,
     dialogueRatio: metrics.dialogueRatio,
@@ -936,6 +937,19 @@ export function mergeReviews(passes, measured, cfg) {
   if (!gates.wordCount.ok) issues.push({ severity: 'high', type: '字数不足', quote: '', why: `实测 ${measured.words} 字，低于 ${measured.minWords}。`, fix: '补一场具体场景与对话，不要补解释。', source: '实测' });
   if (!gates.foreshadow.ok) issues.push({ severity: 'medium', type: '伏笔缺失', quote: '', why: `未执行：${measured.foreshadow.missed.join('、')}`, fix: '在中段用一个具体细节补上，不要直接解释。', source: '实测' });
   if (!gates.hook.ok) issues.push({ severity: 'medium', type: '钩子弱', quote: '', why: `章末钩子强度 ${measured.hookScoreValue}（${measured.hookReasons.join('；')}）。`, fix: '把最后一句改成具体的信息缺口或威胁。', source: '实测' });
+  // 文笔层（对标 2026-11 头部开篇，见 docs/网文头部文笔拆解.md）：只拦「整章没有身体感」这类退化
+  const prof = measured.prose;
+  if (prof) {
+    if (prof.sensoryDensity < 18) {
+      issues.push({ severity: 'medium', type: '质感不足', quote: '', why: `五感密度 ${prof.sensoryDensity}/千字（闸门 18），整章缺身体感。`, fix: '补气味、温度、触感；抽象情绪改成生理反应。', source: '实测' });
+    }
+    if (prof.shortParaRatio < 0.5) {
+      issues.push({ severity: 'low', type: '段落过长', quote: '', why: `短段占比 ${(prof.shortParaRatio * 100).toFixed(0)}%（闸门 50%）。`, fix: '把长段拆成单句成段，留白也是节奏。', source: '实测' });
+    }
+    if (prof.explanationRatio > 0.04) {
+      issues.push({ severity: 'medium', type: '解释替代', quote: '', why: `解释句占比 ${(prof.explanationRatio * 100).toFixed(1)}%（闸门 4%），旁白在替读者总结。`, fix: '把「因为/也就是说/这说明」改成一次动作或一句对话。', source: '实测' });
+    }
+  }
 
   const severityRank = { high: 0, medium: 1, low: 2 };
   issues.sort((a, b) => severityRank[a.severity] - severityRank[b.severity]);

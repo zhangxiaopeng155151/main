@@ -132,6 +132,55 @@ export function styleMetrics(text = '') {
   };
 }
 
+/** 文笔画像：把榜单开篇的共性（感官密度、短段、对话推进、解释句、具体数字）量成可比指标 */
+const SENSORY_LEX = {
+  视觉: ['看', '望', '光', '亮', '暗', '影', '雪', '雾', '烟', '红', '白', '黑', '灰', '蓝', '黄', '青'],
+  听觉: ['声', '响', '听', '喊', '叫', '静', '嗡', '吱', '咔', '轰', '哑', '喘'],
+  体感: ['冷', '热', '烫', '凉', '湿', '干', '硬', '软', '疼', '痛', '痒', '麻', '重', '轻', '冰', '抖'],
+  嗅觉: ['味', '香', '臭', '腥', '霉', '烟味', '气味', '酸味'],
+  味觉: ['甜', '苦', '咸', '涩'],
+};
+
+export function proseProfile(text = '') {
+  const paras = splitParagraphs(text);
+  const sentences = splitSentences(text);
+  const cjk = (text.match(CJK) || []).length || 1;
+  const per1k = 1000 / cjk;
+
+  const sensory = {};
+  let sensoryTotal = 0;
+  for (const [k, words] of Object.entries(SENSORY_LEX)) {
+    let n = 0;
+    for (const w of words) n += text.split(w).length - 1;
+    sensory[k] = Number((n * per1k).toFixed(1));
+    sensoryTotal += n;
+  }
+
+  const shortPara = paras.filter((p) => countWords(p) <= 20).length;
+  const dialogueParas = paras.filter((p) => /^[“"]/.test(p.trim())).length;
+  const explain = sentences.filter((s) => /(因为|所以|也就是说|意思是|这说明|换言之|换句话说)/.test(s)).length;
+  const digits = (text.match(/\d+(?:\.\d+)?/g) || []).length;
+
+  const head = text.slice(0, 520);
+  const opener = {
+    有台词: /[“"][^”"\n]{2,50}[”"]/.test(head),
+    有动作: /(拿|推|拉|坐|站|走|听|看|数|写|按|开|翻|擦|递|接|握|放|拧|擦|踩|敲)/.test(head),
+    有异常: /(停|断|空|没有|不见|少|多|不该|奇怪|反|数|黑|血|碎|裂|错)/.test(head),
+    有数字: /\d/.test(head),
+  };
+
+  return {
+    sensory,
+    sensoryDensity: Number((sensoryTotal * per1k).toFixed(1)),
+    shortParaRatio: Number((shortPara / Math.max(paras.length, 1)).toFixed(2)),
+    dialogueTurns: Number((dialogueParas * per1k).toFixed(1)),
+    explanationRatio: Number((explain / Math.max(sentences.length, 1)).toFixed(3)),
+    numberDensity: Number((digits * per1k).toFixed(1)),
+    opener,
+    开篇三件套: opener.有台词 && opener.有动作 && opener.有异常,
+  };
+}
+
 /** 章末钩子强度（0-10）：靠可观测特征估算，大模型审稿会在此基础上做语义判断 */
 export function hookScore(text = '', names = []) {
   const sentences = splitSentences(text);

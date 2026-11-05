@@ -13,7 +13,8 @@
     "check": "node scripts/selftest.mjs",
     "import": "node scripts/import.mjs 小说资料/十七秒 --reset",
     "submission": "node scripts/submission.mjs",
-    "audit": "node scripts/audit.mjs 小说资料/十七秒"
+    "audit": "node scripts/audit.mjs 小说资料/十七秒",
+    "style": "node scripts/style.mjs 小说资料/十七秒"
   },
   "engines": {
     "node": ">=20"
